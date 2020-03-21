@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.ty.mapper.sys_rightMapper">
+	<resultMap id="BaseResultMap" type="com.hr.entity.sys_right">
+		<id column="right_code" jdbcType="INTEGER" property="rightCode" />
+		<result column="right_parent_code" jdbcType="INTEGER"
+			property="rightParentCode" />
+		<result column="right_type" jdbcType="VARCHAR"
+			property="rightType" />
+		<result column="right_text" jdbcType="VARCHAR"
+			property="rightText" />
+		<result column="right_url" jdbcType="VARCHAR" property="rightUrl" />
+		<result column="right_tip" jdbcType="VARCHAR"
+			property="rightTip" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		right_code, right_parent_code, right_type, right_text,
+		right_url, right_tip
+	</sql>
+	<select id="queryRight" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_right
+	</select>
+	<select id="queryRightByParentId"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_right
+		where
+		right_parent_code=#{right_parent_code,jdbcType=INTEGER}
+	</select>
+	<select id="queryRightAndRoleByRoleId"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from sys_right
+		where right_code in (select right_id from sys_right_role where
+		role_id=#{rid})
+	</select>
+
+</mapper>

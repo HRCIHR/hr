@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.ty.mapper.usersMapper">
+	<resultMap id="BaseResultMap" type="com.hr.entity.users">
+		<id column="u_id" jdbcType="INTEGER" property="uId" />
+		<result column="u_name" jdbcType="VARCHAR" property="uName" />
+		<result column="u_true_name" jdbcType="VARCHAR"
+			property="uTrueName" />
+		<result column="u_password" jdbcType="VARCHAR"
+			property="uPassword" />
+		<association property="role" column="u_roleid"
+			select="com.hr.ty.mapper.sys_roleMapper.queryRoleById"></association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		u_id, u_name, u_true_name, u_password, u_roleid
+	</sql>
+	<select id="querUserByNameAndPwd" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		FROM
+		users where u_name=#{uName} and u_password=#{uPassword}
+	</select>
+</mapper>

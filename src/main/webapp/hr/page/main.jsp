@@ -24,7 +24,7 @@ a {
 </style>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north',title:'欢迎'"
+	<div data-options="region:'north',title:'欢迎${user.uName}--${user.uTrueName}--${user.role.roleName}'"
 		style="height: 150px; overflow: hidden">
 		<iframe src="<%=path%>/hr/page/top.jsp"
 			style='width: 100%; height: 100%; border: 0px;'> </iframe>

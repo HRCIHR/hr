@@ -29,9 +29,7 @@ public class Sys_RightController {
 			id = 0;
 		}
 		List<sys_right> userList = ((users) session.getAttribute("user")).getRole().getRights();
-		System.out.println("当前用户的权限:" + userList);
 		List<sys_right> list = MyUtil.getRightByParentId(userList, id);
-		System.out.println("用户的权限" + list);
 		List<Map<String, Object>> meunList = new ArrayList<Map<String, Object>>();
 		for (sys_right sysRight : list) {
 			Map<String, Object> map = new HashMap<String, Object>();

@@ -8,16 +8,35 @@
 			property="uTrueName" />
 		<result column="u_password" jdbcType="VARCHAR"
 			property="uPassword" />
+
+	</resultMap>
+	<resultMap type="com.hr.entity.users" id="UsersRoleRightResultMap"
+		extends="BaseResultMap">
 		<association property="role" column="u_roleid"
 			select="com.hr.ty.mapper.sys_roleMapper.queryRoleById"></association>
 	</resultMap>
+	
+	<resultMap type="com.hr.entity.users" id="UsersRoleResultMap"
+		extends="BaseResultMap">
+		<association property="role" column="u_roleid"
+			select="com.hr.ty.mapper.sys_roleMapper.queryRoleByIdtwo"></association>
+	</resultMap>
+	
 	<sql id="Base_Column_List">
 		u_id, u_name, u_true_name, u_password, u_roleid
 	</sql>
-	<select id="querUserByNameAndPwd" resultMap="BaseResultMap">
+	
+	<select id="querUserByNameAndPwd" resultMap="UsersRoleRightResultMap">
 		select
 		<include refid="Base_Column_List" />
 		FROM
 		users where u_name=#{uName} and u_password=#{uPassword}
+	</select>
+	
+	<select id="querUserAndRole" resultMap="UsersRoleResultMap"><!-- 这里有点小毛病未解决 -->
+	<bind name="page" value="(page-1)*rows"/>
+		select
+		<include refid="Base_Column_List" />
+		from users order by u_id ${order} limit #{page},#{rows}
 	</select>
 </mapper>

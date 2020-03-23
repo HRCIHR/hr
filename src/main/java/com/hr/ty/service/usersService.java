@@ -11,4 +11,6 @@ public interface usersService {
 	users querUserByNameAndPwd(users user);
 	
 	List<users> querUserAndRole(pagination page);
+	
+	Integer insertUser(users user);
 }

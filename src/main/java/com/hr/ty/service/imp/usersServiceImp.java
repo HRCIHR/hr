@@ -25,5 +25,11 @@ public class usersServiceImp implements usersService{
 		System.out.println("usersServiceImp-querUserAndRole");
 		return um.querUserAndRole(page);
 	}
+	@Override
+	public Integer insertUser(users user) {
+		// TODO Auto-generated method stub
+		Integer integer = um.insertUser(user);
+		return integer ;
+	}
 
 }

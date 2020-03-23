@@ -10,15 +10,11 @@
 <head>
 <meta charset="UTF-8">
 <title>用户管理</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=path%>/easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=path%>/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/easyui/themes/icon.css">
 <script type="text/javascript" src="<%=path%>/easyui/jquery.min.js"></script>
-<script type="text/javascript"
-	src="<%=path%>/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript"
-	src="<%=path%>/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=path%>/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#dg').datagrid({
@@ -31,6 +27,12 @@
 			idField:"uId",
 			sortName:"uId",
 			sortOrder:"asc",
+			toolbar: [{
+				iconCls: 'icon-add',
+				text:'添加用户',
+				handler: function(){
+					　window.location.href = '../../../role/queryRoleJson';}
+			}],
 			columns : [ [ {
 				field : "uId",
 				title : "编号",
@@ -50,6 +52,14 @@
 				width : 100,
 				formatter:function(value,row,index){
 					return value.roleName;
+				}
+			}
+			, {
+				field : "operation",
+				title : "操作",
+				width : 100,
+				formatter:function(value,row,index){
+					return "<input type='button' value='删除'> <input type='button' value='修改'>" ;
 				}
 			}
 

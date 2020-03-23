@@ -10,5 +10,7 @@ import com.hr.util.pagination;
 public interface usersMapper {
 	users querUserByNameAndPwd(users user);
 	
-	List<users> querUserAndRole(pagination page);
+	List<users> querUserAndRole(pagination page);//分页查询
+	
+	Integer insertUser(users user);
 }

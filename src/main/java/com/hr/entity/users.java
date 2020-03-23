@@ -58,5 +58,6 @@ public class users {
 		return "users [uId=" + uId + ", uName=" + uName + ", uTrueName=" + uTrueName + ", uPassword=" + uPassword
 				+ ", role=" + role + "]";
 	}
+
 	
 }

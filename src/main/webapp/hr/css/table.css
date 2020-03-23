@@ -1,97 +1,97 @@
-/* CSS Document */
+/* css document */
 * {
-	FONT-FAMILY:微软雅黑;
+	font-family:微软雅黑;
 }
-.resizeDivClass
+.resizedivclass
 {
 position:relative;
-background-color:#DEDBD6;
+background-color:#dedbd6;
 width:2;
 z-index:1;
-left:expression(this.parentElement.offsetWidth-1);
+left:expression(this.parentelement.offsetwidth-1);
 cursor:e-resize;
 
 }
-A:visited {
-	TEXT-DECORATION: none
+a:visited {
+	text-decoration: none
 }
-A:active {
-	TEXT-DECORATION: none
+a:active {
+	text-decoration: none
 }
-A:hover {
-	TEXT-DECORATION: underline overline
+a:hover {
+	text-decoration: underline overline
 }
-A:link {
-	TEXT-DECORATION: none
+a:link {
+	text-decoration: none
 }
 .t {
-	LINE-HEIGHT: 1.4
+	line-height: 1.4
 }
-BODY {
-	background-color:#FFFFCC;
-	FONT-SIZE: 10pt;
-	SCROLLBAR-HIGHLIGHT-COLOR: buttonface;
-	SCROLLBAR-SHADOW-COLOR: buttonface;
-	SCROLLBAR-3DLIGHT-COLOR: buttonhighlight;
-	SCROLLBAR-TRACK-COLOR: #eeeeee;
-	SCROLLBAR-DARKSHADOW-COLOR: buttonshadow;
+body {
+	background-color:#ffffcc;
+	font-size: 10pt;
+	scrollbar-highlight-color: buttonface;
+	scrollbar-shadow-color: buttonface;
+	scrollbar-3dlight-color: buttonhighlight;
+	scrollbar-track-color: #eeeeee;
+	scrollbar-darkshadow-color: buttonshadow;
 	margin-left: 0px;
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
 }
-TD {
-	FONT-FAMILY: ??; FONT-SIZE: 9pt
+td {
+	font-family: ??; font-size: 9pt
 }
-DIV {
-	FONT-FAMILY: ??; FONT-SIZE: 9pt
+div {
+	font-family: ??; font-size: 9pt
 }
-FORM {
-	FONT-FAMILY: ??; FONT-SIZE: 9pt
+form {
+	font-family: ??; font-size: 9pt
 }
-OPTION {
-	FONT-FAMILY: ??; FONT-SIZE: 9pt
+option {
+	font-family: ??; font-size: 9pt
 }
-P {
-	FONT-FAMILY: ??; FONT-SIZE: 9pt
+p {
+	font-family: ??; font-size: 9pt
 }
-TD {
-	FONT-FAMILY: ??; FONT-SIZE: 9pt
+td {
+	font-family: ??; font-size: 9pt
 }
-BR {
-	FONT-FAMILY: ����; FONT-SIZE: 9pt
+br {
+	font-family: ����; font-size: 9pt
 }
 
-TEXTAREA {
-	BACKGROUND-COLOR: #FFFFCC; BORDER-BOTTOM-COLOR: #000000; BORDER-BOTTOM-WIDTH: 1px; BORDER-LEFT-COLOR: #000000; BORDER-LEFT-WIDTH: 1px; BORDER-RIGHT-COLOR: #000000; BORDER-RIGHT-WIDTH: 1px; BORDER-TOP-COLOR: #000000; BORDER-TOP-WIDTH: 1px; FONT-FAMILY: ���� ; FONT-SIZE: 9pt
+textarea {
+	background-color: #ffffcc; border-bottom-color: #000000; border-bottom-width: 1px; border-left-color: #000000; border-left-width: 1px; border-right-color: #000000; border-right-width: 1px; border-top-color: #000000; border-top-width: 1px; font-family: ���� ; font-size: 9pt
 }
-SELECT {
-	BACKGROUND-COLOR: #FFFFCC; BORDER-BOTTOM-COLOR: #000000; BORDER-BOTTOM-WIDTH: 1px; BORDER-LEFT-COLOR: #000000; BORDER-LEFT-WIDTH: 1px; BORDER-RIGHT-COLOR: #000000; BORDER-RIGHT-WIDTH: 1px; BORDER-TOP-COLOR: #000000; BORDER-TOP-WIDTH: 1px; FONT-FAMILY: ���� ; FONT-SIZE: 9pt
+select {
+	background-color: #ffffcc; border-bottom-color: #000000; border-bottom-width: 1px; border-left-color: #000000; border-left-width: 1px; border-right-color: #000000; border-right-width: 1px; border-top-color: #000000; border-top-width: 1px; font-family: ���� ; font-size: 9pt
 }
 
 .gray {
-	CURSOR: pointer; FILTER: gray
+	cursor: pointer; filter: gray
 }
 .style3 {
 	font-size: 16px;
 	font-weight: bold;
 }
-.TABLE_STYLE1{
+.table_style1{
 	border: 1px solid;
 	border-color:#000000;
 	border-collapse: collapse;
 	width: 100%;
 	
 }
-.TABLE_STYLE2{
+.table_style2{
 	width: 100%;
 }
-.ALL-STYLE{
+.all-style{
 	border: 1px ridge #666666;
-	border-color:#DEDBD6;
+	border-color:#dedbd6;
 
 }
-.TR_STYLE1{
+.tr_style1{
 
 }
 
@@ -99,95 +99,95 @@ SELECT {
 
 
 
-.TD_HANDBOOK_STYLE1 {
+.td_handbook_style1 {
 	vertical-align : top ;
 	width:100%;
-	color:#0000FF;
+	color:#0000ff;
 }
 
-.TD_STYLE1{
-	background-color:#FFDB6F;
+.td_style1{
+	background-color:#ffdb6f;
 	border-width:1;
 }
 
-.TD_STYLE2{
+.td_style2{
 border-spacing: 1px;
-background-color:#FFFFBB;
-border-color:#DEDBD6;
+background-color:#ffffbb;
+border-color:#dedbd6;
 border:0;
 }
-.TD_STYLE3{
+.td_style3{
 
 }
-.SUBMIT_STYLE1{
- BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); BORDER-LEFT: #2C59AA 1px solid; CURSOR: pointer; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #2C59AA 1px solid
+.submit_style1{
+ border-right: #2c59aa 1px solid; padding-right: 2px; border-top: #2c59aa 1px solid; padding-left: 2px; font-size: 12px; filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#c3daf5); border-left: #2c59aa 1px solid; cursor: pointer; color: black; padding-top: 2px; border-bottom: #2c59aa 1px solid
 
 }
-.BUTTON_STYLE1{
- BORDER-RIGHT: #2C59AA 1px solid; 
- PADDING-RIGHT: 2px;
-  BORDER-TOP: #2C59AA 1px solid;
-   PADDING-LEFT: 2px; 
-   FONT-SIZE: 12px;
-    FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5);
-     BORDER-LEFT: #2C59AA 1px solid; 
-     CURSOR: pointer; 
-     COLOR: black; 
-     PADDING-TOP: 2px; 
-     BORDER-BOTTOM: #2C59AA 1px solid
+.button_style1{
+ border-right: #2c59aa 1px solid; 
+ padding-right: 2px;
+  border-top: #2c59aa 1px solid;
+   padding-left: 2px; 
+   font-size: 12px;
+    filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#c3daf5);
+     border-left: #2c59aa 1px solid; 
+     cursor: pointer; 
+     color: black; 
+     padding-top: 2px; 
+     border-bottom: #2c59aa 1px solid
 }
-.RESET_STYLE1{
- BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); BORDER-LEFT: #2C59AA 1px solid; CURSOR: pointer; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #2C59AA 1px solid
+.reset_style1{
+ border-right: #2c59aa 1px solid; padding-right: 2px; border-top: #2c59aa 1px solid; padding-left: 2px; font-size: 12px; filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#c3daf5); border-left: #2c59aa 1px solid; cursor: pointer; color: black; padding-top: 2px; border-bottom: #2c59aa 1px solid
 }
-.RADIO_STYLE1{
+.radio_style1{
 
 }
-.CHECKBOX_STYLE1{
+.checkbox_style1{
 
 }
-.SELECT_STYLE1{
+.select_style1{
 width:100%;
 }
-.SELECT_STYLE2{
+.select_style2{
 width:30%;
 }
-.TEXTAREA_STYLE1{
+.textarea_style1{
 width:100%;
 }
-.DIV_STYLE1{
+.div_style1{
 
 float :right ;
 vertical-align : top ;
 
 }
-.DIV_STYLE2{
+.div_style2{
 
 float :center ;
 vertical-align : top ;
 
 }
-.INPUT_STYLE1{
-BACKGROUND-COLOR: #FFFFCC;
+.input_style1{
+background-color: #ffffcc;
 width:30%
 }
-.INPUT_STYLE2{
-BACKGROUND-COLOR: #FFFFCC;
+.input_style2{
+background-color: #ffffcc;
 width:100%
 }
-.FILE_STYLE1{
- BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); BORDER-LEFT: #2C59AA 1px solid; CURSOR: pointer; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #2C59AA 1px solid
+.file_style1{
+ border-right: #2c59aa 1px solid; padding-right: 2px; border-top: #2c59aa 1px solid; padding-left: 2px; font-size: 12px; filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#c3daf5); border-left: #2c59aa 1px solid; cursor: pointer; color: black; padding-top: 2px; border-bottom: #2c59aa 1px solid
 }
 .btn3_mouseout {
- BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); BORDER-LEFT: #2C59AA 1px solid; CURSOR: pointer; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #2C59AA 1px solid
+ border-right: #2c59aa 1px solid; padding-right: 2px; border-top: #2c59aa 1px solid; padding-left: 2px; font-size: 12px; filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#c3daf5); border-left: #2c59aa 1px solid; cursor: pointer; color: black; padding-top: 2px; border-bottom: #2c59aa 1px solid
 }
 .btn3_mouseover {
- BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#D7E7FA); BORDER-LEFT: #2C59AA 1px solid; CURSOR: pointer; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #2C59AA 1px solid
+ border-right: #2c59aa 1px solid; padding-right: 2px; border-top: #2c59aa 1px solid; padding-left: 2px; font-size: 12px; filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#d7e7fa); border-left: #2c59aa 1px solid; cursor: pointer; color: black; padding-top: 2px; border-bottom: #2c59aa 1px solid
 }
 .btn3_mousedown
 {
- BORDER-RIGHT: #FFE400 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #FFE400 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); BORDER-LEFT: #FFE400 1px solid; CURSOR: pointer; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #FFE400 1px solid
+ border-right: #ffe400 1px solid; padding-right: 2px; border-top: #ffe400 1px solid; padding-left: 2px; font-size: 12px; filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#c3daf5); border-left: #ffe400 1px solid; cursor: pointer; color: black; padding-top: 2px; border-bottom: #ffe400 1px solid
 }
 .btn3_mouseup {
- BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); BORDER-LEFT: #2C59AA 1px solid; CURSOR: pointer; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #2C59AA 1px solid
+ border-right: #2c59aa 1px solid; padding-right: 2px; border-top: #2c59aa 1px solid; padding-left: 2px; font-size: 12px; filter: progid:dximagetransform.microsoft.gradient(gradienttype=0, startcolorstr=#ffffff, endcolorstr=#c3daf5); border-left: #2c59aa 1px solid; cursor: pointer; color: black; padding-top: 2px; border-bottom: #2c59aa 1px solid
 }
 

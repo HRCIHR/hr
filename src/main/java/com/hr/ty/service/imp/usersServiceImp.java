@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hr.entity.users;
 import com.hr.ty.mapper.usersMapper;
@@ -26,6 +27,7 @@ public class usersServiceImp implements usersService{
 		return um.querUserAndRole(page);
 	}
 	@Override
+	@Transactional
 	public Integer insertUser(users user) {
 		// TODO Auto-generated method stub
 		Integer integer = um.insertUser(user);

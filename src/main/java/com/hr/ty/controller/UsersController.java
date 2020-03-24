@@ -57,15 +57,12 @@ public class UsersController { // 登录
 	}
 
 	@RequestMapping("/insertUser")
-	public String insertUser(users user, HttpServletResponse response) {
+	@ResponseBody
+	public int insertUser(users user) {
 		System.out.println("添加用户" + user);
-		Integer row = us.insertUser(user);
-			if (row > 0) {
-				//添加成功！
-				return "redirect:../hr/page/power/user_list.jsp";
-			} else {
-				//添加失败
-			}
-			return "page/power/user_list";
+		Integer  row= us.insertUser(user);
+		return row;
+			
 		}
+	
 	}

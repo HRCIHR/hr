@@ -22,18 +22,11 @@ public class RoleController {
 	@Autowired
 	private sys_roleService ss;
      @RequestMapping("/queryRoleJson")
-     public void queryRoleJson(HttpServletRequest req,HttpServletResponse resp) {
+     @ResponseBody
+     public List queryRoleJson() {
     	 List<sys_role> list = ss.queryRole();
-    	 req.setAttribute("role",list);
     	 System.out.println("查询全部角色"+list);
-         try {
-			req.getRequestDispatcher("../hr/page/power/user_add.jsp").forward(req,resp);//内部跳转
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return list;
+   
      }
 }

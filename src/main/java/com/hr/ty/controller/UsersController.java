@@ -1,9 +1,12 @@
 package com.hr.ty.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,13 +57,15 @@ public class UsersController { // 登录
 	}
 
 	@RequestMapping("/insertUser")
-	public void insertUser(users user) {
+	public String insertUser(users user, HttpServletResponse response) {
 		System.out.println("添加用户" + user);
-		Integer integer = us.insertUser(user);
-		if (integer > 0) {
-			System.out.println("添加成功！");
-		} else {
-			System.out.println("添加失败！");
+		Integer row = us.insertUser(user);
+			if (row > 0) {
+				//添加成功！
+				return "redirect:../hr/page/power/user_list.jsp";
+			} else {
+				//添加失败
+			}
+			return "page/power/user_list";
 		}
 	}
-}

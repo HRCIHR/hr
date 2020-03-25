@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hr.zh.mapper.FirstKindMapper">
+	<!-- sqly语句 -->
+	<sql id="firstKindbyAll">
+		SELECT
+		config_file_first_kind.first_kind_id,
+		config_file_first_kind.first_kind_name,
+		config_file_first_kind.first_kind_salary_id,
+		config_file_first_kind.first_kind_sale_id
+		FROM
+		config_file_first_kind
 
+	</sql>
+
+
+
+	<resultMap type="com.hr.entity.ConfigFileFirstKind"
+		id="firstkind">
+		<id column="first_Kind_Id" property="firstKindId" />
+		<result column="first_Kind_Name" property="firstKindName" />
+		<result column="first_Kind_Salary_Id"
+			property="firstKindSalaryId" />
+		<result column="first_Kind_Sale_Id" property="firstKindSaleId" />
+	</resultMap>
+
+	<!--查询所有 分页 -->
+	<select id="queryfirstKindAll" resultMap="firstkind">
+		<include refid="firstKindbyAll"></include>
+		LIMIT #{page},#{rows}
+	</select>
+
+	<select id="queryfirstKindAllCount"
+		resultType="java.lang.Integer">
+		SELECT
+		COUNT(first_kind_id)
+		FROM
+		config_file_first_kind
+	</select>
+
+	<!-- id查询 -->
+	<select id="queryfirstKindById" resultMap="firstkind">
+		<include refid="firstKindbyAll"></include>
+		<where>
+			first_kind_id=#{_parameter}
+		</where>
+	</select>
+
+	<!-- 删除 -->
+	<delete id="DelFirstKindById">
+		delete config_file_first_kind
+		<where>
+			first_kind_id=#{_parameter}
+		</where>
+	</delete>
+
+	<!--添加 需要还需要修改语句 有问题 -->
+	<insert id="saveFirstKind">
+		INSERT INTO hr.config_file_first_kind
+		(first_kind_name,
+		first_kind_salary_id, first_kind_sale_id) VALUES
+		('集团', '1','1');
+	</insert>
+	<!--修改by id 修改修改 未完工 -->
+	<update id="">
+		UPDATE hr.config_file_first_kind SET
+		first_kind_id='1',
+		first_kind_name='集团', first_kind_salary_id='1',
+		first_kind_sale_id='1'
+		WHERE (first_kind_id='1');
+	</update>
 
 </mapper>

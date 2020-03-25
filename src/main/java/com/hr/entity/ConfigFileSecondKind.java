@@ -11,7 +11,19 @@ public class ConfigFileSecondKind {
 
     private String secondSaleId;
 
-    public Integer getSecondKindId() {
+    //一个二级机构属于一个一级机构 而 一个一级机构有多个二级机构
+    private ConfigFileFirstKind configFileFirstKind;
+    
+    
+    public ConfigFileFirstKind getConfigFileFirstKind() {
+		return configFileFirstKind;
+	}
+
+	public void setConfigFileFirstKind(ConfigFileFirstKind configFileFirstKind) {
+		this.configFileFirstKind = configFileFirstKind;
+	}
+
+	public Integer getSecondKindId() {
         return secondKindId;
     }
 
@@ -50,4 +62,12 @@ public class ConfigFileSecondKind {
     public void setSecondSaleId(String secondSaleId) {
         this.secondSaleId = secondSaleId == null ? null : secondSaleId.trim();
     }
+
+	@Override
+	public String toString() {
+		return "ConfigFileSecondKind [secondKindId=" + secondKindId + ", secondKindName=" + secondKindName
+				+ ", firstKindId=" + firstKindId + ", secondSalaryId=" + secondSalaryId + ", secondSaleId="
+				+ secondSaleId + ", configFileFirstKind=" + configFileFirstKind + "]";
+	}
+    
 }

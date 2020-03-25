@@ -9,35 +9,44 @@ public class ConfigFileFirstKind {
 
     private String firstKindSaleId;
 
-    public Integer getFirstKindId() {
-        return firstKindId;
-    }
+	@Override
+	public String toString() {
+		return "ConfigFileFirstKind [firstKindId=" + firstKindId + ", firstKindName=" + firstKindName
+				+ ", firstKindSalaryId=" + firstKindSalaryId + ", firstKindSaleId=" + firstKindSaleId + "]";
+	}
 
-    public void setFirstKindId(Integer firstKindId) {
-        this.firstKindId = firstKindId;
-    }
+	public Integer getFirstKindId() {
+		return firstKindId;
+	}
 
-    public String getFirstKindName() {
-        return firstKindName;
-    }
+	public void setFirstKindId(Integer firstKindId) {
+		this.firstKindId = firstKindId;
+	}
 
-    public void setFirstKindName(String firstKindName) {
-        this.firstKindName = firstKindName == null ? null : firstKindName.trim();
-    }
+	public String getFirstKindName() {
+		return firstKindName;
+	}
 
-    public String getFirstKindSalaryId() {
-        return firstKindSalaryId;
-    }
+	public void setFirstKindName(String firstKindName) {
+		this.firstKindName = firstKindName;
+	}
 
-    public void setFirstKindSalaryId(String firstKindSalaryId) {
-        this.firstKindSalaryId = firstKindSalaryId == null ? null : firstKindSalaryId.trim();
-    }
+	public String getFirstKindSalaryId() {
+		return firstKindSalaryId;
+	}
 
-    public String getFirstKindSaleId() {
-        return firstKindSaleId;
-    }
+	public void setFirstKindSalaryId(String firstKindSalaryId) {
+		this.firstKindSalaryId = firstKindSalaryId;
+	}
 
-    public void setFirstKindSaleId(String firstKindSaleId) {
-        this.firstKindSaleId = firstKindSaleId == null ? null : firstKindSaleId.trim();
-    }
+	public String getFirstKindSaleId() {
+		return firstKindSaleId;
+	}
+
+	public void setFirstKindSaleId(String firstKindSaleId) {
+		this.firstKindSaleId = firstKindSaleId;
+	}
+
+    
+    
 }

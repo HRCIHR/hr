@@ -11,8 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import com.hr.entity.users;
 import com.hr.ty.service.PageCountService;
@@ -21,7 +25,7 @@ import com.hr.util.pagination;
 
 @Controller
 @RequestMapping("users")
-public class UsersController { // 登录
+public class UsersController { 
 	@Autowired
 	private usersService us;
 
@@ -45,11 +49,9 @@ public class UsersController { // 登录
 	@RequestMapping("/querUserAndRole")
 	@ResponseBody
 	public Map querUserAndRole(pagination page) {
-		System.out.println("users-querUserAndRole");
+		System.out.println("查询用户+分页");
 		List<users> users = us.querUserAndRole(page);
 		Integer count = ps.getTableCount("users", "u_id");
-		System.out.println("总行数" + count);
-		System.out.println("查询全部用户" + users);
 		Map map = new HashMap();
 		map.put("total", count);
 		map.put("rows", users);
@@ -60,9 +62,22 @@ public class UsersController { // 登录
 	@ResponseBody
 	public int insertUser(users user) {
 		System.out.println("添加用户" + user);
-		Integer  row= us.insertUser(user);
-		return row;
-			
-		}
-	
+		return us.insertUser(user);
+
 	}
+
+	@RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public int deleteUser(@PathVariable("id") Integer id) {
+		System.out.println("删除用户" + id);
+		return us.deleteByPrimaryKey(id);
+	}
+
+	@RequestMapping("/updateUserByUname")
+	@ResponseBody
+	public Integer updateUserByUname(users user) {
+		System.out.println("修改用户：" + user);
+		return us.updateByPrimaryKey(user);
+	}
+
+}

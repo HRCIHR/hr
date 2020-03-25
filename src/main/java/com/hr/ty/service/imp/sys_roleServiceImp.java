@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import com.hr.entity.sys_role;
 import com.hr.ty.mapper.sys_roleMapper;
 import com.hr.ty.service.sys_roleService;
+
 @Service
 public class sys_roleServiceImp implements sys_roleService {
-@Autowired
-private sys_roleMapper sm;
+	@Autowired
+	private sys_roleMapper sm;
+
 	@Override
 	public List<sys_role> queryRole() {
 		// TODO Auto-generated method stub

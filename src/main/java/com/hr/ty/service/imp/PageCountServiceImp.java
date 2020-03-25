@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.hr.ty.mapper.PageCountMapper;
 import com.hr.ty.service.PageCountService;
+
 @Service
 public class PageCountServiceImp implements PageCountService {
 	@Autowired

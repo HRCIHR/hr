@@ -46,4 +46,13 @@
     values (#{uName,}, #{uTrueName}, 
       #{uPassword}, #{role.roleId})
   </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  
+  <update id="updateByPrimaryKey" >
+    update users set u_name = #{uName},u_true_name = #{uTrueName}, u_password = #{uPassword},u_roleid = #{role.roleId} where u_id = #{uId}
+  </update>
 </mapper>

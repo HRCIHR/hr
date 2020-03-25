@@ -13,4 +13,8 @@ public interface usersMapper {
 	List<users> querUserAndRole(pagination page);//分页查询
 	
 	Integer insertUser(users user);
+	
+	Integer deleteByPrimaryKey(int uId);
+	
+	Integer updateByPrimaryKey(users record);
 }

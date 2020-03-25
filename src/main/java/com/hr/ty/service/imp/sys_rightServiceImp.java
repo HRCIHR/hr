@@ -24,8 +24,8 @@ public class sys_rightServiceImp implements sys_rightService {
 	@Override
 	public List<sys_right> queryRightByParentId(Integer id) {
 		// TODO Auto-generated method stub
-		if(id==null) {
-			id=0;
+		if (id == null) {
+			id = 0;
 		}
 		System.out.println("queryRightByParentId");
 		return srm.queryRightByParentId(id);

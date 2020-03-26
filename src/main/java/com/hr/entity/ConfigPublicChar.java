@@ -30,4 +30,11 @@ public class ConfigPublicChar {
     public void setAttributeName(String attributeName) {
         this.attributeName = attributeName == null ? null : attributeName.trim();
     }
+
+	@Override
+	public String toString() {
+		return "ConfigPublicChar [pbcId=" + pbcId + ", attributeKind=" + attributeKind + ", attributeName="
+				+ attributeName + "]";
+	}
+    
 }

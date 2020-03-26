@@ -1,116 +1,115 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-trasitional.dtd">
 <html>
+	<script type="application/javascript" src="../../../easyui/jquery.min.js"></script>
+
+	<script type="application/javascript" src="../../../easyui/jquery.easyui.min.js"></script>
+	<script type="application/javascript" src="../../../easyui/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" href="../../../easyui/themes/icon.css" />
+	<link rel="stylesheet" href="../../../easyui/themes/default/easyui.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet"
-			href="../../css/table.css" type="text/css">
-		<script type="text/javascript"
-			src="../../javascript/comm/comm.js">
-		</script>
-		<script type="text/javascript" src="../../javascript/jquery-1.7.2.js"></script>
-		<script type="text/javascript">
-			function deleteMajor(id)
-			{
-				$.ajax({
-					url:"/HR_Fist/customiz/customizAction!doDeleteMajorKind",
-					data:"cmk.mfkId="+id,
-					dataType:"text",
-					success:function (){
-						alert("删除成功！");
-						location.reload();
-					},
-					type:"post"
-				});
-				
-			}
-		</script>
-		
+		<title></title>
 	</head>
+	<script type="text/javascript">
+		//PublicChar/pagQueryPublicCharByType
+		$(function() {
+
+			//添加
+			$('#adddialog').dialog({
+				title: '添加',
+				width: 600,
+				height: 600,
+				shadow: true,
+				closed: true,
+				modal: true,
+				onBeforeClose: function() {
+
+				}
+			});
+			//表单设置
+			$("#tijiao").on("click", function() {
+				$('#addform').form('submit', {
+					url: "xxxxx",
+					onSubmit: function(param) {
+
+						console.log(param);
+						return false;
+					},
+					success: function(data) {
+						alert(data)
+					}
+				});
+
+			})
+
+			$('#professiontable').datagrid({
+				url: 'http://127.0.0.1:8080/HR/MajorKind/pagQueryMajor',
+				fitColumns: true,
+				pagination: true,
+				pageList: [5, 10],
+				pageSize: 5,
+				pageNumber: 1,
+				method: "get",
+				toolbar: [{
+					iconCls: 'icon-add',
+					text: "添加",
+					handler: function() {
+
+						$('#adddialog').dialog("open");
+					}
+				}],
+
+				columns: [
+					[{
+							field: 'majorKindId',
+							title: '分类编号',
+							width: 100
+						}, {
+							field: 'majorKindName',
+							title: '职位分类名称',
+							width: 100
+						},
+						{
+							field: 'xxx',
+							title: '操作',
+							width: 100,
+							align: 'right',
+							formatter: function(value, row, index) {
+								var rows = JSON.stringify(row);
+								return "<button onClick='deletebut(" + row.majorKindId + ")'>删除</button>"
+							}
+						}
+					]
+				]
+			});
+		});
+
+		function deletebut(id) {
+			alert(id);
+		}
+	</script>
 
 	<body>
-		<form method="post" action="../customiz/customizAction!findMajorKind">
-			<table width="100%">
-				<tr>
-					<td>
-						<font color="black">您正在做的业务是：人力资源--客户化设置--人力资源档案管理设置--职位分类设置
-						</font>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<input type="button" value="添加" class="BUTTON_STYLE1"
-							onclick="window.location.href='major_kind_add.html';">
-					</td>
-				</tr>
-			</table>
-			<table width="100%" border="1" cellpadding=0 cellspacing=1
-				bordercolorlight=#848284 bordercolordark=#eeeeee
-				class="TABLE_STYLE1">
-				<tr>
-					<td width="46%" class="TD_STYLE1">
-						职位分类编号
-					</td>
-					<td width="47%" class="TD_STYLE1">
-						职位分类名称
-					</td>
-					<td width="5%" class="TD_STYLE1">
-						删除
-					</td>
-				</tr>
 
-				
-				<tr>
-					<td class="TD_STYLE2">
-						01
-					</td>
-					<td class="TD_STYLE2">
-						销售
-					</td>
-					<td class="TD_STYLE2">
-						<a href="#">删除</a>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="TD_STYLE2">
-						02
-					</td>
-					<td class="TD_STYLE2">
-						软件开发
-					</td>
-					<td class="TD_STYLE2">
-						<a href="#">删除</a>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="TD_STYLE2">
-						03
-					</td>
-					<td class="TD_STYLE2">
-						人力资源
-					</td>
-					<td class="TD_STYLE2">
-						<a href="#">删除</a>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="TD_STYLE2">
-						04
-					</td>
-					<td class="TD_STYLE2">
-						生产部
-					</td>
-					<td class="TD_STYLE2">
-						<a href="#">删除</a>
-					</td>
-				</tr>
-				
+		<table id="professiontable"></table>
+		<div id="adddialog">
 
-			</table>
-			<p>
-				 
-		</form>
+			<form id="addform" method="post" style="margin-top: 150px;">
+
+				<center><input name="firstKindName" class="easyui-textbox" data-options="label:'属性总类',labelWidth:150" style="width:300px">
+					<br />
+					<br />
+					<input name="firstKindSalaryId" class="easyui-textbox" data-options="label:'属性名称',labelWidth:150" style="width:300px">
+
+					</br>
+					</br>
+					<button id="tijiao">提交</button>
+				</center>
+
+			</form>
+
+		</div>
 	</body>
+
 </html>

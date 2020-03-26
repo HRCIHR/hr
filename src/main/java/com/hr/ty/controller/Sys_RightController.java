@@ -49,4 +49,29 @@ public class Sys_RightController {
 		}
 		return meunList;
 	}
-}
+	// 得到所有的权限
+		@RequestMapping("/queryRightAll")
+		@ResponseBody
+		public List queryRightAll() {
+			List<sys_right> list = srs.queryRight();
+			// 创建一个List集合保存需要转成json的数据
+			// fatherMap 存放所有的父类和父类自己的儿子
+			List<Map<String, Object>> fatherList = new ArrayList<Map<String, Object>>();
+			for (sys_right f : list) {
+				// 判断是不是最大的根菜单
+				if (f.getRightParentCode() == 0 && "fatcherNode".equals(f.getRightType())) {
+					Map<String, Object> father = new HashMap<String, Object>();
+					father.put("id", f.getRightCode());
+					father.put("text", f.getRightText());
+					father.put("state", "open");
+					// 找儿子
+					MyUtil.getSon(list, father, f.getRightCode());
+					fatherList.add(father);
+				}
+			}
+			System.out.println(fatherList);
+
+			return fatherList;
+		}
+	}
+

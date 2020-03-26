@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.ThirdKindMapper">
+
+	<sql id="queryThirdkindALL">
+		SELECT
+		config_file_third_kind.third_kind_id,
+		config_file_third_kind.third_kind_name,
+		config_file_third_kind.first_kind_id,
+		config_file_third_kind.second_kind_id,
+		config_file_third_kind.third_kind_sale_id,
+		config_file_third_kind.third_kind_is_retail
+		FROM
+		config_file_third_kind
+
+	</sql>
+	<resultMap type="com.hr.entity.ConfigFileThirdKind"
+		id="qeuryThirdAll">
+		<id column="third_Kind_Id" property="thirdKindId" />
+		<result column="third_Kind_Name" property="thirdKindName" />
+		<result column="first_Kind_Id" property="firstKindId" />
+		<result column="second_Kind_Id" property="secondKindId" />
+		<result column="third_Kind_Sale_Id" property="thirdKindSaleId" />
+		<result column="third_Kind_Is_Retail"
+			property="thirdKindIsRetail" />
+		
+
+	</resultMap>
+	
+	<resultMap type="com.hr.entity.ConfigFileThirdKind" id="extendsqeuryThirdAll" extends="qeuryThirdAll">
+	<association property="configFileFirstKind"
+			column="first_Kind_Id"
+			select="com.hr.zh.mapper.FirstKindMapper.queryfirstKindById"></association>
+		<association property="configFileSecondKind"
+			column="second_Kind_Id"
+			select="com.hr.zh.mapper.SecondKindMapper.queryThirdKindById"></association>
+	
+	</resultMap>
+
+	<!--查所有分页 -->
+	<select id="pagQueryThirdKind" resultMap="extendsqeuryThirdAll">
+		<include refid="queryThirdkindALL"></include>
+		LIMIT #{page},#{rows}
+	</select>
+	<!-- 查询总值 -->
+	<select id="QueryThirdKindCount" resultType="java.lang.Integer">
+		SELECT
+		count(third_kind_id)
+		FROM
+		config_file_third_kind
+	</select>
+</mapper>

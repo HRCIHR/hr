@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.SecondKindMapper">
+	<sql id="qeurySecondKindall">
+		SELECT
+		config_file_second_kind.second_kind_id,
+		config_file_second_kind.second_kind_name,
+		config_file_second_kind.first_kind_id,
+		config_file_second_kind.second_salary_id,
+		config_file_second_kind.second_sale_id
+		FROM
+		config_file_second_kind
+	</sql>
+
+	<resultMap type="com.hr.entity.ConfigFileSecondKind"
+		id="queryAllMap">
+		<id column="second_Kind_Id" property="secondKindId" />
+		<result column="second_Kind_Name" property="secondKindName" />
+		<result column="first_Kind_Id" property="firstKindId" />
+		<result column="second_Salary_Id" property="secondSalaryId" />
+		<result column="second_Sale_Id" property="secondSaleId" />
+
+	</resultMap>
+
+	<resultMap type="com.hr.entity.ConfigFileSecondKind"
+		id="extendsQueryAllMap" extends="queryAllMap">
+		<association property="configFileFirstKind"
+			column="first_Kind_Id"
+			select="com.hr.zh.mapper.FirstKindMapper.queryfirstKindById">
+
+		</association>
+	</resultMap>
+
+
+
+	<!-- List<ConfigFileSecondKind> pagQuerySecondKind(pagination page); -->
+	<select id="pagQuerySecondKind" resultMap="extendsQueryAllMap">
+		<include refid="qeurySecondKindall"></include>
+		LIMIT #{page},#{rows}
+	</select>
+
+
+	<!-- Integer QuerySecondKindCount(); -->
+
+	<select id="QuerySecondKindCount" resultType="java.lang.Integer">
+		SELECT
+		count(second_kind_id)
+		FROM
+		config_file_second_kind
+	</select>
+	
+	<!-- com.hr.zh.mapper.SecondKindMapper.queryThirdKindById(Integer) -->
+	<select id="queryThirdKindById" resultMap="queryAllMap">
+	<include refid="qeurySecondKindall"></include>
+	<where>
+	second_kind_id=#{_parameter}
+	</where>
+	</select>
+	
+	
+</mapper>

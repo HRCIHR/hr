@@ -32,8 +32,15 @@ a{
   cursor:pointer;
 }
 </style>
+<script type="text/javascript">
+  function logout(){
+		$("#logoutfrom").submit();
+		window.parent.location.href="../../login.jsp";
+  }
+</script>
 </head>
 <body topmargin="0" leftmargin="0">
+<form action="<%=path%>/users/logout" id="logoutfrom"></form>
 	<table style="width: 70%; margin-left: 30%;">
 		<tr>
 			<td style="text-align: right; width: 30%">
@@ -43,7 +50,7 @@ a{
 			</td>
 			<td
 				style="text-align: right; font-size: 17px; width: 35%; color: white;"> 
-				<a onclick="parent.location.href='<%=path%>/login.jsp'"  data-options="iconCls:'icon-undo'" class="my_link_button">安全退出</a>
+				<a onclick="javascript:logout()"  data-options="iconCls:'icon-undo'" class="my_link_button">安全退出</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>

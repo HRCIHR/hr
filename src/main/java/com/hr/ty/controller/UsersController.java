@@ -79,5 +79,14 @@ public class UsersController {
 		System.out.println("修改用户：" + user);
 		return us.updateByPrimaryKey(user);
 	}
+	
+	@RequestMapping("/logout")
+	public void logout (HttpSession session) {
+		System.out.println("注销");
+		session.removeAttribute("user");
+		session.invalidate();
+		
+	}
+	
 
 }

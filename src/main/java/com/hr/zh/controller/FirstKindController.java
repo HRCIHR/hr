@@ -38,4 +38,40 @@ public class FirstKindController {
 
 	}
 
+	@RequestMapping("/saveFirstKind") // First/saveFirstKind
+	public @ResponseBody boolean saveFirstKind(ConfigFileFirstKind firstKind) {
+		Boolean f = firstKindService.saveFirstKind(firstKind);
+		System.out.println(firstKind);
+
+		return f;
+
+	}
+
+	// updateFirstKind 名称不应许更改
+	@RequestMapping("/updateFirstKind") // First/saveFirstKind
+	public @ResponseBody boolean updateFirstKind(ConfigFileFirstKind firstKind) {
+
+		boolean f = firstKindService.updateFirstKind(firstKind);
+		System.out.println(firstKind);
+		return f;
+
+	}
+
+	@RequestMapping("/delFirstKind") // First/saveFirstKind
+	public @ResponseBody boolean delFirstKind(Integer firstKindID) {
+
+		boolean f = firstKindService.DelFirstKindById(firstKindID);
+		System.out.println(firstKindID);
+		return f;
+
+	}
+
+	@RequestMapping("/findFirstKindAll") // First/findFirstKindAll
+	public @ResponseBody List<ConfigFileFirstKind> findFirstKindAll() {
+
+		List<ConfigFileFirstKind> findFirstKindAll = firstKindService.findFirstKindAll();
+			System.out.println(findFirstKindAll);
+		return findFirstKindAll;
+
+	}
 }

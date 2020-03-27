@@ -20,9 +20,7 @@ public class MajorKindServiceImp implements MajorKindService {
 	public List<ConfigMajorKind> pagQueryMajor(pagination page) {
 		// TODO Auto-generated method stub
 		
-		System.out.println(page + "==============");
-		int pages = page.getPage();
-		page.setPage((pages - 1) * page.getRows());
+		pagination.pageformat(page);
 		return majorKindMapper.pagQueryMajor(page);
 	}
 

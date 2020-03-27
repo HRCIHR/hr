@@ -12,9 +12,6 @@
 		config_file_first_kind
 
 	</sql>
-
-
-
 	<resultMap type="com.hr.entity.ConfigFileFirstKind"
 		id="firstkind">
 		<id column="first_Kind_Id" property="firstKindId" />
@@ -27,6 +24,7 @@
 	<!--查询所有 分页 -->
 	<select id="queryfirstKindAll" resultMap="firstkind">
 		<include refid="firstKindbyAll"></include>
+		ORDER BY first_kind_id
 		LIMIT #{page},#{rows}
 	</select>
 
@@ -48,26 +46,34 @@
 
 	<!-- 删除 -->
 	<delete id="DelFirstKindById">
-		delete config_file_first_kind
+		delete from config_file_first_kind
 		<where>
 			first_kind_id=#{_parameter}
 		</where>
 	</delete>
 
-	<!--添加 需要还需要修改语句 有问题 -->
+	<!--添加 需要还需要修改语句 有问题 Integer saveFirstKind(ConfigFileFirstKind firstKind); -->
 	<insert id="saveFirstKind">
 		INSERT INTO hr.config_file_first_kind
 		(first_kind_name,
 		first_kind_salary_id, first_kind_sale_id) VALUES
-		('集团', '1','1');
+		(#{firstKindName},#{firstKindSalaryId},#{firstKindSaleId});
 	</insert>
-	<!--修改by id 修改修改 未完工 -->
-	<update id="">
-		UPDATE hr.config_file_first_kind SET
-		first_kind_id='1',
-		first_kind_name='集团', first_kind_salary_id='1',
-		first_kind_sale_id='1'
-		WHERE (first_kind_id='1');
+	<!--修改by id 修改修改 未完工 Integer updateFirstKind(ConfigFileFirstKind firstKind); -->
+	<update id="updateFirstKind">
+		UPDATE config_file_first_kind
+		<set>
+			first_kind_salary_id=#{firstKindSalaryId},
+			first_kind_sale_id=#{firstKindSaleId},
+		</set>
+		WHERE first_kind_id=#{firstKindId};
 	</update>
+	
+	<!-- List<ConfigFileFirstKind> findFirstKindAll(); 查所有 -->
+	<select id="findFirstKindAll" resultMap="firstkind">
+		<include refid="firstKindbyAll"></include>
+		ORDER BY first_kind_id
+	</select>
+	
 
 </mapper>

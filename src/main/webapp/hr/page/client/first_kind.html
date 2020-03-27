@@ -10,26 +10,79 @@
 		<link rel="stylesheet" href="../../../easyui/themes/default/easyui.css" />
 
 		</script>
+		<titile>Ⅱ级机构信息管理</titile>
 	</head>
+
+	<style>
+
+	</style>
 
 	<script type="text/javascript">
 		$(function() {
 
+			//onChange
+			$("#firstKindSalaryId").textbox({
+
+				onChange: function(newValue, oldValue) {
+
+				}
+			});
+			$("#firstKindSaleId").textbox({
+				onChange: function(newValue, oldValue) {
+					console.log(newValue + "老：" + oldValue);
+				}
+			});
 			//表单设置
-			$("#tijiao").on("click", function() {
-				$('#addform').form('submit', {
-					url: "xxxxx",
+
+			$("#updatetijiao").on("click", function() {
+				$('#updateform').form('submit', {
+					url: "http://127.0.0.1:8080/HR/First/updateFirstKind",
 					onSubmit: function(param) {
 
-						console.log(param);
-						return false;
 					},
 					success: function(data) {
-						alert(data)
+						if(data) {
+							$.messager.alert('提示信息', '修改成功!', 'info', function() {
+
+								location.href = "http://127.0.0.1:8080/HR/hr/page/client/first_kind.html";
+							});
+							//关闭模态框 清除模态框数据clear
+
+							$('#updateform').form("clear");
+
+							$('#updatedialog').dialog("close");
+						} else {
+							$.messager.alert('提示信息', '修改失败 请检查输入是否有误!', 'error');
+						}
 					}
 				});
 
-			})
+			});
+			$("#addtijiao").on("click", function() {
+				$('#addform').form('submit', {
+					url: "http://127.0.0.1:8080/HR/First/saveFirstKind",
+					onSubmit: function(param) {
+
+					},
+					success: function(data) {
+						if(data) {
+							$.messager.alert('提示信息', '添加成功!', 'info', function() {
+							//关闭模态框 清除模态框数据clear
+							$('#addform').form("clear");
+
+							$('#adddialog').dialog("close");
+								location.href = "http://127.0.0.1:8080/HR/hr/page/client/first_kind.html";
+							});
+							
+
+						} else {
+							$.messager.alert('提示信息', '添加失败 请检查输入是否有误!', 'error');
+						}
+					}
+				});
+
+			});
+
 			$('#adddialog').dialog({
 				title: '添加',
 				width: 600,
@@ -38,8 +91,9 @@
 				closed: true,
 				modal: true,
 				onBeforeClose: function() {
-
+					$('#addform').form("clear");
 				}
+
 			});
 			//修改dialog
 			$('#updatedialog').dialog({
@@ -50,7 +104,7 @@
 				closed: true,
 				modal: true,
 				onBeforeClose: function() {
-
+					$('#addform').form("clear");
 				}
 			});
 
@@ -112,10 +166,32 @@
 		function updatafirstkind(rows) {
 			console.log(rows);
 			$('#updatedialog').dialog("open");
+
+			//bh mc xcbh xsbh  setText
+			$("#bh").textbox("setValue", rows.firstKindId);
+			$("#mc").textbox("setValue", rows.firstKindName);
+			$("#xcbh").textbox("setValue", rows.firstKindSalaryId);
+			$("#xsbh").textbox("setValue", rows.firstKindSaleId);
+
 		}
 
 		function deletefirstkind(id) {
-			alert(id);
+			$.ajax({
+				type: "get",
+				url: "http://127.0.0.1:8080/HR/First/delFirstKind?firstKindID=" + id,
+				async: true,
+				success: function(data) {
+					if(data) {
+						$.messager.alert('提示信息', '删除成功!', 'info', function() {
+
+							location.href = "http://127.0.0.1:8080/HR/hr/page/client/first_kind.html";
+						});
+
+					} else {
+						$.messager.alert('提示信息', '删除失败 请检查输入是否有误!', 'error');
+					}
+				}
+			});
 		}
 	</script>
 
@@ -129,38 +205,40 @@
 					<input name="firstKindName" class="easyui-textbox" data-options="label:'Ⅰ级机构名称',labelWidth:150" style="width:300px">
 					<br />
 					<br />
-					<input name="firstKindSalaryId" class="easyui-textbox" data-options="label:'薪酬发放责任人编号',labelWidth:150" style="width:300px">
+					<input id="firstKindSalaryId" name="firstKindSalaryId" class="easyui-textbox" data-options="label:'薪酬发放责任人编号',labelWidth:150" style="width:300px">
 
 					<br/><span style="color: red;">(注:输入薪酬发放责任人编号（多个编号之间请用"半角逗号 ','"隔开)</span>
 					<br />
-					<input name="firstKindSaleId" class="easyui-textbox" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
+					<input id="firstKindSaleId" name="firstKindSaleId" class="easyui-textbox" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
 					<br /><span style="color: red;">(注:输入销售责任人编号（多个编号之间请用"半角逗号 ','"隔开)</span>
 					<br />
-					<button id="tijiao" type="button">提交</button>
+					<button id="addtijiao" type="button">提交</button>
 
 				</form>
 			</center>
 		</div>
 		<div id="updatedialog">
 			<center style="margin-top: 150px;">
-				<form>
-					<input class="easyui-textbox" data-options="label:'Ⅰ级机构编号',labelWidth:150,readonly:true" style="width:300px">
+				<form id="updateform" method="post">
+					<input id="bh" name="firstKindId" class="easyui-textbox" data-options="label:'Ⅰ级机构编号',labelWidth:150,readonly:true" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'Ⅰ级机构名称',labelWidth:150" style="width:300px">
+					<input id="mc" name="firstKindName" class="easyui-textbox" data-options="label:'Ⅰ级机构名称',labelWidth:150,readonly:true" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'薪酬发放责任人编号',labelWidth:150" style="width:300px">
+					<input id="xcbh" name="firstKindSalaryId" class="easyui-textbox" data-options="label:'薪酬发放责任人编号',labelWidth:150" style="width:300px">
 
 					<br/><span style="color: red;">(注:输入薪酬发放责任人编号（多个编号之间请用"半角逗号 ','"隔开)</span>
 
 					<br />
-					<input class="easyui-textbox" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
+					<input id="xsbh" name="firstKindSaleId" class="easyui-textbox" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
 					<br /><span style="color: red;">(注:输入销售责任人编号（多个编号之间请用"半角逗号 ','"隔开)</span>
 					<br />
+					<button id="updatetijiao" type="button">提交</button>
 				</form>
 			</center>
 		</div>
+
 	</body>
 
 </html>

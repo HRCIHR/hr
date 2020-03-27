@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.PublicCharMapper">
+	<sql id="queryPublicChar">
+		SELECT
+		config_public_char.pbc_id,
+		config_public_char.attribute_kind,
+		config_public_char.attribute_name
+		FROM
+		config_public_char
+	</sql>
+	<resultMap type="com.hr.entity.ConfigPublicChar"
+		id="PublicCharMap">
+		<id column="pbc_Id" property="pbcId" />
+		<result column="attribute_Kind" property="attributeKind" />
+		<result column="attribute_Name" property="attributeName" />
+	</resultMap>
+
+	<!-- List<ConfigPublicChar> pagQueryPublicChar(pagination page); -->
+	<select id="pagQueryPublicChar" resultMap="PublicCharMap">
+		<include refid="queryPublicChar"></include>
+		LIMIT #{page},#{rows}
+	</select>
+	<!-- 查询总数 -->
+	<select id="queryPublicCharCount" resultType="java.lang.Integer">
+		SELECT
+		count(pbc_id)
+		FROM
+		config_public_char
+	</select>
+
+	<!-- List<ConfigPublicChar> pagQueryPublicCharByType(pagination page, String 
+		type); -->
+	<select id="pagQueryPublicCharByType" resultMap="PublicCharMap">
+		<include refid="queryPublicChar"></include>
+		<where>attribute_kind=#{type}</where>
+		LIMIT #{pa.page},#{pa.rows}
+	</select>
+
+	<select id="queryPublicCharByTypeCount"
+		resultType="java.lang.Integer">
+		SELECT
+		count(pbc_id)
+		FROM
+		config_public_char
+		<where>attribute_kind='职称'</where>
+	</select>
+</mapper>

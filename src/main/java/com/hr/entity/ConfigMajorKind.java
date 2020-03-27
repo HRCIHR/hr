@@ -20,4 +20,10 @@ public class ConfigMajorKind {
     public void setMajorKindName(String majorKindName) {
         this.majorKindName = majorKindName == null ? null : majorKindName.trim();
     }
+
+	@Override
+	public String toString() {
+		return "ConfigMajorKind [majorKindId=" + majorKindId + ", majorKindName=" + majorKindName + "]";
+	}
+    
 }

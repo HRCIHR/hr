@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.MajorMapper">
+	<sql id="queryMajorAll">
+		SELECT
+		config_major.major_id,
+		config_major.major_name,
+		config_major.major_kind_id,
+		config_major.test_amount
+		FROM
+		config_major
+	</sql>
+
+	<resultMap type="com.hr.entity.ConfigMajor" id="MajorAllMap">
+		<id column="major_Id" property="majorId" />
+		<result column="major_Name" property="majorName" />
+		<result column="major_Kind_Id" property="majorKindId" />
+		<result column="test_Amount" property="testAmount" />
+	</resultMap>
+
+	<resultMap type="com.hr.entity.ConfigMajor"
+		id="extendsMajorAllMap" extends="MajorAllMap">
+		<association property="configMajorKind"
+			column="major_Kind_Id"
+			select="com.hr.zh.mapper.MajorKindMapper.QueryMajorById">
+
+		</association>
+	</resultMap>
+
+	<select id="pagQueryMajor" resultMap="extendsMajorAllMap">
+		<include refid="queryMajorAll"></include>
+		LIMIT #{page},#{rows}
+	</select>
+
+	<select id="queryMajorCount" resultType="java.lang.Integer">
+		SELECT
+		count(major_id)
+		FROM
+		config_major
+	</select>
+
+</mapper>

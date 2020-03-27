@@ -81,8 +81,7 @@ a {
 	<div data-options="region:'center'">
 		<div id="tt2" class="easyui-tabs" style="width: 100%; height: 100%;">
 			<div title="首页"
-				style="padding: 20px; display: none; background: url(<%=path%>/hr/images/onepice.jpg) no-repeat 0 0;">
-
+				style="padding: 20px; display: none; background: url(<%=path%>/hr/images/onepice.jpg) no-repeat 0 0;" >
 			</div>
 		</div>
 	</div>

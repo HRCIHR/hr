@@ -20,9 +20,7 @@ public class MajorServiceImp implements MajorService {
 	@Override
 	public List<ConfigMajor> pagQueryMajor(pagination page) {
 		// TODO Auto-generated method stub
-		System.out.println(page + "==============");
-		int pages = page.getPage();
-		page.setPage((pages - 1) * page.getRows());
+		pagination.pageformat(page);
 		return majorMapper.pagQueryMajor(page);
 	}
 

@@ -36,4 +36,26 @@ public class SecondKindController {
 		return map;
 	}
 
+	// 添加
+	@RequestMapping("/saveSecondKind") // SecondKind/saveSecondKind
+	public @ResponseBody boolean saveSecondKind(ConfigFileSecondKind secondKind) {
+
+		System.out.println(secondKind);
+		return true;
+	}
+
+	@RequestMapping("/updateSecondKind") // SecondKind/saveSecondKind
+	public @ResponseBody boolean updateSecondKind(ConfigFileSecondKind secondKind) {
+
+		System.out.println(secondKind);
+		return true;
+	}
+
+	@RequestMapping("/delSecondKind") // SecondKind/saveSecondKind
+	public @ResponseBody boolean delSecondKind(Integer secondKindID) {
+
+		System.out.println(secondKindID);
+		return true;
+	}
+
 }

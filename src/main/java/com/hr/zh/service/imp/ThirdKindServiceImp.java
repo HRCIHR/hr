@@ -20,9 +20,7 @@ public class ThirdKindServiceImp implements ThirdKindService {
 	@Override
 	public List<ConfigFileThirdKind> pagQueryThirdKind(pagination page) {
 		// TODO Auto-generated method stub
-		System.out.println(page + "==============");
-		int pages = page.getPage();
-		page.setPage((pages - 1) * page.getRows());
+		pagination.pageformat(page);
 		return thirdKindMapper.pagQueryThirdKind(page);
 	}
 

@@ -20,9 +20,7 @@ public class PublicCharServiceImp implements PublicCharService {
 	@Override
 	public List<ConfigPublicChar> pagQueryPublicChar(pagination page) {
 		// TODO Auto-generated method stub
-		System.out.println(page + "==============");
-		int pages = page.getPage();
-		page.setPage((pages - 1) * page.getRows());
+		pagination.pageformat(page);
 		
 		return publicCharMapper.pagQueryPublicChar(page);
 	}

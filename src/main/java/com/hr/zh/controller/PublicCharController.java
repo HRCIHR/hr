@@ -29,7 +29,7 @@ public class PublicCharController {
 		for (ConfigPublicChar configPublicChar : queryPublicChar) {
 			System.out.println(configPublicChar);
 		}
-		Integer count = publicCharService.queryPublicCharByTypeCount();
+		Integer count = publicCharService.queryPublicCharCount();
 		map.put("rows", queryPublicChar);
 		map.put("total", count);
 		return map;

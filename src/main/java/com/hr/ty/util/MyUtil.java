@@ -35,8 +35,13 @@ public class MyUtil {
 				Map<String, Object> son = new HashMap<String, Object>();
 				son.put("id", sr.getRightCode());
 				son.put("text", sr.getRightText());
+				Map<String, Object> attr = new HashMap<String, Object>();
+				attr.put("url", sr.getRightUrl());
+				attr.put("tip", sr.getRightTip());
+				attr.put("pid", sr.getRightParentCode());
+				son.put("attributes", attr);
 				// 此儿子节点还是别人的父亲,sr.getRight_parent_code()!=0 表示不是最大根节点
-				if ("parent".equals(sr.getRightType()) && sr.getRightParentCode() != 0) {
+				if ("fatcherNode".equals(sr.getRightType()) && sr.getRightParentCode() != 0) {
 					son.put("state", "open");
 					// 找当前对象的儿子
 					getSon(list, son, sr.getRightCode());

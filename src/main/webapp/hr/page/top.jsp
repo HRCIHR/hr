@@ -40,7 +40,7 @@ a{
 </script>
 </head>
 <body topmargin="0" leftmargin="0">
-<form action="<%=path%>/users/logout" id="logoutfrom"></form>
+<form action="http://localhost:8080/hr/users/logout" id="logoutfrom"></form>
 	<table style="width: 70%; margin-left: 30%;">
 		<tr>
 			<td style="text-align: right; width: 30%">

@@ -64,6 +64,11 @@ public class Sys_RightController {
 					father.put("id", f.getRightCode());
 					father.put("text", f.getRightText());
 					father.put("state", "open");
+					Map<String, Object> attr = new HashMap<String, Object>();
+					attr.put("url", f.getRightUrl());
+					attr.put("tip", f.getRightTip());
+					attr.put("pid", f.getRightParentCode());
+					father.put("attributes", attr);
 					// 找儿子
 					MyUtil.getSon(list, father, f.getRightCode());
 					fatherList.add(father);

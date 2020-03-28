@@ -112,7 +112,8 @@
 		    animate:true,
 		    lines:true,
 		    formatter:function(node){
-		    	return "<input type='checkbox' name='allRight' id='right"+node.id+"' value='"+node.id+"'/>"+node.text;
+		    	//设置一个自定义属性方便后面的操作
+		    	return "<input type='checkbox' data-parentid='"+node.attributes.pid+"' name='allRight' id='right"+node.id+"' value='"+node.id+"'/>"+node.text;
 		    }
 		}); 
 	})
@@ -143,6 +144,55 @@
 		       }
 		    }    
 		});  
+	})
+	//清空所有的权限
+	function clearMenu(){
+		//得到页面全部的权限
+		var allRights=$("input[name=allRight]");
+		//清空上一个角色的权限
+		allRights.each(function (){
+				$(this).prop("checked","");
+		});
+		alert("重置当前角色权限");
+	}
+	//找父亲：点击子菜单选中父菜单
+	function checkedParentMenu(obj){
+		//找当前菜单的主菜单
+		var f=$(obj).parent().parent().parent().parent().parent();
+		var pid=$(obj).data("parentid");
+		var menuName=f[0].nodeName;
+		var bl=0;
+		//判断不是根菜单，也就是父亲的id不为0的
+		if(menuName=="LI"){
+			$("input[data-parentid="+pid+"]").each(function (){
+				if($(this).prop("checked")){
+					bl=1;
+					return false;
+				}
+			})
+			if(bl){
+				//选中自己的父亲
+				$("#right"+pid).prop("checked","checked");
+			}else{
+				//父亲没选中
+				$("#right"+pid).prop("checked","");
+			}
+			checkedParentMenu($("#right"+pid)[0]);
+		}
+		//取消自己取消儿子,不需要做点中自己选中儿子
+		var id=$(obj).prop("id");
+			id=id.substring(5);
+		if($(obj).prop("checked")==false){
+			$("input[data-parentid="+id+"]").each(function (){
+				$(this).prop("checked","");
+			})
+		}
+	}
+	//由于复选框都是后面生成的，所以只能通过父容器去委托事件
+	$(function (){
+		$("#rights").on("click","input[name=allRight]",function (){
+			checkedParentMenu(this);
+		});
 	})
 </script>
 </head>
@@ -179,7 +229,7 @@
 	
 	<!-- 自定义工具:修改 -->
 	<div id="panelTool2">
-		<a style="text-decoration:none; margin-top:-6px; height:30px;width: 108px;background-position: 0px 6px" href="javascript:" class="icon-remove">
+		<a style="text-decoration:none; margin-top:-6px; height:30px;width: 108px;background-position: 0px 6px" href="javascript:clearMenu()" class="icon-remove">
 			<span style="font-weight:bold;margin-left: 18px;line-height: 28px;font-size: 15px">清空所选权限</span>
 		</a>
 	</div>

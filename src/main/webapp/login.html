@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<script type="text/javascript" src="easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyui/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" href="easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" href="easyui/themes/icon.css" />
+
+	<script type="text/javascript">
+		$(function() {
+
+			$("#loginbutton").on("mousedown", function() {
+				$(this).css("background-color", "#6C6A66");
+			})
+			$("#loginbutton").on("mouseup", function() {
+				$(this).css("background-color", "#4386BC");
+			})
+
+			$("#loginbutton").on("click", function() {
+				var name = $("input[name=uName]").val();
+				var pwd = $("input[name=uPassword]").val();
+				$.ajax({
+					type: "post",
+					url: "users/querUserByNameAndPwd",
+					data: {
+						"uName": name,
+						"uPassword": pwd
+					},
+					async: true,
+					success: function(data) {
+						if(data) {
+							$.messager.progress({
+								title: "loading...",
+								msg: "正在跳转欢迎界面",
+								text: ""
+
+							});
+							setTimeout(function() {
+								$.messager.progress("close");
+								location.href = "hr/page/main.jsp";
+
+							}, 2000);
+						} else {
+							$.messager.alert({
+								title: "error",
+								msg: "账号或密码输入错误请重试!",
+								icon: "error"
+							});
+						}
+					}
+				});
+
+			})
+		})
+	</script>
+	<style>
+		/*设置 背景颜色*/
+		
+		body {
+			background-image: url(hr/images/images/000.jpg);
+		}
+		/*div {
+			border: #000000 solid 1px;
+			
+		}*/
+		
+		#login {
+			margin: 0 auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -300px;
+			margin-left: -200px;
+			width: 400px;
+			height: 500px;
+			background: #4A4F55;
+			border-radius: 5%;
+			opacity: 0.7;
+			z-index: -1;
+		}
+		
+		#hrtitle {
+			color: white;
+		}
+		
+		#logintop {
+			z-index: 20;
+		}
+		
+		#logintop {
+			margin-top: 130px;
+		}
+		
+		li {
+			padding: 5px;
+		}
+		
+		input {
+			width: 250px;
+			height: 50px;
+			font-size: 20px;
+			background: transparent;
+			border-style: none;
+			border-bottom-style: solid;
+			border-bottom-color: white;
+			outline: none;
+			color: white;
+		}
+		
+		#loginbutton {
+			width: 100px;
+			height: 40px;
+			border-radius: 15px 15px 15px 15px;
+			outline: none;
+			border-style: none;
+			background: #4386BC;
+			cursor: pointer;
+			color: white;
+		}
+	</style>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+
+	<body>
+		<!-- hr 登入界面设计-->
+		<div id="login">
+
+		</div>
+
+		<div id="logintop">
+			<center>
+				<h1 id="hrtitle">HR人力资源管理系统</h1>
+			</center>
+		</div>
+		<div id="loginbottom">
+			<center>
+
+				<ul style="list-style: none;margin-top: 70px;">
+					<li><input name="uName" type="text" placeholder="用户名" /></li>
+					<li><input name="uPassword" type="password" placeholder="密码" /></li>
+					<li style="padding: 25px;"><button id="loginbutton">登录</button></li>
+				</ul>
+			</center>
+		</div>
+
+	</body>
+
+</html>

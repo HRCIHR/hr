@@ -33,16 +33,17 @@ public class UsersController {
 	private PageCountService ps;
 
 	@RequestMapping("/querUserByNameAndPwd")
-	public String querUserByNameAndPwd(HttpSession session, users user) {
+	@ResponseBody
+	public boolean querUserByNameAndPwd(HttpSession session, users user) {
 		System.out.println("登录：" + user);
 		users u = us.querUserByNameAndPwd(user);
 		if (u != null) {
 			session.setAttribute("user", u);
 		} else {
 			// 账号密码错误
-			return "redirect:../login.jsp";
+			return false;
 		}
-		return "redirect:../hr/page/main.jsp";
+		return true;
 
 	}
 

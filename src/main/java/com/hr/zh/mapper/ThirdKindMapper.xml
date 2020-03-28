@@ -23,18 +23,19 @@
 		<result column="third_Kind_Sale_Id" property="thirdKindSaleId" />
 		<result column="third_Kind_Is_Retail"
 			property="thirdKindIsRetail" />
-		
+
 
 	</resultMap>
-	
-	<resultMap type="com.hr.entity.ConfigFileThirdKind" id="extendsqeuryThirdAll" extends="qeuryThirdAll">
-	<association property="configFileFirstKind"
+
+	<resultMap type="com.hr.entity.ConfigFileThirdKind"
+		id="extendsqeuryThirdAll" extends="qeuryThirdAll">
+		<association property="configFileFirstKind"
 			column="first_Kind_Id"
 			select="com.hr.zh.mapper.FirstKindMapper.queryfirstKindById"></association>
 		<association property="configFileSecondKind"
 			column="second_Kind_Id"
-			select="com.hr.zh.mapper.SecondKindMapper.queryThirdKindById"></association>
-	
+			select="com.hr.zh.mapper.SecondKindMapper.querySecondKindById"></association>
+
 	</resultMap>
 
 	<!--查所有分页 -->
@@ -49,4 +50,32 @@
 		FROM
 		config_file_third_kind
 	</select>
+
+	<!-- Integer saveThirdKind(ConfigFileThirdKind thirdKind); -->
+
+	<insert id="saveThirdKind">
+		INSERT INTO hr.config_file_third_kind (
+		third_kind_name,
+		first_kind_id, second_kind_id, third_kind_sale_id,
+		third_kind_is_retail) VALUES (#{thirdKindName},#{firstKindId}
+		,#{secondKindId},
+		#{thirdKindSaleId}, #{thirdKindIsRetail});
+
+	</insert>
+	<!--Integer updateThirdKind(ConfigFileThirdKind thirdKind); -->
+	<update id="updateThirdKind">
+		UPDATE config_file_third_kind SET
+		third_kind_name=#{thirdKindName},
+		third_kind_sale_id=#{thirdKindSaleId},
+		third_kind_is_retail=#{thirdKindIsRetail}
+		WHERE
+		third_kind_id=#{thirdKindId};
+
+	</update>
+	<!--Integer delThirdKind(Integer thirdKindID); -->
+	<delete id="delThirdKind">
+		DELETE from config_file_third_kind where
+		third_kind_id=#{_parameter}
+	</delete>
+
 </mapper>

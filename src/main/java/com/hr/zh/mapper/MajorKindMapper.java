@@ -16,4 +16,10 @@ public interface MajorKindMapper {
 
 	ConfigMajorKind QueryMajorById(Integer majorkindId);
 
+	Integer delMajorKind(Integer MajorKind);
+
+	Integer saveMajorKind(ConfigMajorKind MajorKind);
+
+	List<ConfigMajorKind> queryMajorKind();
+
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hr.entity.ConfigMajor;
+import com.hr.entity.ConfigMajorKind;
 import com.hr.util.pagination;
 import com.hr.zh.service.MajorService;
 import com.hr.zh.service.imp.MajorServiceImp;
@@ -30,6 +31,23 @@ public class MajorController {
 		map.put("rows", pagQueryMajor);
 		map.put("total", count);
 		return map;
+	}
+
+	// Major/saveMajor
+	@RequestMapping("/saveMajor")
+	public @ResponseBody boolean saveMajor(ConfigMajor Major) {
+		System.out.println(Major);
+		Boolean saveMajor = majorService.saveMajor(Major);
+		return saveMajor;
+	}
+
+	// Major/delMajor Majorid
+	@RequestMapping("/delMajor")
+	public @ResponseBody boolean delMajor(Integer Majorid) {
+
+		Boolean delMajor = majorService.delMajor(Majorid);
+		System.out.println(Majorid);
+		return delMajor;
 	}
 
 }

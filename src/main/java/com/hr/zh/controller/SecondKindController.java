@@ -41,21 +41,32 @@ public class SecondKindController {
 	public @ResponseBody boolean saveSecondKind(ConfigFileSecondKind secondKind) {
 
 		System.out.println(secondKind);
-		return true;
+		Boolean success = secondKindService.saveSecondKind(secondKind);
+		return success;
 	}
 
-	@RequestMapping("/updateSecondKind") // SecondKind/saveSecondKind
+	@RequestMapping("/updateSecondKind") // SecondKind/updateSecondKind
 	public @ResponseBody boolean updateSecondKind(ConfigFileSecondKind secondKind) {
 
 		System.out.println(secondKind);
-		return true;
+		Boolean success = secondKindService.updateSecondKind(secondKind);
+		return success;
 	}
 
-	@RequestMapping("/delSecondKind") // SecondKind/saveSecondKind
+	@RequestMapping("/delSecondKind") // SecondKind/delSecondKind
 	public @ResponseBody boolean delSecondKind(Integer secondKindID) {
 
 		System.out.println(secondKindID);
-		return true;
+		Boolean success = secondKindService.delSecondKind(secondKindID);
+		return success;
+	}
+
+	// querySecondKindByFirstId
+	@RequestMapping("/querySecondKindByFirstId") // SecondKind/querySecondKindByFirstId
+	public @ResponseBody List<ConfigFileSecondKind> querySecondKindByFirstId(Integer firstKindId) {
+		
+		List<ConfigFileSecondKind> firstId = secondKindService.querySecondKindByFirstId(firstKindId);
+		return firstId;
 	}
 
 }

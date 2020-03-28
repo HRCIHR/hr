@@ -15,11 +15,44 @@
 		//PublicChar/pagQueryPublicCharByType
 		$(function() {
 
+			//Major/saveMajor
+			//addtijiao
+			$("#addtijiao").on("click", function() {
+				$('#addform').form('submit', {
+					url: "../../../Major/saveMajor",
+					onSubmit: function(param) {
+
+					},
+					success: function(data) {
+						if(data) {
+							$.messager.alert('提示信息', '添加成功!', 'info', function() {
+								//关闭模态框 清除模态框数据clear
+								$('#addform').form("clear");
+
+								$('#adddialog').dialog("close");
+								location.href = "major.html";
+							});
+
+						} else {
+							$.messager.alert('提示信息', '添加失败 请检查输入是否有误!', 'error');
+						}
+					}
+				});
+
+			});
+			//zhiweicheckbox
+			$("#zhiweicheckbox").combobox({
+				url: '../../../MajorKind/queryMajorKind',
+				valueField: "majorKindId",
+				method: "get",
+				textField: "majorKindName"
+
+			});
 			//添加
 			$('#adddialog').dialog({
 				title: '添加',
 				width: 600,
-				height: 600,
+				height: 400,
 				shadow: true,
 				closed: true,
 				modal: true,
@@ -59,14 +92,32 @@
 						$('#adddialog').dialog("open");
 					}
 				}],
+				loadFilter: function(data) {
 
+					var newarray = new Array();
+					for(a = 0; a < data.rows.length; a++) {
+						var obj = new Object();
+						obj.majorId = data.rows[a].majorId;
+						obj.majorName = data.rows[a].majorName;
+						obj.majorKindId = data.rows[a].majorKindId;
+						obj.majorKindName = data.rows[a].configMajorKind.majorKindName;
+
+						newarray.push(obj);
+					}
+
+					var rs = new Object();
+					rs.total = data.total;
+					rs.rows = newarray;
+
+					return rs;
+				},
 				columns: [
 					[{
 							field: 'majorKindId',
 							title: '职位分类编号',
 							width: 100
 						}, {
-							field: '未写',
+							field: 'majorKindName',
 							title: '职位分类名称',
 							width: 100
 						},
@@ -95,7 +146,23 @@
 		});
 
 		function deletebut(id) {
-			alert(id);
+			//Major/delMajor Majorid
+			$.ajax({
+				type: "get",
+				url: "../../../Major/delMajor?Majorid=" + id,
+				async: true,
+				success: function(data) {
+					if(data) {
+						$.messager.alert('提示信息', '删除成功!', 'info', function() {
+
+							location.href = "major.html";
+						});
+
+					} else {
+						$.messager.alert('提示信息', '删除失败 请检查输入是否有误!', 'error');
+					}
+				}
+			});
 		}
 	</script>
 
@@ -104,16 +171,18 @@
 		<table id="professiontable"></table>
 		<div id="adddialog">
 
-			<form id="addform" method="post" style="margin-top: 150px;">
+			<form id="addform" method="post" style="margin-top:75px;">
 
-				<center><input name="firstKindName" class="easyui-textbox" data-options="label:'属性总类',labelWidth:150" style="width:300px">
-					<br />
-					<br />
-					<input name="firstKindSalaryId" class="easyui-textbox" data-options="label:'属性名称',labelWidth:150" style="width:300px">
+				<center>
+					<input id="zhiweicheckbox" name="majorKindId" data-options="label:'职位分类设置',labelWidth:150" style="width:300px">
+					</br>
+					</br>
+					<input name="majorName" class="easyui-textbox" data-options="label:'职位名称',labelWidth:150" style="width:300px">
 
 					</br>
 					</br>
-					<button id="tijiao">提交</button>
+					<button id="addtijiao" type="button">提交</button>
+
 				</center>
 
 			</form>

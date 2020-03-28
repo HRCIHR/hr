@@ -14,6 +14,14 @@ public interface SecondKindMapper {
 	List<ConfigFileSecondKind> pagQuerySecondKind(pagination page);
 
 	Integer QuerySecondKindCount();
+
+	ConfigFileSecondKind querySecondKindById(Integer secondKindId);
+
+	List<ConfigFileSecondKind> querySecondKindByFirstId(Integer firstKindId);
 	
-	ConfigFileSecondKind queryThirdKindById(Integer thirdKind);
+	Integer saveSecondKind(ConfigFileSecondKind secondKind);
+
+	Integer updateSecondKind(ConfigFileSecondKind secondKind);
+
+	Integer delSecondKind(Integer secondKindID);
 }

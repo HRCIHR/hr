@@ -9,4 +9,8 @@ public interface MajorService {
 	List<ConfigMajor> pagQueryMajor(pagination page);
 
 	Integer queryMajorCount();
+
+	Boolean saveMajor(ConfigMajor Major);
+
+	Boolean delMajor(Integer Majorid);
 }

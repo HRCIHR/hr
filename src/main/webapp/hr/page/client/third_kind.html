@@ -15,10 +15,93 @@
 	<script type="text/javascript">
 		$(function() {
 
+			//addtijiao
+			$("#addtijiao").on("click", function() {
+				$('#addform').form('submit', {
+					url: "../../../Third/saveSecondKind",
+					onSubmit: function(param) {
+
+					},
+					success: function(data) {
+						if(data) {
+							$.messager.alert('提示信息', '添加成功!', 'info', function() {
+								//关闭模态框 清除模态框数据clear
+								$('#addform').form("clear");
+
+								$('#adddialog').dialog("close");
+								location.href = "third_kind.html";
+							});
+
+						} else {
+							$.messager.alert('提示信息', '添加失败 请检查输入是否有误!', 'error');
+						}
+					}
+				});
+
+			});
+
+			//updatetijiao
+			$("#updatetijiao").on("click", function() {
+				$('#updateform').form('submit', {
+					url: "../../../Third/updateThirdKind",
+					onSubmit: function(param) {
+
+					},
+					success: function(data) {
+						if(data) {
+							$.messager.alert('提示信息', '修改成功!', 'info', function() {
+
+								location.href = "third_kind.html";
+							});
+							//关闭模态框 清除模态框数据clear
+
+							$('#updateform').form("clear");
+
+							$('#updatedialog').dialog("close");
+						} else {
+							$.messager.alert('提示信息', '修改失败 请检查输入是否有误!', 'error');
+						}
+					}
+				});
+
+			});
+
+			//
+			//			$("#secondcheckbox").combobox({
+			//				valueField: "firstKindId",
+			//				textField: "firstKindName"
+			//			});
+
+			$("#firstcheckbox").combobox({
+				url: '../../../First/findFirstKindAll',
+				valueField: "firstKindId",
+				method: "get",
+				textField: "firstKindName",
+				onSelect: function(record) {
+
+					$("#secondcheckbox").combobox({
+						url: '../../../SecondKind/querySecondKindByFirstId?firstKindId=' + record.firstKindId,
+						valueField: "secondKindId",
+						method: "get",
+						textField: "secondKindName"
+
+					});
+				}
+
+			});
+
+			//			$("#secondcheckbox").combobox({
+			//				url: '../../../First/findFirstKindAll',
+			//				valueField: "firstKindId",
+			//				method: "get",
+			//				textField: "firstKindName"
+			//
+			//			});
+
 			$('#adddialog').dialog({
 				title: '添加',
 				width: 600,
-				height: 600,
+				height: 400,
 				shadow: true,
 				closed: true,
 				modal: true,
@@ -30,7 +113,7 @@
 			$('#updatedialog').dialog({
 				title: '变更信息',
 				width: 600,
-				height: 600,
+				height: 400,
 				shadow: true,
 				closed: true,
 				modal: true,
@@ -55,16 +138,47 @@
 						$('#adddialog').dialog("open");
 					}
 				}],
+				loadFilter: function(data) {
+					var newarray = new Array();
+
+					for(a = 0; a < data.rows.length; a++) {
+
+						var obj = new Object();
+						obj.thirdKindIsRetail = data.rows[a].thirdKindIsRetail;
+						obj.thirdKindSaleId = data.rows[a].thirdKindSaleId;
+						obj.thirdKindName = data.rows[a].thirdKindName;
+						obj.thirdKindId = data.rows[a].thirdKindId;
+						obj.firstKindId = data.rows[a].configFileFirstKind.firstKindId;
+						obj.firstKindName = data.rows[a].configFileFirstKind.firstKindName;
+						obj.secondKindId = data.rows[a].configFileSecondKind.secondKindId;
+						obj.secondKindName = data.rows[a].configFileSecondKind.secondKindName;
+						newarray.push(obj);
+					}
+					//					var rows = JSON.stringify(newarray);
+					//
+					//					var jsonrows = '{"total":' + data.total + ',"rows":' + rows + '}';
+					//
+					//					console.log(jsonrows);
+
+					var rs = new Object();
+					rs.total = data.total;
+					rs.rows = newarray;
+
+					console.log(rs);
+					return rs;
+				},
 
 				columns: [
 					[{
 							field: 'firstKindId',
 							title: 'Ⅰ级机构编号',
-							width: 100
+							width: 100,
+							align: 'right'
 						}, {
-							field: '未填写',
+							field: 'firstKindName',
 							title: 'Ⅰ级机构名称',
-							width: 100
+							width: 100,
+							align: 'right'
 						}, {
 							field: 'secondKindId',
 							title: 'Ⅱ级机构编号',
@@ -109,7 +223,7 @@
 							align: 'right',
 							formatter: function(value, row, index) {
 								var rows = JSON.stringify(row);
-								return "<button onClick='updatafirstkind(" + rows + ")'>变更</button><button onClick='deletefirstkind(" + row.firstKindId + ")'>删除</button>"
+								return "<button onClick='updatafirstkind(" + rows + ")'>变更</button><button onClick='deletefirstkind(" + row.thirdKindId + ")'>删除</button>"
 							}
 						}
 					]
@@ -117,13 +231,40 @@
 			});
 
 		});
+
 		function updatafirstkind(rows) {
 			console.log(rows);
 			$('#updatedialog').dialog("open");
+			// yjmc ejmc sjbh sjmc xsbh xz
+			$("#yjmc").textbox("setValue", rows.firstKindName);
+			$("#ejmc").textbox("setValue", rows.secondKindName);
+			$("#sjbh").textbox("setValue", rows.thirdKindId);
+			$("#sjmc").textbox("setValue", rows.thirdKindName);
+			$("#xsbh").textbox("setValue", rows.thirdKindSaleId);
+			//select
+
+			$("#xz").combobox("select", rows.thirdKindIsRetail);
+
 		}
 
 		function deletefirstkind(id) {
-			alert(id);
+			//Third/delThirdKind
+			$.ajax({
+				type: "get",
+				url: "../../../Third/delThirdKind?thirdKind=" + id,
+				async: true,
+				success: function(data) {
+					if(data) {
+						$.messager.alert('提示信息', '删除成功!', 'info', function() {
+
+							location.href = "third_kind.html";
+						});
+
+					} else {
+						$.messager.alert('提示信息', '删除失败 请检查输入是否有误!', 'error');
+					}
+				}
+			});
 		}
 	</script>
 
@@ -131,51 +272,65 @@
 		<table id="secondkindtable"></table>
 
 		<div id="adddialog">
-			<center style="margin-top: 150px;">
-				<form>
+			<center style="margin-top: 75px;">
+				<form id="addform" method="post">
 					<!--下拉框-->
-					<input id="addcheckbox" style="width:300px">
+					<input id="firstcheckbox" name="firstKindId" data-options="label:'Ⅰ级机构名称',labelWidth:150" style="width:300px">
 					<br />
 					<br />
-					<input id="addcheckbox" style="width:300px">
+					<input id="secondcheckbox" name="secondKindId" data-options="label:'Ⅱ级级机构名称',labelWidth:150" class="easyui-combobox" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'Ⅲ级机构编号',labelWidth:150" style="width:300px">
+					<!--<input class="easyui-textbox" data-options="label:'Ⅲ级机构编号',labelWidth:150" style="width:300px">
+					<br />
+					<br />-->
+					<input class="easyui-textbox" name="thirdKindName" data-options="label:'Ⅲ级机构名称',labelWidth:150" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'Ⅲ级机构名称',labelWidth:150" style="width:300px">
-					<br />
-					<br />
-					<input class="easyui-textbox" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
+					<input class="easyui-textbox" name="thirdKindSaleId" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
 					<br /><span style="color: red;">(注:输入销售责任人编号（多个编号之间请用"半角逗号 ','"隔开)</span>
 					<br />
-					<div style="margin-bottom: 20px; margin-left: -200px;">
-						<input class="easyui-checkbox" labelWidth='100' value="1" label="是/否为零售店"> <br />
-					</div>
+					<!--<div style="margin-bottom: 20px; margin-left: -200px;">
+						<input class="easyui-checkbox" name="thirdKindIsRetail" labelWidth='100' value="1" label="是/否为零售店"> <br />
+					</div>-->
+					<select id="cc" data-options="label:'是否选中',labelWidth:150,panelHeight:70" class="easyui-combobox" name="thirdKindIsRetail" style="width:200px;">
+						<option selected="selected" value="是">是</option>
+						<option value="否">否</option>
+					</select>
+					<br />
+					<br />
+					<button id="addtijiao" type="button">提交</button>
 				</form>
 			</center>
 		</div>
 		<div id="updatedialog">
-			<center style="margin-top: 150px;">
-				<form>
-					<input class="easyui-textbox" data-options="label:'Ⅰ级机构名称',labelWidth:150" style="width:300px">
+			<center style="margin-top: 75px;">
+				<form id="updateform" method="post">
+					<input id="yjmc" class="easyui-textbox" data-options="label:'Ⅰ级机构名称',labelWidth:150,readonly:true" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'Ⅱ级机构名称',labelWidth:150" style="width:300px">
+					<input id="ejmc" class="easyui-textbox" data-options="label:'Ⅱ级机构名称',labelWidth:150,readonly:true" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'Ⅲ级机构编号',labelWidth:150" style="width:300px">
+					<input id="sjbh" name="thirdKindId" class="easyui-textbox" data-options="label:'Ⅲ级机构编号',labelWidth:150,readonly:true" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'Ⅲ级机构名称',labelWidth:150" style="width:300px">
+					<input id="sjmc" class="easyui-textbox" name="thirdKindName" data-options="label:'Ⅲ级机构名称',labelWidth:150" style="width:300px">
 					<br />
 					<br />
-					<input class="easyui-textbox" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
+					<input id="xsbh" class="easyui-textbox" name="thirdKindSaleId" data-options="label:'销售责任人编号',labelWidth:150" style="width:300px">
 					<br /><span style="color: red;">(注:输入销售责任人编号（多个编号之间请用"半角逗号 ','"隔开)</span>
 					<br />
-					<div style="margin-bottom: 20px; margin-left: -200px;">
-						<input class="easyui-checkbox" labelWidth='100' value="1" label="是/否为零售店"> <br />
-					</div>
+					<!--<div style="margin-bottom: 20px; margin-left: -200px;">
+						<input id="xz"  name="thirdKindIsRetail" labelWidth='100' value="1" label="是/否为零售店"> <br />
+					</div>-->
+					<select id="xz" data-options="label:'是否选中',labelWidth:150,panelHeight:70" class="easyui-combobox" name="thirdKindIsRetail" style="width:200px;">
+						<option value="是">是</option>
+						<option value="否">否</option>
+					</select>
+					<br />
+					<br />
+					<button id="updatetijiao" type="button">提交</button>
 				</form>
 			</center>
 		</div>

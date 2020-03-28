@@ -11,4 +11,10 @@ public interface MajorKindService {
 	List<ConfigMajorKind> pagQueryMajor(pagination page);
 
 	Integer pagQueryMajorCount();
+
+	Boolean delMajorKind(Integer MajorKind);
+
+	Boolean saveMajorKind(ConfigMajorKind MajorKind);
+	
+	List<ConfigMajorKind> queryMajorKind();
 }

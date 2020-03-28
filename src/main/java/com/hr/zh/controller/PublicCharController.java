@@ -49,4 +49,19 @@ public class PublicCharController {
 		return map;
 	}
 
+	@RequestMapping("/savePublicChar") // PublicChar/savePublicChar
+	public @ResponseBody boolean savePublicChar(ConfigPublicChar PublicChar) {
+
+		System.out.println(PublicChar);
+		boolean success = publicCharService.savePublicChar(PublicChar);
+		return success;
+	}
+
+	@RequestMapping("/delPublicChar")
+	// PublicChar/delPublicChar PublicCharID
+	public @ResponseBody boolean delPublicChar(Integer PublicCharID) {
+		boolean success = publicCharService.delPublicChar(PublicCharID);
+		System.out.println(PublicCharID);
+		return success;
+	}
 }

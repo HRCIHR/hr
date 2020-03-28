@@ -7,5 +7,14 @@ import com.hr.util.pagination;
 
 public interface SecondKindService {
 	List<ConfigFileSecondKind> pagQuerySecondKind(pagination page);
+
 	Integer QuerySecondKindCount();
+
+	Boolean saveSecondKind(ConfigFileSecondKind secondKind);
+
+	Boolean updateSecondKind(ConfigFileSecondKind secondKind);
+
+	Boolean delSecondKind(Integer secondKindID);
+
+	List<ConfigFileSecondKind> querySecondKindByFirstId(Integer firstKindId);
 }

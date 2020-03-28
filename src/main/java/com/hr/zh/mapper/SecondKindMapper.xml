@@ -48,14 +48,46 @@
 		FROM
 		config_file_second_kind
 	</select>
-	
+
 	<!-- com.hr.zh.mapper.SecondKindMapper.queryThirdKindById(Integer) -->
-	<select id="queryThirdKindById" resultMap="queryAllMap">
-	<include refid="qeurySecondKindall"></include>
-	<where>
-	second_kind_id=#{_parameter}
-	</where>
+	<select id="querySecondKindById" resultMap="queryAllMap">
+		<include refid="qeurySecondKindall"></include>
+		<where>
+			second_kind_id=#{_parameter}
+		</where>
 	</select>
-	
-	
+
+	<!--二级联动 查询 List<ConfigFileSecondKind> querySecondKindByFirstId(Integer 
+		firstKindId); -->
+	<select id="querySecondKindByFirstId" resultMap="queryAllMap">
+		<include refid="qeurySecondKindall"></include>
+		<where>
+			first_kind_id=#{_parameter}
+		</where>
+	</select>
+
+	<!-- Integer saveSecondKind(ConfigFileSecondKind secondKind); -->
+	<insert id="saveSecondKind">
+		INSERT INTO config_file_second_kind (
+		second_kind_name, first_kind_id,
+		second_salary_id, second_sale_id)
+		VALUES (#{secondKindName},#{firstKindId} ,#{secondSalaryId} ,
+		#{secondSaleId});
+	</insert>
+	<!--Integer updateSecondKind(ConfigFileSecondKind secondKind); -->
+	<update id="updateSecondKind">
+		UPDATE hr.config_file_second_kind SET
+		second_salary_id=#{secondSalaryId},
+		second_sale_id=#{secondSaleId}
+		WHERE
+		second_kind_id=#{secondKindId};
+
+	</update>
+	<!-- Integer delSecondKind(Integer secondKindID); -->
+	<delete id="delSecondKind">
+		delete from config_file_second_kind where
+		second_kind_id=#{_parament}
+	</delete>
+
+
 </mapper>

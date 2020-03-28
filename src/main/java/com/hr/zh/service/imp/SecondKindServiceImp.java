@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.hr.entity.ConfigFileSecondKind;
+import com.hr.util.MasterTool;
 import com.hr.util.pagination;
 import com.hr.zh.mapper.SecondKindMapper;
 import com.hr.zh.service.SecondKindService;
@@ -27,6 +28,38 @@ public class SecondKindServiceImp implements SecondKindService {
 	public Integer QuerySecondKindCount() {
 		// TODO Auto-generated method stub
 		return secondKindMapper.QuerySecondKindCount();
+	}
+
+	@Override
+	public Boolean saveSecondKind(ConfigFileSecondKind secondKind) {
+		// TODO Auto-generated method stub
+		Integer saveSecondKind = secondKindMapper.saveSecondKind(secondKind);
+		boolean success = MasterTool.isSuccess(saveSecondKind);
+		return success;
+	}
+
+	@Override
+	public Boolean updateSecondKind(ConfigFileSecondKind secondKind) {
+		// TODO Auto-generated method stub
+		Integer updateSecondKind = secondKindMapper.updateSecondKind(secondKind);
+		boolean success = MasterTool.isSuccess(updateSecondKind);
+		return success;
+	}
+
+	@Override
+	public Boolean delSecondKind(Integer secondKindID) {
+		// TODO Auto-generated method stub
+		Integer delSecondKind = secondKindMapper.delSecondKind(secondKindID);
+		boolean success = MasterTool.isSuccess(delSecondKind);
+		return success;
+	}
+
+	@Override
+	public List<ConfigFileSecondKind> querySecondKindByFirstId(Integer firstKindId) {
+		// TODO Auto-generated method stub
+		List<ConfigFileSecondKind> querySecondKindByFirstId = secondKindMapper.querySecondKindByFirstId(firstKindId);
+		
+		return querySecondKindByFirstId;
 	}
 
 }

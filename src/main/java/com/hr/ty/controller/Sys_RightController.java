@@ -49,7 +49,7 @@ public class Sys_RightController {
 		}
 		return meunList;
 	}
-	// 得到所有的权限
+	// 得到所有的权限  未过滤。
 		@RequestMapping("/queryRightAll")
 		@ResponseBody
 		public List queryRightAll() {

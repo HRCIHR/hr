@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hr.entity.ConfigPublicChar;
 import com.hr.util.pagination;
+
 import com.sun.org.glassfish.gmbal.ParameterNames;
 
 @Repository("PublicCharMapper")
@@ -20,4 +21,7 @@ public interface PublicCharMapper {
 
 	List<ConfigPublicChar> pagQueryPublicCharByType(@Param("pa") pagination page, @Param("type") String type);
 
+	Integer savePublicChar(ConfigPublicChar PublicChar);
+
+	Integer delPublicChar(Integer PublicCharID);
 }

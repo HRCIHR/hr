@@ -39,4 +39,15 @@
 		config_major
 	</select>
 
+
+	<!-- Integer saveMajor(ConfigMajor Major); -->
+	<insert id="saveMajor">
+		INSERT INTO hr.config_major (major_name,
+		major_kind_id) VALUES (#{majorName}, #{majorKindId});
+
+	</insert>
+	<!--Integer delMajor(Integer Majorid) -->
+	<delete id="delMajor">
+		DELETE from config_major where major_id=#{_parameter}
+	</delete>
 </mapper>

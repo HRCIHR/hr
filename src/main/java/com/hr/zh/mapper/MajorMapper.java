@@ -12,4 +12,8 @@ public interface MajorMapper {
 	List<ConfigMajor> pagQueryMajor(pagination page);
 
 	Integer queryMajorCount();
+
+	Integer saveMajor(ConfigMajor Major);
+
+	Integer delMajor(Integer Majorid);
 }

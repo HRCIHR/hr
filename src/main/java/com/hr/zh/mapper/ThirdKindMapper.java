@@ -11,7 +11,13 @@ import com.hr.util.pagination;
 public interface ThirdKindMapper {
 
 	List<ConfigFileThirdKind> pagQueryThirdKind(pagination page);
-	
-	
+
 	Integer QueryThirdKindCount();
+
+	Integer saveThirdKind(ConfigFileThirdKind thirdKind);
+
+	Integer updateThirdKind(ConfigFileThirdKind thirdKind);
+
+	Integer delThirdKind(Integer thirdKindID);
+
 }

@@ -45,4 +45,17 @@
 		config_public_char
 		<where>attribute_kind='职称'</where>
 	</select>
+
+	<!-- Integer savePublicChar(ConfigPublicChar PublicChar); -->
+	<insert id="savePublicChar">
+		INSERT INTO hr.config_public_char
+		(attribute_kind,
+		attribute_name)
+		VALUES (#{attributeKind} ,#{attributeName} );
+	</insert>
+	<!-- Integer delPublicChar(Integer PublicCharID); -->
+	<delete id="delPublicChar">
+		delete from config_public_char where
+		pbc_id=#{_parameter}
+	</delete>
 </mapper>

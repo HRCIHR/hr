@@ -76,7 +76,7 @@
 			$('#adddialog').dialog({
 				title: '添加',
 				width: 600,
-				height: 600,
+				height: 400,
 				shadow: true,
 				closed: true,
 				modal: true,
@@ -88,7 +88,7 @@
 			$('#updatedialog').dialog({
 				title: '变更信息',
 				width: 600,
-				height: 600,
+				height: 400,
 				shadow: true,
 				closed: true,
 				modal: true,
@@ -126,8 +126,12 @@
 						obj.firstKindName = data.rows[a].configFileFirstKind.firstKindName;
 						newarray.push(obj);
 					}
-					console.log(newarray);
-					return newarray;
+
+					var rs = new Object();
+					rs.total = data.total;
+					rs.rows = newarray;
+
+					return rs;
 				},
 
 				columns: [
@@ -217,7 +221,7 @@
 		<table id="secondkindtable"></table>
 
 		<div id="adddialog">
-			<center style="margin-top: 150px;">
+			<center style="margin-top:75px;">
 				<form id="addform" method="post">
 					<!--下拉框-->
 					<input name="firstKindId" id="addcheckbox" data-options="label:'Ⅱ级机构编号',labelWidth:150" style="width:300px">
@@ -242,12 +246,12 @@
 			</center>
 		</div>
 		<div id="updatedialog">
-			<center style="margin-top: 150px;">
+			<center style="margin-top: 75px;">
 				<form id="updateform" method="post">
 					<input id="yjmc" class="easyui-textbox" data-options="label:'Ⅰ级机构名称',labelWidth:150" style="width:300px">
 					<br />
 					<br />
-					<input id="ejbh" class="easyui-textbox" data-options="label:'Ⅱ级机构编号',labelWidth:150" style="width:300px">
+					<input id="ejbh" name="secondKindId" class="easyui-textbox" data-options="label:'Ⅱ级机构编号',labelWidth:150" style="width:300px">
 					<br />
 					<br />
 					<input id="ejmc" class="easyui-textbox" data-options="label:'Ⅱ级机构名称',labelWidth:150" style="width:300px">

@@ -15,11 +15,35 @@
 		//PublicChar/pagQueryPublicCharByType
 		$(function() {
 
+			//addtijiao
+			$("#addtijiao").on("click", function() {
+				$('#addform').form('submit', {
+					url: "../../../MajorKind/saveMajorKind",
+					onSubmit: function(param) {
+
+					},
+					success: function(data) {
+						if(data) {
+							$.messager.alert('提示信息', '添加成功!', 'info', function() {
+								//关闭模态框 清除模态框数据clear
+								$('#addform').form("clear");
+
+								$('#adddialog').dialog("close");
+								location.href = "major_kind.html";
+							});
+
+						} else {
+							$.messager.alert('提示信息', '添加失败 请检查输入是否有误!', 'error');
+						}
+					}
+				});
+
+			});
 			//添加
 			$('#adddialog').dialog({
 				title: '添加',
 				width: 600,
-				height: 600,
+				height: 400,
 				shadow: true,
 				closed: true,
 				modal: true,
@@ -27,21 +51,6 @@
 
 				}
 			});
-			//表单设置
-			$("#tijiao").on("click", function() {
-				$('#addform').form('submit', {
-					url: "xxxxx",
-					onSubmit: function(param) {
-
-						console.log(param);
-						return false;
-					},
-					success: function(data) {
-						alert(data)
-					}
-				});
-
-			})
 
 			$('#professiontable').datagrid({
 				url: 'http://127.0.0.1:8080/HR/MajorKind/pagQueryMajor',
@@ -86,7 +95,22 @@
 		});
 
 		function deletebut(id) {
-			alert(id);
+			$.ajax({
+				type: "get",
+				url: "../../../MajorKind/delMajorKind?MajorKind=" + id,
+				async: true,
+				success: function(data) {
+					if(data) {
+						$.messager.alert('提示信息', '删除成功!', 'info', function() {
+
+							location.href = "major_kind.html";
+						});
+
+					} else {
+						$.messager.alert('提示信息', '删除失败 请检查输入是否有误!', 'error');
+					}
+				}
+			});
 		}
 	</script>
 
@@ -95,16 +119,14 @@
 		<table id="professiontable"></table>
 		<div id="adddialog">
 
-			<form id="addform" method="post" style="margin-top: 150px;">
+			<form id="addform" method="post" style="margin-top: 75px;">
 
-				<center><input name="firstKindName" class="easyui-textbox" data-options="label:'属性总类',labelWidth:150" style="width:300px">
-					<br />
-					<br />
-					<input name="firstKindSalaryId" class="easyui-textbox" data-options="label:'属性名称',labelWidth:150" style="width:300px">
+				<center>
+					<input name="majorKindName" class="easyui-textbox" data-options="label:'属性名称',labelWidth:150" style="width:300px">
 
 					</br>
 					</br>
-					<button id="tijiao">提交</button>
+					<button id="addtijiao" type="button">提交</button>
 				</center>
 
 			</form>

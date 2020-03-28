@@ -6,8 +6,13 @@ import com.hr.entity.ConfigFileThirdKind;
 import com.hr.util.pagination;
 
 public interface ThirdKindService {
-List<ConfigFileThirdKind> pagQueryThirdKind(pagination page);
-	
-	
+	List<ConfigFileThirdKind> pagQueryThirdKind(pagination page);
+
 	Integer queryThirdKindcount();
+	
+	boolean saveThirdKind(ConfigFileThirdKind thirdKind);
+
+	boolean updateThirdKind(ConfigFileThirdKind thirdKind);
+
+	boolean delThirdKind(Integer thirdKindID);
 }

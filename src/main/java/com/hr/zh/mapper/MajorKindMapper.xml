@@ -33,4 +33,24 @@
 		<where>major_kind_id=${_parameter}</where>
 	</select>
 
+
+	<!--Integer saveMajorKind(ConfigMajorKind MajorKind); -->
+	<insert id="saveMajorKind">
+		INSERT INTO hr.config_major_kind (major_kind_name)
+		VALUES
+		(#{majorKindName});
+
+	</insert>
+	<!-- Integer delMajorKind(Integer MajorKind); -->
+	<delete id="delMajorKind">
+		DELETE from config_major_kind where
+		major_kind_id=#{_parameter}
+
+	</delete>
+
+	<!-- List<ConfigMajorKind> queryMajorKind(); -->
+
+	<select id="queryMajorKind" resultMap="MajorKindMap">
+		<include refid="queryMajorAll"></include>
+	</select>
 </mapper>

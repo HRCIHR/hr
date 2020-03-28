@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hr.entity.ConfigFileSecondKind;
 import com.hr.entity.ConfigFileThirdKind;
 import com.hr.util.pagination;
 import com.hr.zh.service.ThirdKindService;
@@ -33,4 +34,32 @@ public class ThirdKindController {
 
 		return map;
 	}
+
+	// 添加
+	@RequestMapping("/saveSecondKind") // Third/saveSecondKind
+	public @ResponseBody boolean saveThirdKind(ConfigFileThirdKind thirdKind) {
+		boolean success = thirdKindService.saveThirdKind(thirdKind);
+		System.out.println(thirdKind);
+
+		return success;
+	}
+
+	// 修改
+	@RequestMapping("/updateThirdKind") // Third/updateThirdKind
+	public @ResponseBody boolean updateThirdKind(ConfigFileThirdKind thirdKind) {
+		boolean success = thirdKindService.updateThirdKind(thirdKind);
+		System.out.println(thirdKind);
+
+		return success;
+	}
+
+	// 删除
+	@RequestMapping("/delThirdKind") // Third/delThirdKind
+	public @ResponseBody boolean delThirdKind(Integer thirdKind) {
+		boolean success = thirdKindService.delThirdKind(thirdKind);
+		System.out.println(thirdKind);
+
+		return success;
+	}
+
 }

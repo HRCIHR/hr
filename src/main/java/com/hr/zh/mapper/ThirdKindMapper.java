@@ -12,7 +12,11 @@ public interface ThirdKindMapper {
 
 	List<ConfigFileThirdKind> pagQueryThirdKind(pagination page);
 
+	List<ConfigFileThirdKind> queryThirdKindByIDList(Integer secondKindId);
+
 	Integer QueryThirdKindCount();
+
+	ConfigFileThirdKind queryThirdKindById(Integer thirdKindID);
 
 	Integer saveThirdKind(ConfigFileThirdKind thirdKind);
 

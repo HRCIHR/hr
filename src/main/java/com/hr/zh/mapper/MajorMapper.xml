@@ -50,4 +50,17 @@
 	<delete id="delMajor">
 		DELETE from config_major where major_id=#{_parameter}
 	</delete>
+
+	<!--ConfigMajor queryMajorByid(Integer Majorid); -->
+	<select id="queryMajorByid" resultMap="extendsMajorAllMap">
+		<include refid="queryMajorAll"></include>
+		<where>major_id=#{_parameter}</where>
+	</select>
+
+	<!--List<ConfigMajor> QueryMajor(Integer majorKindId); -->
+	<select id="QueryMajor" resultMap="MajorAllMap">
+		<include refid="queryMajorAll"></include>
+		<where>major_kind_id=#{_parameter}</where>
+	</select>
+
 </mapper>

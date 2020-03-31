@@ -8,6 +8,8 @@ import com.hr.util.pagination;
 public interface MajorService {
 	List<ConfigMajor> pagQueryMajor(pagination page);
 
+	List<ConfigMajor> QueryMajor(Integer majorKindId);
+
 	Integer queryMajorCount();
 
 	Boolean saveMajor(ConfigMajor Major);

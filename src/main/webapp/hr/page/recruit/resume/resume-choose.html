@@ -1,129 +1,488 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-trasitional.dtd">
 <html>
+
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>My JSP 'resume-choose.jsp' starting page</title>
+		<title>My JSP 'position-release_details.jsp' starting page</title>
 
-		 <link rel="stylesheet"
-			href="../../../css/table.css" type="text/css">
-		<link rel="stylesheet"
-			href="../../../css/cwcalendar.css" type="text/css">
-		<script type="text/javascript"
-			src="../../../javascript/comm/comm.js">
-		</script>
-		<script type="text/javascript"
-			src="../../../javascript/comm/list.js">
-		</script>
-		<script type="text/javascript"
-			src="../../../javascript/calendar-ch.js">
-		</script>
-		<script type="text/javascript"
-			src="../../../javascript/jquery-1.7.2.js">
-		</script>
-		<script type="text/javascript"
-			src="../../../javascript/locate.js">
-		</script>
-		<script type="text/javascript"
-			src="../../../javascript/select.js">
-		</script>
-	   <script type="text/javascript"
-			src="../../../javascript/comm/time.js">
-			</script>
-		<script type="text/javascript">
-	function search() {
-	 
-			window.location.href= "resume-list.html";
-	}
-</script>
+		<script type="application/javascript" src="../../../../easyui/jquery.min.js"></script>
+
+		<script type="application/javascript" src="../../../../easyui/jquery.easyui.min.js"></script>
+		<script type="application/javascript" src="../../../../easyui/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="../../../../easyui/themes/icon.css" />
+		<link rel="stylesheet" href="../../../../easyui/themes/default/easyui.css" />
+
 	</head>
+	<script>
+		function fuhe(datas) {
+
+			console.log(datas);
+
+			//给下拉框赋值
+			setTimeout(function() {
+				$('#addzhiweiClass').combobox('select', datas.ConfigMajor.configMajorKind.majorKindId);
+				$('#zhaopinType').combobox('select', datas.engage_Type);
+				$('#addzhiweiName').combobox('select', datas.ConfigMajor.majorId);
+				$("#sex").combobox('select', datas.human_Sex);
+				$("#guoji").combobox('select', datas.human_Nationality);
+				$("#mingzu").combobox('select', datas.human_Race);
+				$("#zongjiao").combobox('select', datas.human_Religion);
+				$("#zhengzhimianmao").combobox('select', datas.human_Party);
+				$("#xueli").combobox('select', datas.human_Educated_Degree);
+				$("#jiaoyunianxian").combobox('select', datas.human_Educated_Years);
+				$("#zhuanye").combobox('select', datas.human_Educated_Major);
+				$("#techang").combobox('select', datas.human_Specility);
+				$("#aihao").combobox('select', datas.human_Hobby);
+
+				$("#human_Name").textbox("setValue", datas.human_Name);
+
+				$("#human_Homephone").textbox("setValue", datas.human_Homephone);
+
+				$("#human_Mobilephone").textbox("setValue", datas.human_Mobilephone);
+				$("#human_Telephone").textbox("setValue", datas.human_Telephone);
+
+				$("#human_Address").textbox("setValue", datas.human_Address);
+				$("#human_Postcode").textbox("setValue", datas.human_Postcode);
+				$("#human_Birthplace").textbox("setValue", datas.human_Birthplace);
+				$("#resid").val(datas.res_Id);
+				$("#human_Idcard").textbox("setValue", datas.human_Idcard);
+				//human_Age  human_College human_History_Records remark
+				$("#human_Age").textbox("setValue", datas.human_Age);
+				$("#human_College").textbox("setValue", datas.human_College);
+				$("#human_History_Records").textbox("setValue", datas.human_History_Records);
+				$("#remark").textbox("setValue", datas.remark);
+				//registerTime  bri
+				$('#bri').datetimebox('setValue', datas.human_Birthday);
+				$('#regist_Time').datetimebox('setValue', datas.regist_Time);
+
+			}, 100);
+
+			$('#Resumedialog').dialog("open");
+		}
+		$(function() {
+
+			$("#updatetijiao").on("click", function() {
+				$("#updateform").form('submit', {
+					url: "http://127.0.0.1:8080/HR/Resume/updateResume",
+					onSubmit: function(param) {
+
+					},
+					success: function(data) {
+						if(data) {
+							$.messager.alert('提示信息', '修改成功!', 'info', function() {
+
+								location.reload();
+							});
+							//关闭模态框 清除模态框数据clear
+
+						} else {
+							$.messager.alert('提示信息', '修改失败 请检查输入是否有误!', 'error');
+						}
+					}
+				});
+
+			})
+
+			//			$("#zhiweiClass").combobox({
+			//				url: 'http://127.0.0.1:8080/HR/MajorKind/queryMajorKind',
+			//				valueField: "majorKindId",
+			//				method: "get",
+			//				textField: "majorKindName",
+			//				onSelect: function(record) {
+			//					console.log(record);
+			//					$("#zhiweiName").combobox({
+			//						url: 'http://127.0.0.1:8080/HR/Major/QueryMajor?majorKindId=' + record.majorKindId,
+			//						valueField: "majorId",
+			//						method: "get",
+			//						textField: "majorName"
+			//					})
+			//				}
+			//			});
+			$("#zhaopinType").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=招聘类型',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#guoji").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=国籍',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#mingzu").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=民族',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#zhengzhimianmao").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=政治面貌',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#xueli").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=学历',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#jiaoyunianxian").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=教育年限',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#zhuanye").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=专业',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#techang").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=特长',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#aihao").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=爱好',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+			$("#zongjiao").combobox({
+				url: 'http://127.0.0.1:8080/HR/PublicChar/queryPublicChar?type=宗教信仰',
+				valueField: "attributeName",
+				method: "get",
+				textField: "attributeName"
+			});
+
+			//Resumedialog
+			$('#Resumedialog').dialog({
+				title: "简历复核",
+				width: 800,
+				height: 600,
+				shadow: true,
+				closed: true
+			});
+
+			$("#searchbut").on("click", function() {
+				var MajorId = $('#searchzhiweiName').textbox("getValue");
+				var keyword = $('#keyword').textbox("getValue");
+				var status = $('#status').val();
+				var begin = $('#begin').datetimebox('getValue');
+				var finish = $('#finish').datetimebox('getValue');
+
+				if(begin == "") {
+					begin = "1899-11-30 00:00";
+				}
+				if(finish == "") {
+					finish = "2300-11-30 00:00";
+				}
+				//				alert(MajorId + keyword + status + begin + finish);
+				var newurl = "http://127.0.0.1:8080/HR/Resume/queryResumeByCase";
+				$('#resumetable').datagrid({
+					url: newurl,
+					method: "post",
+					queryParams: {
+						MajorId: MajorId,
+						keyword: keyword,
+						status: status,
+						begin: begin,
+						finish: finish
+					}
+				});
+
+			})
+			//			$("#searchbut").on("click", function() {
+			//				url: "xxx",
+			//				$('#searchfrom').form('submit', {
+			//					onSubmit: function(param) {
+			//						console.log(param);
+			//						return false;
+			//					}
+			//				});
+			//			})
+
+			//MajorKind/queryMajorKind 职位分类 zhiweiClass ===>zhiweiName
+			$(".zhiweiClass").combobox({
+				url: 'http://127.0.0.1:8080/HR/MajorKind/queryMajorKind',
+				valueField: "majorKindId",
+				method: "get",
+				textField: "majorKindName",
+				onSelect: function(record) {
+					console.log(record);
+					$(".zhiweiName").combobox({
+						url: 'http://127.0.0.1:8080/HR/Major/QueryMajor?majorKindId=' + record.majorKindId,
+						valueField: "majorId",
+						method: "get",
+						textField: "majorName"
+					})
+				}
+			});
+			$(".zhiweiName").combobox({})
+			$('#resumetable').datagrid({
+				url: 'http://127.0.0.1:8080/HR/Resume/queryResumeByCase',
+				fitColumns: true,
+				pagination: true,
+				pageList: [5, 10],
+				pageSize: 5,
+				pageNumber: 1,
+				method: "get",
+				toolbar: '#tb',
+				queryParams: {
+
+					status: 0
+
+				},
+				loadFilter: function(data) {
+					var newarray = new Array();
+
+					for(a = 0; a < data.rows.length; a++) {
+
+						var obj = new Object();
+
+						obj.res_Id = data.rows[a].res_Id;
+						obj.human_Name = data.rows[a].human_Name;
+						obj.human_Sex = data.rows[a].human_Sex;
+						obj.majorKindName = data.rows[a].ConfigMajor.configMajorKind.majorKindName;
+						obj.majorName = data.rows[a].ConfigMajor.majorName;
+						obj.human_Telephone = data.rows[a].human_Telephone;
+						var status = data.rows[a].check_Status;
+						if(status * 1 > 0) {
+							obj.check_Status = "已复核";
+						} else {
+							obj.check_Status = "待复核";
+						}
+
+						obj.datas = data.rows[a];
+						newarray.push(obj);
+					}
+
+					var rs = new Object();
+					rs.total = data.total;
+					rs.rows = newarray;
+
+					console.log(rs);
+					return rs;
+				},
+
+				columns: [
+					[{
+							field: 'res_Id',
+							title: '档案编号',
+							width: 187,
+							align: 'right'
+						}, {
+							field: 'human_Name',
+							title: '姓名',
+							width: 187,
+							align: 'right'
+						}, {
+							field: 'human_Sex',
+							title: '性别',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'majorKindName',
+							title: '职位分类',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'majorName',
+							title: '职位名称',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'human_Telephone',
+							title: '电话号码',
+							width: 187,
+							align: 'right'
+						},
+
+						{
+							field: 'check_Status',
+							title: '复核状态',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'datas',
+							title: '操作',
+							width: 187,
+							align: 'right',
+							formatter: function(value, row, index) {
+								var datas = JSON.stringify(row.datas);
+								//								console.log(datas);
+								return "<button onClick='fuhe(" + datas + ")'>复核</button>"
+							}
+						}
+					]
+				]
+			});
+		})
+	</script>
 
 	<body>
-		<form id="recruitAction!findEngageResume?a=list" name="resumeChooseForm" action="/HR_Fist/recruit/recruitAction!findEngageResume?a=list" method="post">
-			<input type="hidden" name="engageResume.humanMajorKindName"
-				id="majorKindName" />
-			<input type="hidden" name="engageResume.humanMajorName"
-				id="majorName"  />
-			<input type="hidden" name="engageResume.checkStatus"
-				  value="false" /> 
-			
-			<table width="100%">
-				<tr>
-					<td>
-						<font color="black">您正在做的业务是：人力资源--招聘管理--简历管理--简历筛选 </font>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
 
-						<input type="button" value="开始" class="BUTTON_STYLE1"
-							onclick= search(); >
-					</td>
-				</tr>
-			</table>
-			<table width="100%" border="1" cellpadding=0 cellspacing=1
-				bordercolorlight=#848284 bordercolordark=#eeeeee
-				class="TABLE_STYLE1">
+		<table id="resumetable">
+			<div id="tb" style="padding:2px 5px;">
+				<form id="searchfrom" method="post">
+					<input id="a" class="zhiweiClass" data-options="label:'职位分类'" class="easyui-combobox" style="width:300px">
 
-				<tr>
-					<td class="TD_STYLE1" width="30%">
-						请选择职位分类
-					</td>
-					<td class="TD_STYLE2" width="30%">
-					<select name="engageResume.humanMajorKindId" multiple="multiple" style="width: 290;height: 100"
-							 id="majorKindId"  class="SELECT_STYLE2"> 
-						<option value="0">--请选择--</option>
-					
-					<option value="01">销售</option>
-					
-					<option value="02">软件开发</option>
-					
-					<option value="03">人力资源</option>
-					
-					<option value="04">生产部</option>
-					
-					 </select>
-						<select name="engageResume.humanMajorId"  multiple="multiple"  style="width: 290;height: 100"
-							 id="majorId" size="5"
-							class="SELECT_STYLE2">
-							<option>
-								--请选择--
-							</option>
-						</select>
- 
-					</td>
-				</tr>
+					<input id="searchzhiweiName" class="zhiweiName" name="majorId" data-options="label:'职位名称'" class="easyui-combobox" style="width:300px">
+					<input id="keyword" name="keyword" class="easyui-textbox" data-options="label:'关键字'" style="width:300px">
 
-				<tr>
-					<td class="TD_STYLE1" width="30%">
-						请输入关键字
-					</td>
-					<td width="84%">
-						<input type="text" name="utilBean.primarKey" value=""
-							class="INPUT_STYLE2" />
-					</td>
-				</tr>
+					<input id="begin" class="easyui-datetimebox" name="begin" data-options="required:true,showSeconds:false,label:'登记时间'" style="width:250px">至
+					<input id="finish" class="easyui-datetimebox" name="finish" data-options="required:true,showSeconds:false" style="width:150px">
 
-				<tr>
-					<td class="TD_STYLE1" width="30%">
-						请输入登记时间
-					</td>
-					<td width="84%" class="TD_STYLE2">
-					<input type="hidden" name="utilBean.datePropertyName" value="registTime"/>
-						 
-						<input type="text" name="utilBean.startDate"   onclick="aa('utilBean.startDate')" 
-							style="width: 14%" class="INPUT_STYLE2">
-						至
-						<input type="text" name="utilBean.endDate" 
-							style="width: 14%" class="INPUT_STYLE2" onclick="aa('utilBean.endDate')">
-						（YYYY-MM-DD）
-					</td>
-				</tr>
-			</table>
-		</form>
+					<input id="status" type="hidden" value="0" name="status" />
+					<a href="#" id="searchbut" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+				</form>
+			</div>
+		</table>
+		<div id="Resumedialog">
+			<!--<div data-options="region:'center',title:'简历复核'" style="background:#eee;">-->
+			<form id="updateform" method="post">
+				<input type="hidden" name="res_Id" id="resid" />
+				<table>
+					<tr>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'职位分类'" style="width:300px" />
+-->
+							<input id="addzhiweiClass" class="zhiweiClass" name="" data-options="label:'职位分类',labelWidth:150" class="easyui-combobox" style="width:300px">
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'职位名称'" style="width:300px" />-->
+							<input id="addzhiweiName" class="zhiweiName" name="human_Major_Id" data-options="label:'职位名称',labelWidth:150" class="easyui-combobox" style="width:300px">
 
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'招聘类型'" style="width:300px" />-->
+							<input id="zhaopinType" id="zptype" name="engage_Type" data-options="label:'招聘类型',labelWidth:150" class="easyui-combobox" style="width:300px">
+						</td>
+					</tr>
+					<tr>
+						<td><input id="human_Name" name="human_Name" class="easyui-textbox" data-options="label:'姓名'" style="width:300px" />
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'性别'" style="width:300px" />-->
+							<select id="sex" name="human_Sex" class="easyui-combobox" data-options="label:'性别'" style="width:300px;">
+								<option>男</option>
+								<option>女</option>
+							</select>
+						</td>
+						<td><input id="human_Email" name="human_Email" class="easyui-textbox" data-options="label:'Email@'" style="width:300px" />
+						</td>
+					</tr>
+					<tr>
+						<td><input id="human_Mobilephone" name="human_Mobilephone" class="easyui-textbox" data-options="label:'电话'" style="width:300px" />
+						</td>
+						<td><input id="human_Homephone" name="human_Homephone" class="easyui-textbox" data-options="label:'家庭电话'" style="width:300px" />
+						</td>
+						<td><input id="human_Telephone" name="human_Telephone" class="easyui-textbox" data-options="label:'手机'" style="width:300px" />
+						</td>
+					</tr>
+					<tr>
+						<td><input id="human_Address" name="human_Address" class="easyui-textbox" data-options="label:'住址'" style="width:300px" />
+						</td>
+						<td>
+							<!--<input name="humanBirthday" class="easyui-textbox" data-options="label:'生日'" style="width:300px" />-->
+							<input id="bri" class="easyui-datetimebox" name="human_Birthday" data-options="required:true,showSeconds:false,label:'生日'" style="width:300px">
 
+							<td><input id="human_Postcode" name="human_Postcode" class="easyui-textbox" data-options="label:'邮编'" style="width:300px" />
+							</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'国籍'" style="width:300px" />-->
+							<input id="guoji" name="human_Nationality" data-options="label:'国籍',labelWidth:150" class="easyui-combobox" style="width:300px">
 
+						</td>
+						<td><input id="human_Birthplace" name="human_Birthplace" class="easyui-textbox" data-options="label:'出生地'" style="width:300px" />
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'民族'" style="width:300px" />-->
+							<input id="mingzu" name="human_Race" data-options="label:'民族',labelWidth:150" class="easyui-combobox" style="width:300px">
 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'宗教信仰'" style="width:300px" />-->
+							<input id="zongjiao" name="human_Religion" data-options="label:'宗教信仰',labelWidth:150" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'政治面貌'" style="width:300px" />-->
+							<input id="zhengzhimianmao" name="human_Party" data-options="label:'政治面貌',labelWidth:150" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td><input id="" name="human_Idcard" class="easyui-textbox" data-options="label:'身份证号码'" style="width:300px" />
+						</td>
+					</tr>
+					<tr>
+						<td><input id="human_Age" name="human_Age" class="easyui-textbox" data-options="label:'年龄'" style="width:300px" />
+						</td>
+						<td><input id="human_College" name="human_College" class="easyui-textbox" data-options="label:'毕业院校'" style="width:300px" />
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'学历'" style="width:300px" />-->
+							<input id="xueli" name="human_Educated_Degree" data-options="label:'学历',labelWidth:150" class="easyui-combobox" style="width:300px">
+
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'教育年限'" style="width:300px" />-->
+							<input id="jiaoyunianxian" name="human_Educated_Years" data-options="label:'教育年限',labelWidth:150" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'学历专业'" style="width:300px" />-->
+							<input id="zhuanye" name="human_Educated_Major" data-options="label:'学历专业',labelWidth:150" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td><input class="easyui-textbox" data-options="label:'薪酬要求'" style="width:300px" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'特长	'" style="width:300px" />-->
+							<input id="techang" name="human_Specility" data-options="label:'特长',labelWidth:150" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td>
+							<!--<input class="easyui-textbox" data-options="label:'爱好'" style="width:300px" />-->
+							<input id="aihao" name="human_Hobby" data-options="label:'爱好',labelWidth:150" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td>
+							<!--<input id="registerTime" class="easyui-textbox" data-options="label:'注册时间'" style="width:300px" />-->
+							<!--regist_Time-->
+							<input id="regist_Time" class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false,label:'注册时间'" style="width:300px">
+
+						</td>
+					</tr>
+					<tr>
+						<td><input id="human_History_Records" name="human_History_Records" class="easyui-textbox" data-options="label:'个人履历',multiline:true" style="width:300px;height: 130px;">
+						</td>
+						<td><input id="remark" name="remark" class="easyui-textbox" data-options="label:'备注',multiline:true" style="width:300px;height: 130px;">
+						</td>
+						<td>
+
+							<button type="button" id="updatetijiao">提交</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<!--</div>-->
+		</div>
 	</body>
-	
+
 </html>

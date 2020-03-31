@@ -21,6 +21,14 @@
 		<include refid="queryPublicChar"></include>
 		LIMIT #{page},#{rows}
 	</select>
+
+	<!--List<ConfigPublicChar> queryPublicChar(String type); -->
+	<select id="queryPublicChar" resultMap="PublicCharMap">
+		<include refid="queryPublicChar"></include>
+		<where>attribute_kind=#{_parameter}</where>
+	</select>
+
+
 	<!-- 查询总数 -->
 	<select id="queryPublicCharCount" resultType="java.lang.Integer">
 		SELECT
@@ -43,7 +51,7 @@
 		count(pbc_id)
 		FROM
 		config_public_char
-		<where>attribute_kind='职称'</where>
+		<where>attribute_kind=#{_parameter}</where>
 	</select>
 
 	<!-- Integer savePublicChar(ConfigPublicChar PublicChar); -->

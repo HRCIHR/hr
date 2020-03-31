@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.ResumeMapper">
+	<sql id="queryResumeAll">
+		SELECT
+		engage_resume.res_id,
+		engage_resume.human_name,
+		engage_resume.engage_type,
+		engage_resume.human_address,
+		engage_resume.human_postcode,
+		engage_resume.human_major_id,
+		engage_resume.human_telephone,
+		engage_resume.human_homephone,
+		engage_resume.human_mobilephone,
+		engage_resume.human_email,
+		engage_resume.human_hobby,
+		engage_resume.human_specility,
+		engage_resume.human_sex,
+		engage_resume.human_religion,
+		engage_resume.human_party,
+		engage_resume.human_nationality,
+		engage_resume.human_race,
+		engage_resume.human_birthday,
+		engage_resume.human_age,
+		engage_resume.human_educated_degree,
+		engage_resume.human_educated_years,
+		engage_resume.human_educated_major,
+		engage_resume.human_college,
+		engage_resume.human_idcard,
+		engage_resume.human_birthplace,
+		engage_resume.demand_salary_standard,
+		engage_resume.human_history_records,
+		engage_resume.remark,
+		engage_resume.recomandation,
+		engage_resume.human_picture,
+		engage_resume.attachment_name,
+		engage_resume.check_status,
+		engage_resume.register,
+		engage_resume.regist_time,
+		engage_resume.checker,
+		engage_resume.check_time,
+		engage_resume.interview_status,
+		engage_resume.interview_amount,
+		engage_resume.total_points,
+		engage_resume.test_amount,
+		engage_resume.test_checker,
+		engage_resume.test_check_time,
+		engage_resume.pass_register,
+		engage_resume.pass_regist_time,
+		engage_resume.pass_checker,
+		engage_resume.pass_check_time,
+		engage_resume.pass_check_status,
+		engage_resume.pass_checkComment,
+		engage_resume.pass_passComment
+		FROM
+		engage_resume
+
+	</sql>
+
+	<resultMap type="com.hr.entity.EngageResume" id="ResumeMap">
+
+		<association property="ConfigMajor"
+			column="human_major_id"
+			select="com.hr.zh.mapper.MajorMapper.queryMajorByid">
+
+		</association>
+	</resultMap>
+
+	<!--Integer saveResume(@Param("Resume") EngageResume Resume, @Param("sql") 
+		String sql); -->
+	<insert id="saveResume">
+		${value}
+	</insert>
+
+	<!-- Integer updateResume(@Param("Resume") EngageResume Resume, @Param("value") 
+		String sql); -->
+	<update id="updateResume">
+		${value}
+	</update>
+
+
+	<!-- List<EngageResume> queryResumeByCase(EngageResume Resume); -->
+	<select id="queryResumeByCase" resultMap="ResumeMap">
+		<include refid="queryResumeAll"></include>
+
+		<where>
+			<if test="resumeCase.MajorId!=null and resumeCase.MajorId!=''">
+				and human_Major_Id=#{resumeCase.MajorId}
+			</if>
+			<if test="resumeCase.keyword!=null and resumeCase.keyword!=''">
+				<bind name="keyword" value="'%' + resumeCase.keyword + '%'" />
+				and
+				CONCAT(human_name,human_telephone,human_idcard,human_history_records)
+				like '%#{keyword}%'
+			</if>
+			<if test="resumeCase.begin!=null and resumeCase.finish!=null">
+				and regist_time BETWEEN #{resumeCase.begin} and
+				#{resumeCase.finish}
+			</if>
+			<if test="resumeCase.status!=null">
+				and check_Status=#{resumeCase.status}
+			</if>
+		</where>
+		LIMIT #{page.page},#{page.rows}
+	</select>
+	<!-- integer queryResumeByCaseCount(EngageResume Resume); -->
+	<select id="queryResumeByCaseCount"
+		resultType="java.lang.Integer">
+		SELECT
+		count(res_id) from engage_resume
+		<where>
+			<if test="resumeCase.MajorId!=null and resumeCase.MajorId!=''">
+				and human_Major_Id=#{resumeCase.MajorId}
+			</if>
+			<if test="resumeCase.keyword!=null and resumeCase.keyword!=''">
+				<bind name="keyword" value="'%' + resumeCase.keyword + '%'" />
+				and
+				CONCAT(human_name,human_telephone,human_idcard,human_history_records)
+				like '%#{keyword}%'
+			</if>
+			<if test="resumeCase.begin!=null and resumeCase.finish!=null">
+				and regist_time BETWEEN #{resumeCase.begin} and
+				#{resumeCase.finish}
+			</if>
+			<if test="resumeCase.status!=null">
+				and check_Status=#{resumeCase.status}
+			</if>
+		</where>
+	</select>
+</mapper>

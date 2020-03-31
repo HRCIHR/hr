@@ -46,4 +46,22 @@
 	<insert id="insertRole">
  		insert into sys_role(role_name,role_desc,role_flag) values(#{roleName},#{roleDesc},#{roleFlag})
  	</insert>
+ 	
+ 	<delete id="deleteRoleById">
+ 		delete from sys_role where role_id=#{roleId}
+ 	</delete>
+ 	
+ 	<delete id="deleteRoleRightByRoleId">
+ 		delete from sys_right_role where role_id=#{roleId}
+ 	</delete>
+ 	<update id="updateRole">
+ 		update sys_role set role_name=#{roleName},role_desc=#{roleDesc},role_flag=#{roleFlag} where role_id=#{roleId}
+ 	</update>
+ 	<insert id="saveRoleAndRight">
+		insert into sys_right_role(right_id,role_id) values
+ 			 <foreach collection="rightId" item="rid" index="index" separator=",">
+                  (#{rid},#{roleId})
+        	</foreach>
+ 	</insert>
+ 	
 </mapper>

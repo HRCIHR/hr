@@ -55,4 +55,8 @@
   <update id="updateByPrimaryKey" >
     update users set u_name = #{uName},u_true_name = #{uTrueName}, u_password = #{uPassword},u_roleid = #{role.roleId} where u_id = #{uId}
   </update>
+  
+  <select id="queryUserCountByRoleId" resultType="Integer">
+ 		select count(u_id) from users where u_roleid=#{roleId}
+ 	</select>
 </mapper>

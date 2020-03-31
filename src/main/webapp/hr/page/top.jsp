@@ -35,7 +35,7 @@ a{
 <script type="text/javascript">
   function logout(){
 		$("#logoutfrom").submit();
-		window.parent.location.href="../../login.jsp";
+		window.parent.location.href="../../login.html";
   }
 </script>
 </head>

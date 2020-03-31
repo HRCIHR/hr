@@ -45,4 +45,29 @@ public class RoleController {
 		sys_role sys_role = ss.queryRoleAndRightByRoleId(role);
 		return sys_role;
 	}
+	//删除角色
+		@RequestMapping("/deleteRoleById")                      
+		@ResponseBody
+		public Integer deleteRoleById(sys_role role) {
+			System.out.println("删除:"+role);
+			Integer num=ss.deleteRoleById(role);
+			return num;
+	}
+		//修改角色和权限
+		@RequestMapping("/updateRoleAndRoleRight")
+		@ResponseBody
+		public Integer updateRoleAndRoleRight(sys_role role,Integer[] arr) {
+			System.out.println("修改角色1:"+role);
+			System.out.println(arr+"/"+arr.length);
+			Integer num=ss.updateRole(role, arr);
+			return num;
+		}
+		//删除角色所有权限
+				@RequestMapping("/deleteRoleRight")                    
+				@ResponseBody
+				public Integer deleteRoleRight(sys_role role) {
+					System.out.println("删除:"+role);
+					Integer num=ss.deleteRoleRightByRoleId(role);
+					return num;
+			}
 }

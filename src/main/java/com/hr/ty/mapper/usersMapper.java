@@ -17,4 +17,6 @@ public interface usersMapper {
 	Integer deleteByPrimaryKey(int uId);
 	
 	Integer updateByPrimaryKey(users record);
+	
+	Integer queryUserCountByRoleId(Integer roleId);
 }

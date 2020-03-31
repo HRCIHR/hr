@@ -82,7 +82,8 @@
 										title : "操作",
 										width : 100,
 										formatter : function(value, r, index) {
-											return "<a href=\"javascript:deleteUser('"+r.uId+"','"+r.uName+"')\">删除</a>  <a href=\"javascript:updateUser('"+r.uId+"','"+r.uName+"','"+r.uTrueName+"','"+r.uPassword+"','"+r.role.roleId+"')\">修改</a>";
+											/* return "<button onClick='deleteUser("+r.uId+","+r.uName+")'>删除</button><button onClick='updateUser("+r.uId+","+r.uName+","+r.uTrueName+","+r.uPassword+","+r.role.roleId+")'>修改</button>"; */
+											return "<a href=\"javascript:deleteUser('"+r.uId+"','"+r.uName+"')\">删除</a>  <a href=\"javascript:updateUser('"+r.uId+"','"+r.uName+"','"+r.uTrueName+"','"+r.uPassword+"','"+r.role.roleId+"')\">修改</a>"; 
 										}
 									}
 
@@ -110,8 +111,8 @@
 				 url:"<%=path%>/users/deleteUser/"+id,
 				 type:"DELETE",
 				 succeess:function(data){
-					 if(data>0){
-						 alert("删除成功！");  //怎么不弹窗？
+					 if(data){
+						 $.messager.alert('温馨提示','删除成功！');   //怎么不弹窗？
 					 }
 				 }
 			 });

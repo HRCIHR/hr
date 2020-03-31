@@ -13,4 +13,5 @@ public interface sys_rightMapper {
 	List<sys_right> queryRightByParentId(Integer id);
 	
 	List<sys_right> queryRightAndRoleByRoleId(Integer roleId);
+	
 }

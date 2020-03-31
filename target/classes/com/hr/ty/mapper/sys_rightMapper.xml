@@ -36,5 +36,5 @@
 		where right_code in (select right_id from sys_right_role where
 		role_id=#{rid})
 	</select>
-
+ 
 </mapper>

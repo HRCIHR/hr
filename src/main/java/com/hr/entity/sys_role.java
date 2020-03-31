@@ -1,8 +1,9 @@
 package com.hr.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class sys_role {
+public class sys_role implements Serializable{
     private Integer roleId;
 
     private String roleName;

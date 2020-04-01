@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hr.entity.ConfigMajorKind;
 import com.hr.entity.ConfigPublicChar;
 import com.hr.util.pagination;
@@ -51,7 +53,7 @@ public class MajorKindController {
 
 	@RequestMapping("/queryMajorKind") // MajorKind/queryMajorKind
 	public @ResponseBody List<ConfigMajorKind> queryMajorKind() {
-
+		
 		return majorKindService.queryMajorKind();
 	}
 

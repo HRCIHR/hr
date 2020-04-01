@@ -50,7 +50,7 @@
 	</select>
 
 	<!-- com.hr.zh.mapper.SecondKindMapper.queryThirdKindById(Integer) -->
-	<select id="querySecondKindById" resultMap="queryAllMap">
+	<select id="querySecondKindById" resultMap="extendsQueryAllMap">
 		<include refid="qeurySecondKindall"></include>
 		<where>
 			second_kind_id=#{_parameter}

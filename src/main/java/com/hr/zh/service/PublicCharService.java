@@ -11,7 +11,7 @@ public interface PublicCharService {
 
 	Integer queryPublicCharCount();
 
-	Integer queryPublicCharByTypeCount();
+	Integer queryPublicCharByTypeCount(String type);
 
 	List<ConfigPublicChar> pagQueryPublicCharByType(pagination page, String type);
 	
@@ -19,4 +19,6 @@ public interface PublicCharService {
 	boolean savePublicChar(ConfigPublicChar PublicChar);
 
 	boolean delPublicChar(Integer PublicCharID);
+	
+	List<ConfigPublicChar> queryPublicChar(String type);
 }

@@ -48,4 +48,11 @@ public class MajorServiceImp implements MajorService {
 		return success;
 	}
 
+	@Override
+	public List<ConfigMajor> QueryMajor(Integer majorKindId) {
+		// TODO Auto-generated method stub
+		List<ConfigMajor> queryMajor = majorMapper.QueryMajor(majorKindId);
+		return queryMajor;
+	}
+
 }

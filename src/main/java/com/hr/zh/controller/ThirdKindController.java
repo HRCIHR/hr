@@ -24,10 +24,11 @@ public class ThirdKindController {
 
 	@RequestMapping("/pagQueryThirdKind")
 	public @ResponseBody Map<String, Object> pagQueryThirdKind(pagination page) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		List<ConfigFileThirdKind> pagQueryThirdKind = thirdKindService.pagQueryThirdKind(page);
 		System.out.println(pagQueryThirdKind);
 		// 求总数
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		Integer count = thirdKindService.queryThirdKindcount();
 		map.put("rows", pagQueryThirdKind);
 		map.put("total", count);
@@ -60,6 +61,13 @@ public class ThirdKindController {
 		System.out.println(thirdKind);
 
 		return success;
+	}
+
+	@RequestMapping("/queryThirdKindByIDList") // Third/queryThirdKindByIDList?thirdKindID
+	public @ResponseBody List<ConfigFileThirdKind> queryThirdKindByIDList(Integer secondKindId) {
+		List<ConfigFileThirdKind> queryThirdKindByIDList = thirdKindService.queryThirdKindByIDList(secondKindId);
+
+		return queryThirdKindByIDList;
 	}
 
 }

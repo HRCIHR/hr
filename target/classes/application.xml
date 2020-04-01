@@ -27,16 +27,15 @@
 		<property name="password" value="${pwd}"></property>
 		<!-- 配置链接池信息 -->
 	</bean>
-	
+
 	<!-- 配置sqlSessionFactory -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<!-- 给实体类取别名 -->
-		<property name="typeAliasesPackage"
-			value="com.hr.entity"></property>
+		<property name="typeAliasesPackage" value="com.hr.entity"></property>
 	</bean>
-	
+
 	<!-- 扫描注册mapper文件 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!--sqlSessionFactoryBeanName：是一个字符串类型 -->
@@ -53,18 +52,64 @@
 		<property name="prefix" value="/"></property><!-- 前缀 -->
 		<property name="suffix" value=".jsp"></property><!-- 加后缀 -->
 	</bean>
-	
+
 	<!-- 创建事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
+
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="com.hr.util.StringFormatToDate" />
+			</set>
+		</property>
+	</bean>
+
+
+
 	<!-- 开启注解事务 -->
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
 	<!-- 开始注解 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven
+		conversion-service="conversionService">
+
+		<!--设置JSON转换器为Gson -->
+		<mvc:message-converters
+			register-defaults="true">
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean
+				class="org.springframework.http.converter.json.GsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="gson">
+					<bean
+						class="org.springframework.http.converter.json.GsonFactoryBean">
+						<property name="serializeNulls" value="true" />
+						<property name="disableHtmlEscaping" value="true" />
+						<property name="dateFormatPattern"
+							value="yyyy-MM-dd HH:mm:ss" />
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+	</mvc:annotation-driven>
 	<!-- 扫描包 -->
 	<context:component-scan base-package="com.hr"></context:component-scan>
 	<!-- 放行静态资源 -->

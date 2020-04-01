@@ -43,9 +43,9 @@ public class PublicCharServiceImp implements PublicCharService {
 	}
 
 	@Override
-	public Integer queryPublicCharByTypeCount() {
+	public Integer queryPublicCharByTypeCount(String type) {
 		// TODO Auto-generated method stub
-		return publicCharMapper.queryPublicCharByTypeCount();
+		return publicCharMapper.queryPublicCharByTypeCount(type);
 	}
 
 	@Override
@@ -62,6 +62,13 @@ public class PublicCharServiceImp implements PublicCharService {
 		Integer delPublicChar = publicCharMapper.delPublicChar(PublicCharID);
 		boolean success = MasterTool.isSuccess(delPublicChar);
 		return success;
+	}
+
+	@Override
+	public List<ConfigPublicChar> queryPublicChar(String type) {
+		// TODO Auto-generated method stub
+		List<ConfigPublicChar> queryPublicChar = publicCharMapper.queryPublicChar(type);
+		return queryPublicChar;
 	}
 
 }

@@ -56,4 +56,11 @@ public class ThirdKindServiceImp implements ThirdKindService {
 		return success;
 	}
 
+	@Override
+	public List<ConfigFileThirdKind> queryThirdKindByIDList(Integer secondKindId) {
+		// TODO Auto-generated method stub
+		List<ConfigFileThirdKind> queryThirdKindByIDList = thirdKindMapper.queryThirdKindByIDList(secondKindId);
+		return queryThirdKindByIDList;
+	}
+
 }

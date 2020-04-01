@@ -15,4 +15,6 @@ public interface ThirdKindService {
 	boolean updateThirdKind(ConfigFileThirdKind thirdKind);
 
 	boolean delThirdKind(Integer thirdKindID);
+	
+	List<ConfigFileThirdKind> queryThirdKindByIDList(Integer secondKindId);
 }

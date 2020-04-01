@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.MajorReleaseMapper">
+
+	<sql id="queryMajorAll">
+		SELECT
+		*
+		FROM
+		engage_major_release
+	</sql>
+	<resultMap type="com.hr.entity.EngageMajorRelease"
+		id="queryMajorAllMap">
+		<id column="mre_Id" property="mreId" />
+		<result column="third_Kind_Id" property="thirdKindId" />
+		<result column="major_Id" property="majorId" />
+		<result column="human_Amount" property="humanAmount" />
+		<result column="engage_Type" property="engageType" />
+		<result column="deadline" property="deadline" />
+		<result column="register" property="register" />
+		<result column="changer" property="changer" />
+		<result column="regist_Time" property="registTime" />
+		<result column="change_Time" property="changeTime" />
+		<result column="engage_Required" property="engageRequired" />
+		<result column="major_Describe" property="majorDescribe" />
+	</resultMap>
+
+	<resultMap type="com.hr.entity.EngageMajorRelease"
+		id="JoinextendsQueryMajorAllMap" extends="queryMajorAllMap">
+		<association property="configFileThirdKind"
+			select="com.hr.zh.mapper.ThirdKindMapper.queryThirdKindById"
+			column="third_Kind_Id">
+
+		</association>
+		<association property="configMajor"
+			select="com.hr.zh.mapper.MajorMapper.queryMajorByid"
+			column="major_Id">
+
+		</association>
+	</resultMap>
+
+	<!-- List<EngageMajorRelease> pageQueryMajorRelease(pagination page); -->
+	<select id="pageQueryMajorRelease"
+		resultMap="JoinextendsQueryMajorAllMap">
+		<include refid="queryMajorAll"></include>
+		LIMIT #{page},#{rows}
+	</select>
+
+	<!-- List<EngageMajorRelease> QueryMajorReleaseByMojarKindid(Integer MojarKindid); -->
+	<select id="QueryMajorReleaseByMojarKindid"
+		resultMap="JoinextendsQueryMajorAllMap">
+		<include refid="queryMajorAll"></include>
+		where
+		engage_major_release.major_id in
+		(select major_id from
+		config_major
+		where config_major.major_kind_id=#{_parameter})
+
+	</select>
+
+
+
+	<!-- Integer pageQueryMajorReleaseCount(); -->
+	<select id="pageQueryMajorReleaseCount"
+		resultType="java.lang.Integer">
+		SELECT count(mre_id) from engage_major_release
+	</select>
+
+	<!--Integer saveMajorRelease(EngageMajorRelease MajorRelease); -->
+
+	<insert id="saveMajorRelease">
+		INSERT INTO engage_major_release (
+		third_kind_id,
+		major_id,
+		human_amount, engage_type, deadline, register,
+		regist_time,major_describe, engage_required)
+		VALUES
+		(#{thirdKindId},#{majorId},#{humanAmount},#{engageType},#{deadline},#{register},SYSDATE(),#{engageRequired},#{majorDescribe});
+
+	</insert>
+	<!--Integer updateMajorRelease(EngageMajorRelease MajorRelease); -->
+	<update id="updateMajorRelease">
+		UPDATE hr.engage_major_release SET
+		human_amount=#{humanAmount},
+		engage_type=#{engageType},
+		deadline=#{deadline},changer=#{changer},
+		change_time=SYSDATE(),
+		major_describe=#{majorDescribe}, engage_required=#{engageRequired}
+		WHERE mre_id=#{mreId};
+
+	</update>
+
+	<!--Integer delMajorRelease(Integer MajorReleaseID); -->
+	<delete id="delMajorRelease">
+		DELETE from engage_major_release where
+		mre_id=#{_parameter}
+	</delete>
+
+	<!-- EngageMajorRelease QueryMajorReleaseByMreid(Integer mreid); -->
+	<select id="QueryMajorReleaseByMreid"
+		resultMap="JoinextendsQueryMajorAllMap">
+		<include refid="queryMajorAll"></include>
+		where mre_Id=#{_parameter}
+	</select>
+
+</mapper>

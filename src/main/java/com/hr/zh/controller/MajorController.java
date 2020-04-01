@@ -50,4 +50,12 @@ public class MajorController {
 		return delMajor;
 	}
 
+	// Major/QueryMajor?majorKindId
+	@RequestMapping("/QueryMajor")
+	public @ResponseBody List<ConfigMajor> QueryMajor(Integer majorKindId) {
+		System.out.println("majorKindId==================>"+majorKindId);
+		List<ConfigMajor> queryMajor = majorService.QueryMajor(majorKindId);
+		return queryMajor;
+	}
+
 }

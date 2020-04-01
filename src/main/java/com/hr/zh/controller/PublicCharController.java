@@ -21,6 +21,7 @@ public class PublicCharController {
 	@Resource(name = "PublicCharServiceImp")
 	private PublicCharService publicCharService;
 
+	// 所有的 公共数据 分页
 	@RequestMapping("/pagQueryPublicChar")
 	public @ResponseBody Map<String, Object> pagQueryPublicChar(pagination page) {
 
@@ -35,15 +36,26 @@ public class PublicCharController {
 		return map;
 	}
 
+	// 按类型 不分页
+	@RequestMapping("/queryPublicChar") // PublicChar/queryPublicChar?type
+	public @ResponseBody List<ConfigPublicChar> queryPublicChar(String type) {
+		
+		List<ConfigPublicChar> queryPublicChar = publicCharService.queryPublicChar(type);
+
+		return queryPublicChar;
+	}
+
+	// 类型公共数据分页
+
 	@RequestMapping("/pagQueryPublicCharByType")
-	public @ResponseBody Map<String, Object> pagQueryPublicCharByType(pagination page) {
+	public @ResponseBody Map<String, Object> pagQueryPublicCharByType(pagination page, String type) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		List<ConfigPublicChar> queryPublicChar = publicCharService.pagQueryPublicCharByType(page, "职称");
+		List<ConfigPublicChar> queryPublicChar = publicCharService.pagQueryPublicCharByType(page, type);
 		for (ConfigPublicChar configPublicChar : queryPublicChar) {
 			System.out.println(configPublicChar);
 		}
-		Integer count = publicCharService.queryPublicCharByTypeCount();
+		Integer count = publicCharService.queryPublicCharByTypeCount(type);
 		map.put("rows", queryPublicChar);
 		map.put("total", count);
 		return map;

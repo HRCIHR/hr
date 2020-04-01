@@ -14,14 +14,19 @@ import com.sun.org.glassfish.gmbal.ParameterNames;
 public interface PublicCharMapper {
 
 	List<ConfigPublicChar> pagQueryPublicChar(pagination page);
+	
+	List<ConfigPublicChar> queryPublicChar(String type);
 
 	Integer queryPublicCharCount();
 
-	Integer queryPublicCharByTypeCount();
+	Integer queryPublicCharByTypeCount(String type);
 
 	List<ConfigPublicChar> pagQueryPublicCharByType(@Param("pa") pagination page, @Param("type") String type);
 
 	Integer savePublicChar(ConfigPublicChar PublicChar);
 
 	Integer delPublicChar(Integer PublicCharID);
+	
+	
+	
 }

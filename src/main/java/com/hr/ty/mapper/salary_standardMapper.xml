@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.ty.mapper.salary_standardMapper">
+	<resultMap id="BaseResultMap" type="com.hr.entity.SalaryStandard">
+		<id column="standard_id" property="standardId"/>
+		<result column="standard_name" property="standardName" />
+		<result column="designer" property="designer" />
+		<result column="register" property="register" />
+		<result column="checker" property="checker" />
+		<result column="changer" property="changer" />
+		<result column="regist_time" property="registTime" />
+		<result column="check_time" property="checkTime" />
+		<result column="change_time" property="changeTime" />
+		<result column="salary_sum" property="salarySum" />
+		<result column="check_status" property="checkStatus" />
+		<result column="change_status" property="changeStatus" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.hr.entity.SalaryStandardDetails">
+		<result column="check_comment" property="checkComment" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		standard_id, standard_name, designer, register, checker,
+		changer, regist_time,
+		check_time,
+		change_time, salary_sum, check_status,
+		change_status
+	</sql>
+	<sql id="Blob_Column_List">
+		check_comment, remark
+	</sql>
+	<select id="selectBycheckStatus" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from salary_standard
+		where check_status = 0
+	</select>
+</mapper>

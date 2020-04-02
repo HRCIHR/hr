@@ -123,4 +123,13 @@ public class SalaryStandard {
     public void setChangeStatus(Short changeStatus) {
         this.changeStatus = changeStatus;
     }
+
+	@Override
+	public String toString() {
+		return "SalaryStandard [standardId=" + standardId + ", standardName=" + standardName + ", designer=" + designer
+				+ ", register=" + register + ", checker=" + checker + ", changer=" + changer + ", registTime="
+				+ registTime + ", checkTime=" + checkTime + ", changeTime=" + changeTime + ", salarySum=" + salarySum
+				+ ", checkStatus=" + checkStatus + ", changeStatus=" + changeStatus + "]";
+	}
+    
 }

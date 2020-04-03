@@ -1,71 +1,141 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
-<script type="application/javascript" src="../../../easyui/jquery.min.js"></script>
-		<script type="application/javascript" src="../../../easyui/jquery.easyui.min.js"></script>
-		<script type="application/javascript" src="../../../easyui/easyui-lang-zh_CN.js"></script>
-		<link rel="stylesheet" href="../../../easyui/themes/icon.css" />
-		<link rel="stylesheet" href="../../../easyui/themes/default/easyui.css" />
-		<script type="text/javascript">
-		     $(function(){
-		    	 $('#dg').datagrid({
-						url: 'http://127.0.0.1:8080/HR/Salarystandard/querSalarystandard',
-						fitColumns: true,
-						pagination: true,
-						pageList: [5, 10],
-						pageSize: 5,
-						pageNumber: 1,
-						method: "get",
-						columns: [
-							[{
-									field: 'standardId',
-									title: '酬薪标准编号',
-									width: 100
-								}, {
-									field: 'standardName',
-									title: '酬薪标准名称',
-									width: 100
-								}, {
-									field: 'designer',
-									title: '薪酬发放负责人',
-									width: 100,
-									align: 'right'
-								},
-								{
-									field: 'registTime',
-									title: '登记时间',
-									width: 100,
-									align: 'right'
-								},						
-								{
-									field: 'salarySum',
-									title: '薪酬总额',
-									width: 100,
-									align: 'right'
-								},
-								{
-									field: 'xxx',
-									title: '复核',
-									width: 100,
-									align: 'right',
-									formatter: function(value, row, index) {
-										var rows = JSON.stringify(row);
-										return "<button onClick='Recheck(" + row.standardId + ")'>复核</button>"
-									}
-								}
-							]
-						]
-					}); 
-		     })
-		      //点击复核。
-		    	 function Recheck(){
-		    		 
-		    	 }
-		</script>
-		<title>薪酬标准登记复核</title>
+<script type="application/javascript"
+	src="../../../easyui/jquery.min.js"></script>
+<script type="application/javascript"
+	src="../../../easyui/jquery.easyui.min.js"></script>
+<script type="application/javascript"
+	src="../../../easyui/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="../../../easyui/themes/icon.css" />
+<link rel="stylesheet" href="../../../easyui/themes/default/easyui.css" />
+<script type="text/javascript">
+	$(function() {
+		$('#dg')
+				.datagrid(
+						{
+							url : 'http://127.0.0.1:8080/HR/Salarystandard/querSalarystandard',
+							fitColumns : true,
+							pagination : true,
+							pageList : [ 5, 10 ],
+							pageSize : 5,
+							pageNumber : 1,
+							method : "get",
+							columns : [ [
+									{
+										field : 'standardId',
+										title : '酬薪标准编号',
+										width : 100
+									},
+									{
+										field : 'standardName',
+										title : '酬薪标准名称',
+										width : 100
+									},
+									{
+										field : 'designer',
+										title : '薪酬发放负责人',
+										width : 100,
+										align : 'right'
+									},
+									{
+										field : 'registTime',
+										title : '登记时间',
+										width : 100,
+										align : 'right'
+									},
+									{
+										field : 'salarySum',
+										title : '薪酬总额',
+										width : 100,
+										align : 'right'
+									},
+									{
+										field : 'xxx',
+										title : '复核',
+										width : 100,
+										align : 'right',
+										formatter : function(value, row, index) {
+											var rows = JSON.stringify(row);
+											return "<button onClick='Recheck("
+													+ rows + ")'>复核</button>"
+										}
+									} ] ]
+						});
+	})
+</script>
+<script type="text/javascript">
+	//点击复核。
+	function Recheck() {
+		$('#recheck').window('open');
+	}
+</script>
+<title>薪酬标准登记复核</title>
 </head>
+
 <body>
-       <div id="dg"></div>
+	<!--表格-->
+	<div id="dg"></div>
+	<!-- 复核信息-->
+	<!-- 复核模态框 -->
+	<div id="recheck" class="easyui-dialog" title="复核"
+		style="width: 600px; height: 550px;"
+		data-options="iconCls:'icon-save',resizable:true,modal:true,resizable:false,draggable:false,closed:true,
+	buttons:[{text:'复核不通过',handler:function(){}},{text:'复核通过',handler:function(){}}]">
+		<form style="margin-top: 10px;" id="" class="easyui-form"
+			method="post">
+
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'酬薪编号:',required:true">
+			</div>
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'薪酬标准名称 :',required:true">
+			</div>
+
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'薪酬总额 :',required:true">
+			</div>
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'制定人 :',required:true">
+			</div>
+
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'复核人 :',required:true">
+			</div>
+			
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'复核时间 :',required:true">
+			</div>
+
+			<div style="margin-bottom: 20px;>
+					<input class="
+				easyui-textbox" name="" style="width: 300px"
+				data-options="label:'复核人 :',required:true"></div>
+				
+		<div>
+          <div style="margin-bottom: 20px; margin-left: 30px; float: left;">
+				<input class="easyui-textbox" name="" style="width: 100px"
+					data-options="label:'序号 :',required:true">
+			</div>
+		      <div style="margin-bottom: 20px; margin-left: 30px;float: left;">
+				<input class="easyui-textbox" name="" style="width: 200px"
+					data-options="label:'薪酬项目名称 :',required:true">
+			</div>
+			  <div style="margin-bottom: 20px; margin-left: 30px;float: left;">
+				<input class="easyui-textbox" name="" style="width: 150px"
+					data-options="label:'金额 :',required:true">
+			</div>
+            </div>
+		</form>
+	</div>
 </body>
+
 </html>

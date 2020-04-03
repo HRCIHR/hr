@@ -3,69 +3,149 @@
  <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>无标题文档</title>
-		<link rel="stylesheet" href="../../css/table.css" type="text/css">
-		<link rel="stylesheet" type="text/css" media="all"
-			href="../../javascript/calendar/calendar-win2k-cold-1.css">
-		<script type="text/javascript" src="../../javascript/calendar/cal.js"></script>
-		<script type="text/javascript" src="../../javascript/comm/comm.js"></script>
-		<script type="text/javascript" src="../../javascript/comm/list.js"></script>
-		<script type="text/javascript" src="../../javascript/jquery-1.7.2.js"></script>	
-		<script type="text/javascript" src="../../javascript/calendar-ch.js"></script>
-		<script type="text/javascript" src="../../javascript/comm/time.js"></script>
-		<link rel="stylesheet" href="../../css/cwcalendar.css" type="text/css"></link> 
-	 
-	</head>
+		<script type="application/javascript"
+		src="../../../easyui/jquery.min.js"></script>
+	<script type="application/javascript"
+		src="../../../easyui/jquery.easyui.min.js"></script>
+	<script type="application/javascript"
+		src="../../../easyui/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" href="../../../easyui/themes/icon.css" />
+	<link rel="stylesheet" href="../../../easyui/themes/default/easyui.css" />
+<title>酬薪标准变更</title>
+<script type="text/javascript">
+	$(function() {
+		$('#dg')
+				.datagrid(
+						{
+							url : '',
+							fitColumns : true,
+							pagination : true,
+							pageList : [ 5, 10 ],
+							pageSize : 5,
+							pageNumber : 1,
+							method : "get",
+							columns : [ [
+									{
+										field : 'standardId',
+										title : '酬薪标准编号',
+										width : 100
+									},
+									{
+										field : 'standardName',
+										title : '酬薪标准名称',
+										width : 100
+									},
+									{
+										field : 'designer',
+										title : '制定人',
+										width : 100,
+										align : 'right'
+									},
+									{
+										field : 'registTime',
+										title : '登记时间',
+										width : 100,
+										align : 'right'
+									},
+									{
+										field : 'salarySum',
+										title : '薪酬总额',
+										width : 100,
+										align : 'right'
+									},
+									{
+										field: 'datas',
+										title: '操作',
+										width: 187,
+										align: 'right',
+										formatter: function(value, row, index) {
+											var datas = JSON.stringify(row.datas);
+											//								console.log(datas);
+											return "<button onClick='fuhe(" + datas + ")'>变更</button>"
+										}
+									}
+									] ]
+						});
+	})
+</script>
+<script type="text/javascript">
+	//点击复核。
+	function fuhe() {
+		$('#bian').window('open');
+	}
+</script>
+</head>
 
-	<body>
-		<form method="post"
-		 action="salarystandard_change_list.html" >
-			<input type="hidden" name="page.startPage" value="0">
-			<table width="100%">
-				<tr>
-					<td>
-						<font color="black">您正在做的业务是:人力资源管理--薪酬标准管理--薪酬标准变更</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div align="right">
-							<input type="submit" value="查询" class="BUTTON_STYLE1"/>
-						</div>
-					</td>
-				</tr>
-			</table>
-			<table width="100%"   border="1" cellpadding=0 cellspacing=1
-				bordercolorlight=#848284 bordercolordark=#eeeeee
-				class="TABLE_STYLE1" >
-				<tr>
-					<td width="20%" class="TD_STYLE1">
-						请输入薪酬标准编号
-					</td>
-					<td class="TD_STYLE2">
-						<input type="text" name="standard.standardId" value=""
-							class="INPUT_STYLE1">
-					</td>
-				</tr>
-				<tr>
-					<td class="TD_STYLE1">
-						请输入关键字
-					</td>
-					<td class="TD_STYLE2">
-						<input type="text" name="utilbean.primarKey" class="INPUT_STYLE1">
-					</td>
-				</tr>
-				<tr>
-					<td class="TD_STYLE1">
-						请输入建档时间
-					</td>
-					<td width="84%" class="TD_STYLE2">
-						<input name="utilbean.startDate" onclick="aa('utilbean.startDate')" type="text" class="INPUT_STYLE2" id="date_start" style="width:24% " value="" size="30">
-						至 <input type="text" name="utilbean.endDate" onclick="aa('utilbean.endDate')" value="" style="width:24% " class="INPUT_STYLE2" id="date_end">
-						（YYYY-MM-DD）
-					</td>
-				</tr>
-			</table>
-			 
-		</form>
+<body>
+<table id="resumetable">
+			<div id="tb" style="padding:2px 5px;background-color: #F3F3F3;border:1px solid #89C5EE;border-bottom:none;">
+				<form id="searchfrom" method="post">
+				<input id="keyword" name="keyword" class="easyui-textbox" data-options="label:'酬薪标准编号'" style="width:300px">
+					<input id="keyword" name="keyword" class="easyui-textbox" data-options="label:'关键字'" style="width:300px">
+					<input id="begin" class="easyui-datetimebox" name="begin" data-options="required:true,showSeconds:false,label:'登记时间'" style="width:250px">至
+					<input id="finish" class="easyui-datetimebox" name="finish" data-options="required:true,showSeconds:false" style="width:150px">
+
+					<input id="status" type="hidden" value="0" name="status" />
+					<a href="#" id="searchbut" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+				</form>
+			</div>
+		</table>
+		<div id="dg"></div>
+		
+		<!-- 变更模态框 -->
+	<div id="bian" class="easyui-dialog" title="复核"
+		style="width: 600px; height: 550px;"
+		data-options="iconCls:'icon-save',resizable:true,modal:true,resizable:false,draggable:false,closed:true,
+	buttons:[{text:'重新提交',handler:function(){}},{text:'取消',handler:function(){}}]">
+		<form style="margin-top: 10px;" id="" class="easyui-form"
+			method="post">
+
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'酬薪编号:',required:true">
+			</div>
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'薪酬标准名称 :',required:true">
+			</div>
+
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'薪酬总额 :',required:true">
+			</div>
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'制定人 :',required:true">
+			</div>
+
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'复核人 :',required:true">
+			</div>
+			
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input class="easyui-textbox" name="" style="width: 300px"
+					data-options="label:'复核时间 :',required:true">
+			</div>
+
+			<div style="margin-bottom: 20px;>
+					<input class="
+				easyui-textbox" name="" style="width: 300px"
+				data-options="label:'复核人 :',required:true"></div>
+				
+		<div>
+          <div style="margin-bottom: 20px; margin-left: 30px; float: left;">
+				<input class="easyui-textbox" name="" style="width: 100px"
+					data-options="label:'序号 :',required:true">
+			</div>
+		      <div style="margin-bottom: 20px; margin-left: 30px;float: left;">
+				<input class="easyui-textbox" name="" style="width: 200px"
+					data-options="label:'薪酬项目名称 :',required:true">
+			</div>
+			  <div style="margin-bottom: 20px; margin-left: 30px;float: left;">
+				<input class="easyui-textbox" name="" style="width: 150px"
+					data-options="label:'金额 :',required:true">
+			</div>
+            </div>
 	</body>
 </html>

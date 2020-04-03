@@ -30,10 +30,16 @@
 	<sql id="Blob_Column_List">
 		check_comment, remark
 	</sql>
+	
+	 <select id="getTableCountByStandardId" resultType="int">
+	    select count(${tabId}) from ${tabName} where check_status=0
+	  </select>
+	  
 	<select id="selectBycheckStatus" resultMap="BaseResultMap">
+	<bind name="page" value="(page-1)*rows"/>
 		select
 		<include refid="Base_Column_List" />
 		from salary_standard
-		where check_status = 0
+		where check_status = 0 limit #{page},#{rows}
 	</select>
 </mapper>

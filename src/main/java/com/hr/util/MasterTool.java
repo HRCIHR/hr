@@ -85,12 +85,18 @@ public class MasterTool {
 				}
 			}
 
-			if(key.size()!=0) {
+			if (key.size() != 0) {
 				str.append(" , ");
 			}
+			key.add("check_Time");
 			for (int i = 0; i < key.size(); i++) {
 
-				str.append(key.get(i) + "=#{Resume." + key.get(i) + "}");
+				if (key.get(i).equals("check_Time")) {
+					str.append(key.get(i) + "=sysdate()");
+				} else {
+					str.append(key.get(i) + "=#{Resume." + key.get(i) + "}");
+				}
+
 				if (i != key.size() - 1) {
 					str.append(",");
 				}

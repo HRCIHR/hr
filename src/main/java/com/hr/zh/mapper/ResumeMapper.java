@@ -21,4 +21,7 @@ public interface ResumeMapper {
 	List<EngageResume> queryResumeByCase(@Param("resumeCase") ResumeCase resumeCase, @Param("page") pagination page);
 
 	Integer queryResumeByCaseCount(@Param("resumeCase") ResumeCase resumeCase);
+
+	EngageResume queryResumeByID(Integer id);
+
 }

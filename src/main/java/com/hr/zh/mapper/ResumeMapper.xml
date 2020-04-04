@@ -91,7 +91,7 @@
 				<bind name="keyword" value="'%' + resumeCase.keyword + '%'" />
 				and
 				CONCAT(human_name,human_telephone,human_idcard,human_history_records)
-				like '%#{keyword}%'
+				like #{keyword}
 			</if>
 			<if test="resumeCase.begin!=null and resumeCase.finish!=null">
 				and regist_time BETWEEN #{resumeCase.begin} and
@@ -99,6 +99,9 @@
 			</if>
 			<if test="resumeCase.status!=null">
 				and check_Status=#{resumeCase.status}
+			</if>
+			<if test="resumeCase.interview_Status!=null">
+				and interview_Status=#{resumeCase.interview_Status}
 			</if>
 		</where>
 		LIMIT #{page.page},#{page.rows}
@@ -116,7 +119,7 @@
 				<bind name="keyword" value="'%' + resumeCase.keyword + '%'" />
 				and
 				CONCAT(human_name,human_telephone,human_idcard,human_history_records)
-				like '%#{keyword}%'
+				like #{keyword}
 			</if>
 			<if test="resumeCase.begin!=null and resumeCase.finish!=null">
 				and regist_time BETWEEN #{resumeCase.begin} and
@@ -125,6 +128,18 @@
 			<if test="resumeCase.status!=null">
 				and check_Status=#{resumeCase.status}
 			</if>
+			<if test="resumeCase.interview_Status!=null">
+				and interview_Status=#{resumeCase.interview_Status}
+			</if>
 		</where>
 	</select>
+
+
+	<!-- EngageResume queryResumeByID(Integer id); -->
+	<select id="queryResumeByID" resultMap="ResumeMap">
+		<include refid="queryResumeAll"></include>
+		where res_Id=#{_parameter}
+	</select>
+
+
 </mapper>

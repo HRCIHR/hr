@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.InterviewMapper">
+	<sql id="sqlqueryAll">
+		SELECT
+		engage_interview.ein_id,
+		engage_interview.human_name,
+		engage_interview.human_major_id,
+		engage_interview.image_degree,
+		engage_interview.native_language_degree,
+		engage_interview.foreign_language_degree,
+		engage_interview.response_speed_degree,
+		engage_interview.EQ_degree,
+		engage_interview.IQ_degree,
+		engage_interview.multi_quality_degree,
+		engage_interview.register,
+		engage_interview.checker,
+		engage_interview.registe_time,
+		engage_interview.check_time,
+		engage_interview.resume_id,
+		engage_interview.result,
+		engage_interview.interview_comment,
+		engage_interview.check_comment,
+		engage_interview.check_status
+		FROM
+		engage_interview
+	</sql>
+
+	<resultMap type="com.hr.entity.EngageInterview"
+		id="queryInterviewAll">
+		<id column="ein_id" property="einId" />
+		<result column="human_name" property="humanName" />
+		<result column="human_major_id" property="humanMajorId" />
+		<result column="image_degree" property="imageDegree" />
+		<result column="native_language_degree"
+			property="nativeLanguageDegree" />
+		<result column="foreign_language_degree"
+			property="foreignLanguageDegree" />
+		<result column="response_speed_degree"
+			property="responseSpeedDegree" />
+		<result column="EQ_degree" property="eqDegree" />
+		<result column="IQ_degree" property="iqDegree" />
+		<result column="multi_quality_degree"
+			property="multiQualityDegree" />
+		<result column="register" property="register" />
+		<result column="checker" property="checker" />
+		<result column="registe_time" property="registeTime" />
+		<result column="check_time" property="checkTime" />
+		<result column="resume_id" property="resumeId" />
+		<result column="result" property="result" />
+		<result column="check_status" property="checkStatus" />
+		<result column="interview_comment" property="interviewComment" />
+		<result column="check_comment" property="checkComment" />
+	</resultMap>
+	<!--com.hr.zh.mapper.ResumeMapper.queryResumeByID -->
+	<resultMap type="com.hr.entity.EngageInterview" id="joinMap"
+		extends="queryInterviewAll">
+		<association property="engageResume" column="resume_id"
+			select="com.hr.zh.mapper.ResumeMapper.queryResumeByID"></association>
+	</resultMap>
+	<!-- public Integer saveInterview(EngageInterview Interview); -->
+	<insert id="saveInterview">
+		INSERT INTO engage_interview (human_name,
+		human_major_id, image_degree, native_language_degree,
+		foreign_language_degree, response_speed_degree, EQ_degree, IQ_degree,
+		multi_quality_degree, register, registe_time, check_time,
+		resume_id,interview_comment)
+		VALUES
+		(#{humanName},#{humanMajorId},#{imageDegree},#{nativeLanguageDegree}
+		,#{foreignLanguageDegree},#{responseSpeedDegree},#{eqDegree},
+		#{iqDegree},#{multiQualityDegree},#{register},#{registeTime}
+		,#{checkTime},#{resumeId},#{interviewComment});
+	</insert>
+	<!-- List<EngageInterview> queryInterview(); -->
+	<!-- //com.hr.zh.mapper.ResumeMapper.queryResumeByID -->
+	<select id="queryInterview" resultMap="joinMap">
+		<include refid="sqlqueryAll"></include>
+		where check_Status>1
+		LIMIT #{page},#{rows}
+	</select>
+	<select id="queryInterviewCount" resultType="java.lang.Integer">
+		select count(ein_id)
+		FROM
+		engage_interview where check_Status>1
+	</select>
+
+
+
+
+<select id="queryInterviewByStatusOne" resultMap="joinMap">
+		<include refid="sqlqueryAll"></include>
+		where check_Status=1
+		LIMIT #{page},#{rows}
+	</select>
+	<select id="queryInterviewByStatusOneCount" resultType="java.lang.Integer">
+		select count(ein_id)
+		FROM
+		engage_interview where check_Status=1
+	</select>
+
+
+
+
+
+
+	<!-- public Integer updateInterview(EngageInterview Interview); -->
+	<update id="updateInterview">
+		update engage_interview set
+		checker=#{checker},check_Time=#{checkTime}
+		,check_Comment=#{checkComment},check_Status=#{checkStatus}
+		where
+		ein_id=#{einId}
+	</update>
+
+
+</mapper>
+	

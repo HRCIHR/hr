@@ -68,6 +68,8 @@ public class EngageResume {
 
 	private String register;
 
+	private String recomandation;
+
 	private Date regist_Time;
 
 	private String checker;
@@ -101,7 +103,7 @@ public class EngageResume {
 	private String pass_Passcomment;
 
 	private ConfigMajor ConfigMajor;
-	
+
 	public Date getRegist_Time() {
 		return regist_Time;
 	}
@@ -132,6 +134,14 @@ public class EngageResume {
 
 	public void setHuman_Name(String human_Name) {
 		this.human_Name = human_Name;
+	}
+
+	public String getRecomandation() {
+		return recomandation;
+	}
+
+	public void setRecomandation(String recomandation) {
+		this.recomandation = recomandation;
 	}
 
 	public String getEngage_Type() {
@@ -517,13 +527,14 @@ public class EngageResume {
 				+ human_Birthplace + ", demand_Salary_Standard=" + demand_Salary_Standard + ", human_History_Records="
 				+ human_History_Records + ", remark=" + remark + ", human_Picture=" + human_Picture
 				+ ", attachment_Name=" + attachment_Name + ", check_Status=" + check_Status + ", register=" + register
-				+ ", regist_Time=" + regist_Time + ", checker=" + checker + ", check_Time=" + check_Time
-				+ ", interview_Status=" + interview_Status + ", interview_Amount=" + interview_Amount
-				+ ", total_Points=" + total_Points + ", test_Amount=" + test_Amount + ", test_Checker=" + test_Checker
-				+ ", test_CheckTime=" + test_CheckTime + ", pass_Register=" + pass_Register + ", pass_RegistTime="
-				+ pass_RegistTime + ", pass_Checker=" + pass_Checker + ", pass_CheckTime=" + pass_CheckTime
-				+ ", pass_CheckStatus=" + pass_CheckStatus + ", pass_Checkcomment=" + pass_Checkcomment
-				+ ", pass_Passcomment=" + pass_Passcomment + ", ConfigMajor=" + ConfigMajor + "]";
+				+ ", recomandation=" + recomandation + ", regist_Time=" + regist_Time + ", checker=" + checker
+				+ ", check_Time=" + check_Time + ", interview_Status=" + interview_Status + ", interview_Amount="
+				+ interview_Amount + ", total_Points=" + total_Points + ", test_Amount=" + test_Amount
+				+ ", test_Checker=" + test_Checker + ", test_CheckTime=" + test_CheckTime + ", pass_Register="
+				+ pass_Register + ", pass_RegistTime=" + pass_RegistTime + ", pass_Checker=" + pass_Checker
+				+ ", pass_CheckTime=" + pass_CheckTime + ", pass_CheckStatus=" + pass_CheckStatus
+				+ ", pass_Checkcomment=" + pass_Checkcomment + ", pass_Passcomment=" + pass_Passcomment
+				+ ", ConfigMajor=" + ConfigMajor + "]";
 	}
 
 }

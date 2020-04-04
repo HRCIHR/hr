@@ -36,6 +36,8 @@ public class ResumeServiceImp implements ResumeService {
 	public List<EngageResume> queryResumeByCase(ResumeCase resumeCase, pagination page) {
 		// TODO Auto-generated method stub
 		pagination.pageformat(page);
+		System.out.println(resumeCase);
+
 		List<EngageResume> queryResumeByCase = resumeMapper.queryResumeByCase(resumeCase, page);
 		return queryResumeByCase;
 	}

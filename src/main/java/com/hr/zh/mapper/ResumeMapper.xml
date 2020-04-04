@@ -100,6 +100,9 @@
 			<if test="resumeCase.status!=null">
 				and check_Status=#{resumeCase.status}
 			</if>
+			<if test="resumeCase.interview_Status!=null">
+				and interview_Status=#{resumeCase.interview_Status}
+			</if>
 		</where>
 		LIMIT #{page.page},#{page.rows}
 	</select>
@@ -125,6 +128,18 @@
 			<if test="resumeCase.status!=null">
 				and check_Status=#{resumeCase.status}
 			</if>
+			<if test="resumeCase.interview_Status!=null">
+				and interview_Status=#{resumeCase.interview_Status}
+			</if>
 		</where>
 	</select>
+
+
+	<!-- EngageResume queryResumeByID(Integer id); -->
+	<select id="queryResumeByID" resultMap="ResumeMap">
+		<include refid="queryResumeAll"></include>
+		where res_Id=#{_parameter}
+	</select>
+
+
 </mapper>

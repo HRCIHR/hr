@@ -448,7 +448,8 @@
 							<input id="zhuanye" name="human_Educated_Major" data-options="label:'学历专业',labelWidth:150" class="easyui-combobox" style="width:300px">
 
 						</td>
-						<td><input class="easyui-textbox" data-options="label:'薪酬要求'" style="width:300px" />
+						<td>
+							<input class="easyui-textbox" data-options="label:'薪酬要求'" style="width:300px" />
 						</td>
 					</tr>
 					<tr>
@@ -465,14 +466,25 @@
 						<td>
 							<!--<input id="registerTime" class="easyui-textbox" data-options="label:'注册时间'" style="width:300px" />-->
 							<!--regist_Time-->
-							<input id="regist_Time" class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false,label:'注册时间'" style="width:300px">
+							<input id="regist_Time" class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false,label:'注册时间',readonly:true" style="width:300px">
 
 						</td>
+					</tr>
+					<tr>
+						<td>
+							<input name="checker" class="easyui-textbox" data-options="label:'推荐人'" style="width:300px" />
+
+						</td>
+						<!--<td><input id="regist_Time" class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false,label:'推荐时间'" style="width:300px">-->
+						</td>
+
 					</tr>
 					<tr>
 						<td><input id="human_History_Records" name="human_History_Records" class="easyui-textbox" data-options="label:'个人履历',multiline:true" style="width:300px;height: 130px;">
 						</td>
 						<td><input id="remark" name="remark" class="easyui-textbox" data-options="label:'备注',multiline:true" style="width:300px;height: 130px;">
+						</td>
+						<td><input id="" name="recomandation" class="easyui-textbox" data-options="label:'推荐意见',multiline:true" style="width:300px;height: 130px;">
 						</td>
 						<td>
 

@@ -1,13 +1,40 @@
 package com.hr.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.management.RuntimeErrorException;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hr.entity.EngageResume;
 
 public class MasterTool {
+
+	public static String FileUploadTool(MultipartFile imgdata) {
+		String newFileName = null;
+		try {
+			String originalFilename = imgdata.getOriginalFilename();
+			String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+			String fileName = UUID.randomUUID().toString().substring(24) + suffix;
+			String realPath = "D:/MyApps/tomcat/apache-tomcat-8.5.50/webapps/HR/upLoad/";
+			System.out.println(fileName);
+
+			File file = new File(realPath + fileName);
+
+			imgdata.transferTo(file);
+			newFileName = "http://127.0.0.1:8080/hr/upLoad/" + fileName;
+
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return newFileName;
+	}
 
 	public static boolean isSuccess(Integer val) {
 		boolean f = false;

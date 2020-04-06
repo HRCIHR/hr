@@ -1,197 +1,659 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-trasitional.dtd">
 <html>
+
 	<head>
+		<title>人力资源档案删除</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet"
-			href="../../css/table.css" type="text/css" />
-		<link rel="stylesheet"
-			href="../../css/cwcalendar.css" type="text/css">
-		<script type="text/javascript"
-			src="../../javascript/comm/comm.js">
-		</script>
-		<script type="text/javascript"
-			src="../../javascript/comm/list.js">
-		</script>
-		<script type="text/javascript"
-			src="../../javascript/calendar-ch.js">
-		</script>
-		<script type="text/javascript"
-			src="../../javascript/jquery-1.7.2.js">
-		</script>
-		<script type="text/javascript"
-			src="../../javascript/locate.js">
-		</script>
+		<link rel="stylesheet" href="../../css/table.css" type="text/css">
+		<link rel="stylesheet" href="../../css/cwcalendar.css" type="text/css">
+
+		<script type="application/javascript" src="../../../easyui/jquery.min.js"></script>
+
+		<script type="application/javascript" src="../../../easyui/jquery.easyui.min.js"></script>
+		<script type="application/javascript" src="../../../easyui/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="../../../easyui/themes/icon.css" />
+		<link rel="stylesheet" href="../../../easyui/themes/default/easyui.css" />
+		<script type="application/javascript" src="../../javascript/Myjs.js"></script>
 	</head>
+	<script>
+		function fuhe(datas) {
+
+			console.log(datas);
+
+			setTimeout(function() {
+
+				$('#firstcheckbox').combobox('select', datas.thirdKind.configFileSecondKind.configFileFirstKind.firstKindId);
+				$('#secondcheckbox').combobox('select', datas.thirdKind.configFileSecondKind.secondKindId);
+				$('#thirdcheckbox').combobox('select', datas.thirdKind.thirdKindId);
+				console.log(datas.thirdKind.thirdKindId);
+				$('#guoji').combobox('select', datas.human_Nationality);
+				$('#mingzu').combobox('select', datas.human_Race);
+
+				$('#zhengzhimianmao').combobox('select', datas.human_Party);
+				$('#xueli').combobox('select', datas.human_Educated_Degree);
+
+				$('#jiaoyunianxian').combobox('select', datas.human_Educated_Years);
+				$('#zhuanye').combobox('select', datas.human_Educated_Major);
+				$('#techang').combobox('select', datas.human_Speciality);
+				$('#aihao').combobox('select', datas.human_Hobby);
+				$('#zhicheng').combobox('select', datas.human_Pro_Designation);
+				$('#zongjiao').combobox('select', datas.human_Religion);
+				$('#zhiweiClass').combobox('select', datas.Major.configMajorKind.majorKindId);
+				$('#zhiweiName').combobox('select', datas.Major.majorId);
+				$('#human_Sex').val(datas.human_Sex); //combobox('select', datas.human_Sex);
+				//				$("#humanName").textbox("setValue", datas.);
+				//				$("#human_Birthplace").textbox("setValue", datas.);
+				//				$("#humanEmail").textbox("setValue", datas.);
+				//				//humanTelephone humanQq humanMobilephone human_Address
+				//				////human_Postcode human_Birthplace human_Birthday humanIdCard human_Society_Security_Id
+				//				//human_Bank human_Account register regist_Time  human_Histroy_Records remark human_Family_Membership
+				//				$("#humanTelephone").textbox("setValue", datas.);
+				//				$("#humanQq").textbox("setValue", datas.);
+				//				$("#humanMobilephone").textbox("setValue", datas.);
+				//				$("#human_Address").textbox("setValue", datas.);
+				//				$("#human_Postcode").textbox("setValue", datas.);
+				//				$("#human_Birthplace").textbox("setValue", datas.);
+				//				//human_Birthday   regist_Time时间
+				//				$("#humanIdCard").textbox("setValue", datas.);
+				//
+				//				$("#human_Society_Security_Id").textbox("setValue", datas.);
+				//				$("#human_Bank").textbox("setValue", datas.);
+				//				$("#human_Account").textbox("setValue", datas.);
+				//				$("#register").textbox("setValue", datas.);
+				//				$("#human_Histroy_Records").textbox("setValue", datas.);
+				//				$("#remark").textbox("setValue", datas.);
+				//				$("#human_Family_Membership").textbox("setValue", datas.);
+				//	$("#").textbox("setValue", datas.);
+				//$("#").va("setValue", datas.);
+				$("#humanName").val(datas.human_Name);
+				$("#human_Birthplace").val(datas.human_Birthplace);
+				$("#humanEmail").val(datas.human_Email);
+				//humanTelephone humanQq humanMobilephone human_Address
+				////human_Postcode human_Birthplace human_Birthday humanIdCard human_Society_Security_Id
+				//human_Bank human_Account register regist_Time  human_Histroy_Records remark human_Family_Membership
+				$("#humanTelephone").val(datas.human_Telephone);
+				$("#humanQq").val(datas.human_Qq);
+				$("#humanMobilephone").val(datas.human_Mobilephone);
+				$("#human_Address").val(datas.human_Address);
+				$("#human_Postcode").val(datas.human_Postcode);
+				$("#human_Birthplace").val(datas.human_Birthplace);
+				//human_Birthday   regist_Time时间
+				$("#humanIdCard").val(datas.human_Id_Card);
+
+				$("#human_Society_Security_Id").val(datas.human_Society_Security_Id);
+				$("#human_Bank").val(datas.human_Bank);
+				$("#human_Account").val(datas.human_Account);
+				$("#checker").val(datas.checker);
+				$("#human_Histroy_Records").val(datas.human_Histroy_Records);
+				$("#remark").val(datas.remark);
+				$("#human_Family_Membership").val(datas.human_Family_Membership);
+				$("#bh").textbox("setValue", datas.human_Id);
+				$("#human_Age").val(datas.human_Age);
+				//$("#").val("setValue", datas.);
+
+				$('#human_Birthday').datetimebox("setValue", datas.human_Birthday);
+				$('#check_Time').datetimebox("setValue", datas.check_Time);
+$("#headimg").attr("src", datas.human_Picture);
+				$("#updatadiglog").dialog("open");
+			}, 100)
+
+		}
+
+		$(function() {
+
+			$("#firstcheckbox1").combobox({
+				url: 'http://127.0.0.1:8080/HR/First/findFirstKindAll',
+				valueField: "firstKindId",
+				method: "get",
+				textField: "firstKindName",
+				onSelect: function(record) {
+
+					$("#secondcheckbox1").combobox({
+						url: 'http://127.0.0.1:8080/HR/SecondKind/querySecondKindByFirstId?firstKindId=' + record.firstKindId,
+						valueField: "secondKindId",
+						method: "get",
+						textField: "secondKindName", //thirdcheckbox
+						onSelect: function(record) {
+							console.log(record);
+							$("#thirdcheckbox1").combobox({
+								url: 'http://127.0.0.1:8080/HR/Third/queryThirdKindByIDList?secondKindId=' + record.secondKindId,
+								valueField: "thirdKindId",
+								method: "get",
+								textField: "thirdKindName"
+							})
+
+						}
+					});
+				}
+
+			});
+			$("#zhiweiClass1").combobox({
+				url: 'http://127.0.0.1:8080/HR/MajorKind/queryMajorKind',
+				valueField: "majorKindId",
+				method: "get",
+				textField: "majorKindName",
+				onSelect: function(record) {
+					console.log(record);
+					$("#zhiweiName1").combobox({
+						url: 'http://127.0.0.1:8080/HR/Major/QueryMajor?majorKindId=' + record.majorKindId,
+						valueField: "majorId",
+						method: "get",
+						textField: "majorName"
+					})
+				}
+			});
+
+			$('#zhiweiName1').combobox({
+
+			});
+			$('#secondcheckbox1').combobox({
+
+			});
+			$('#thirdcheckbox1').combobox({
+
+			});
+
+			$("#updatadiglog").dialog({
+				title: '复核',
+				width: 1500,
+				height: 600,
+				closed: true,
+				cache: true
+			});
+
+			$('#checktable').datagrid({
+				url: 'http://127.0.0.1:8080/HR/HumanFile/queryHumanFileByCheckStatus?status=2',
+				fitColumns: true,
+				pagination: true,
+				pageList: [5, 10],
+				pageSize: 5,
+				pageNumber: 1,
+				method: "get",
+				loadFilter: function(data) {
+					var newarray = new Array();
+
+					for(a = 0; a < data.rows.length; a++) {
+						var obj = new Object();
+						obj.human_Id = data.rows[a].human_Id;
+						obj.human_Name = data.rows[a].human_Name;
+
+						obj.human_Sex = data.rows[a].human_Sex;
+
+						obj.firstKindName = data.rows[a].thirdKind.configFileSecondKind.configFileFirstKind.firstKindName;
+
+						obj.secondKindName = data.rows[a].thirdKind.configFileSecondKind.secondKindName;
+
+						obj.thirdKindName = data.rows[a].thirdKind.thirdKindName;
+
+						obj.human_Pro_Designation = data.rows[a].human_Pro_Designation;
+
+						obj.datas = data.rows[a];
+						newarray.push(obj);
+					}
+
+					var rs = new Object();
+					rs.total = data.total;
+					rs.rows = newarray;
+
+					console.log(rs);
+					return rs;
+
+				},
+
+				columns: [
+					[{
+							field: 'human_Id',
+							title: '档案编号',
+							width: 187,
+							align: 'right'
+						}, {
+							field: 'human_Name',
+							title: '姓名',
+							width: 187,
+							align: 'right'
+						}, {
+							field: 'human_Sex',
+							title: '性别',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'firstKindName',
+							title: 'I级机构',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'secondKindName',
+							title: 'II级机构',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'thirdKindName',
+							title: 'III级机构',
+							width: 187,
+							align: 'right'
+						},
+
+						{
+							field: 'human_Pro_Designation',
+							title: '职称',
+							width: 187,
+							align: 'right'
+						},
+						{
+							field: 'datas',
+							title: '刪除',
+							width: 187,
+							align: 'right',
+							formatter: function(value, row, index) {
+								var datas = JSON.stringify(row.datas);
+
+								return "<button onClick='fuhe(" + datas + ")'>刪除</button>"
+							}
+						}
+					]
+				]
+			});
+
+			$("#updatebut").on("click", function() {
+
+				var human_File_Status = $("#bh").textbox("getValue");
+				$.ajax({
+					type: "get",
+					url: "http://127.0.0.1:8080/HR/HumanFile/HumanFileStatus?human_Id=" + human_File_Status + "&human_File_Status=2",
+					async: true,
+					success: function(data) {
+
+						if(data == "true") {
+							$.messager.alert('提示信息', '刪除成功!', 'info', function() {
+
+								location.reload();
+							});
+						} else {
+							$.messager.alert('提示信息', '刪除失败 请检查输入是否有误!', 'error');
+						}
+					}
+
+				});
+
+			})
+			$("#searchbut").on("click", function() {
+				var majorKindId = $('#zhiweiClass1').combobox("getValue");
+				var MajorId = $('#zhiweiName1').combobox("getValue");
+				var first_Kind_Id = $('#firstcheckbox1').combobox("getValue");
+				var second_Kind_Id = $('#secondcheckbox1').combobox("getValue");
+				var third_Kind_Id = $('#thirdcheckbox1').combobox("getValue");
+				var status = $('#status').val();
+				var begin = $('#begin').datetimebox('getValue');
+				var finish = $('#finish').datetimebox('getValue');
+
+				if(begin == "") {
+					begin = "1899-11-30 00:00";
+				}
+				if(finish == "") {
+					finish = "2300-11-30 00:00";
+				}
+				//				alert(MajorId + keyword + status + begin + finish);
+				var newurl = "http://127.0.0.1:8080/HR/HumanFile/queryHumanFileByCase";
+				$('#checktable').datagrid({
+					url: newurl,
+					method: "post",
+					queryParams: {
+						majorKindId: majorKindId,
+						MajorId: MajorId,
+						status: status,
+						begin: begin,
+						finish: finish,
+						first_Kind_Id: first_Kind_Id,
+						second_Kind_Id: second_Kind_Id,
+						third_Kind_Id: third_Kind_Id
+
+					}
+				});
+
+			})
+		})
+	</script>
 
 	<body>
-		<form method="post" action="delete_list.html">
-			<table width="100%">
-				<tr>
-					<td>
-						<font color="black">您正在做的业务是：人力资源--人力资源档案管理--人力资源档案删除 </font>
-					</td>
-				</tr>
-				<tr>
-					<td align="right"> 
-						<input type="submit" value="查询" class="BUTTON_STYLE1"/>
-						<input type="button" value="搜索" class="BUTTON_STYLE1"
-							onclick="location.href='delete_keywords.html'">
-					</td>
-				</tr>
-			</table>
-			<table width="100%" border="1" cellpadding=0 cellspacing=1
-				bordercolorlight=#848284 bordercolordark=#eeeeee
-				class="TABLE_STYLE1">
-				<tr class="TR_STYLE1">
-					<td width="16%" class="TD_STYLE1">
-						请选择员工所在I级机构
-					</td>
-					<td width="84%" class="TD_STYLE2">
-						<select name="humanFile.firstKindId" size="5" id="firstKind"
-							class="SELECT_STYLE2">
-							<option value="" selected="selected">全部</option>
-							
-								<option value="1353318953319">Ⅰ级结构</option>
-							
-								<option value="1353318929919">集团</option>
-							
-								<option value="1353318937391">总部</option>
-							
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td class="TD_STYLE1">
-						请选择员工所在II级机构
-					</td>
-					<td width="84%" class="TD_STYLE2">
-						<select name="humanFile.secondKindId" size="5" id="secondKind"
-							class="SELECT_STYLE2">
-							<option value="" selected="selected">
-								全部
-							</option>
-							
-								<option value="1353318983380">Ⅱ级结构2</option>
-							
-								<option value="1353318986625">Ⅱ级结构3</option>
-							
-								<option value="1353318990197">Ⅱ级结构4</option>
-							
-								<option value="1353318995252">Ⅱ级结构5</option>
-							
-								<option value="1353319004705">软件公司</option>
-							
-								<option value="1353319016546">科技公司</option>
-							
-								<option value="1353319033409">北京分校区</option>
-							
-								<option value="1353319038682">湖南分校区</option>
-							
-								<option value="1353319043830">湖北分校区</option>
-							
-								<option value="1353318979558">Ⅱ级结构1</option>
-							
-						</select>
-					</td>
-				</tr>
-				<tr class="TR_STYLE1">
-					<td width="16%" class="TD_STYLE1">
-						请选择员工所在III级机构
-					</td>
-					<td width="84%" class="TD_STYLE2">
-						<select name="humanFile.thirdKindId" class="SELECT_STYLE2" size="5" id="thirdKind">
-							<option value="" selected="selected">
-								全部
-							</option>
-							
-								<option value="1353319130551">外包公司</option>
-							
-								<option value="1353319150238">软件股份有限公司</option>
-							
-								<option value="1353319177944">中关村分校区1</option>
-							
-								<option value="1353319185073">中关村分校区2</option>
-							
-								<option value="1353319193840">中关村分校区3</option>
-							
-								<option value="1353319216320">长沙分校区1</option>
-							
-								<option value="1353319228535">长沙分校区2</option>
-							
-								<option value="1353319236725">长沙分校区3</option>
-							
-								<option value="1353319077370">Ⅲ级结构111</option>
-							
-								<option value="1353319096948">Ⅲ级结构222</option>
-							
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td class="TD_STYLE1">
-						请选择职位分类
-					</td>
-					<td width="84%" class="TD_STYLE2">
-						<select name="humanFile.humanMajorKindId" size="5" id="majorKind"
-							class="SELECT_STYLE2">
-							<option value="" selected="selected">
-								全部
-							</option>
-							
-								<option value="01">销售</option>
-							
-								<option value="02">软件开发</option>
-							
-								<option value="03">人力资源</option>
-							
-								<option value="04">生产部</option>
-							
-						</select>
-					</td>
-				</tr>
-				<tr class="TR_STYLE1">
-					<td width="16%" class="TD_STYLE1">
-						请选择职位名称
-					</td>
-					<td width="84%" class="TD_STYLE2">
-						<select name="humanFile.humanMajorId" size="5" class="SELECT_STYLE2" id="majorName">
-							<option value="" selected="selected">
-								全部
-							</option>
-							
-								<option value="01">区域经理</option>
-							
-								<option value="02">总经理</option>
-							
-								<option value="01">项目经理</option>
-							
-								<option value="02">程序员</option>
-							
-								<option value="01">人事经理</option>
-							
-								<option value="02">专员</option>
-							
-								<option value="01">主任</option>
-							
-								<option value="02">技术工人</option>
-							
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td class="TD_STYLE1">
-						请输入建档时间
-					</td>
-					<td width="84%" class="TD_STYLE2">
-						<input type="text" name="utilBean.startDate" readonly
-							style="width: 14%" class="INPUT_STYLE2" id="date_start">
-						至
-						<input type="text" name="utilBean.endDate" readonly="readonly"
-							style="width: 14%" class="INPUT_STYLE2" id="date_end">
-						<input type="hidden" name="utilBean.datePropertyName" value="registTime"/>
-					</td>
-				</tr>
-			</table>
-		</form>
+
+		<table id="checktable">
+			<div id="tb" style="padding:2px 5px;">
+				<form id="searchfrom" method="post">
+					<input name="majorKindId" id="zhiweiClass1" class="zhiweiClass" data-options="label:'职位分类'" class="easyui-combobox" style="width:300px">
+
+					<input name="majorId" id="zhiweiName1" class="zhiweiName" data-options="label:'职位名称'" class="easyui-combobox" style="width:300px">
+					<input name="first_Kind_Id" id="firstcheckbox1" class="easyui-textbox" data-options="label:'一级机构'" style="width:300px" />
+					<input name="second_Kind_Id" id="secondcheckbox1" class="easyui-textbox" data-options="label:'二级机构'" style="width:300px" />
+					<input name="third_Kind_Id" id="thirdcheckbox1" class="easyui-textbox" data-options="label:'三级机构'" style="width:300px" />
+					<input name="begin" id="begin" class="easyui-datetimebox" data-options="required:true,showSeconds:false,label:'建档时间'" style="width:250px">至
+					<input name="finish" id="finish" class="easyui-datetimebox" data-options="required:true,showSeconds:false" style="width:150px">
+					<input name="status" id="status" type="hidden" value="1" name="status" />
+
+					<a href="#" id="searchbut" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+				</form>
+			</div>
+
+		</table>
+
+		<div id="updatadiglog">
+			<form id="updateform" method="post">
+				<table width="100%">
+
+					<tr>
+						<td align="right">
+							<input id="updatebut" type="button" value="刪除" class="BUTTON_STYLE1" />
+							<input type="reset" value="清除" class="BUTTON_STYLE1" />
+						</td>
+					</tr>
+				</table>
+				<table width="100%" border="1" cellpadding=3 cellspacing=1 bordercolorlight=#848284 bordercolordark=#eeeeee class="TABLE_STYLE1">
+					<tr>
+
+						<td class="TD_STYLE1" width="11%">
+							编号：
+						</td>
+						<td width="14%" class="TD_STYLE2">
+							<input id="bh" name="human_Id" class="easyui-textbox" data-options="readonly:true">
+
+						</td>
+
+					</tr>
+					<tr>
+						<td class="TD_STYLE1" width="11%">
+							I级机构
+						</td>
+						<td width="14%" class="TD_STYLE2">
+							<input name="" id="firstcheckbox" class="easyui-textbox" data-options="readonly:true" style="width:300px" />
+
+						</td>
+						<td width="11%" class="TD_STYLE1">
+							II级机构
+						</td>
+						<td width="14%" class="TD_STYLE2">
+							<input name="" id="secondcheckbox" class="easyui-textbox" data-options="readonly:true" style="width:300px" />
+
+						</td>
+						<td width="11%" class="TD_STYLE1">
+							III级机构
+						</td>
+						<td class="TD_STYLE2" colspan="2">
+							<input name="" id="thirdcheckbox" class="easyui-textbox" data-options="readonly:true" style="width:300px" />
+
+						</td>
+						<td rowspan="5" style="text-align: center;">
+							<img id="headimg" name="" src="../../../hr/images/loading1.jpg" title="选择头像" style="width: 300px;height: 260px;" />
+							<!--<input id="imgtext" class="easyui-filebox" style="width:300px" accept="image/x-png">-->
+							<input type="file" id="imgfile" name="imgdata" onchange="reafile()" />
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							职位分类
+						</td>
+						<td class="TD_STYLE2">
+
+							<input id="zhiweiClass" name="" data-options="readonly:true" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							职位名称
+						</td>
+						<td class="TD_STYLE2">
+
+							<input id="zhiweiName" name="" data-options="readonly:true" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							职称
+						</td>
+						<td colspan="2" class="TD_STYLE2">
+							<input id="zhicheng" name="human_Pro_Designation" data-options="" class="easyui-combobox" style="width:300px">
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							姓名
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" id="humanName" name="human_Name" class="INPUT_STYLE2" />
+						</td>
+						<td class="TD_STYLE1">
+							性别
+						</td>
+						<td class="TD_STYLE2">
+							<select id="human_Sex" name="human_Sex" class="SELECT_STYLE1">
+								<option value="男" selected="selected">
+									男
+								</option>
+								<option value="女">
+									女
+								</option>
+							</select>
+						</td>
+						<td class="TD_STYLE1">
+							EMAIL
+						</td>
+						<td colspan="2" class="TD_STYLE2">
+							<input type="text" name="human_Email" id="humanEmail" class="INPUT_STYLE2">
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							电话
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" name="human_Telephone" id="humanTelephone" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							QQ
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" name="human_Qq" id="humanQq" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							手机
+						</td>
+						<td colspan="2" class="TD_STYLE2">
+							<input type="text" name="human_Mobilephone" id="humanMobilephone" class="INPUT_STYLE2">
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							住址
+						</td>
+						<td colspan="3" class="TD_STYLE2">
+							<input type="text" id="human_Address" name="human_Address" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							邮编
+						</td>
+						<td colspan="2" class="TD_STYLE2">
+							<input type="text" id="human_Postcode" name="human_Postcode" class="INPUT_STYLE2">
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							国籍
+						</td>
+						<td class="TD_STYLE2">
+							<input id="guoji" name="human_Nationality" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							出生地
+						</td>
+						<td class="TD_STYLE2">
+							<input id="human_Birthplace" type="text" name="human_Birthplace" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							生日
+						</td>
+						<td width="13%" class="TD_STYLE2">
+
+							<!--<input type="text" name="human_Birthday" readonly="readonly" class="INPUT_STYLE2" id="birthday">-->
+							<input class="easyui-datetimebox" id="human_Birthday" name="human_Birthday" data-options="" style="width:300px">
+
+						</td>
+						<td width="11%" class="TD_STYLE1">
+							民族
+						</td>
+						<td class="TD_STYLE2" width="14%">
+							<input id="mingzu" name="human_Race" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							宗教信仰
+						</td>
+						<td class="TD_STYLE2">
+							<input id="zongjiao" name="human_Religion" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							政治面貌
+						</td>
+						<td class="TD_STYLE2">
+							<input id="zhengzhimianmao" name="human_Party" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							身份证号码
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" name="human_Id_Card" id="humanIdCard" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							社会保障号码
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" id="human_Society_Security_Id" name="human_Society_Security_Id" class="INPUT_STYLE2">
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							年龄
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" id="human_Age" name="human_Age" id="humanAge" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							学历
+						</td>
+						<td class="TD_STYLE2">
+							<input id="xueli" name="human_Educated_Degree" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							教育年限
+						</td>
+						<td class="TD_STYLE2">
+							<input id="jiaoyunianxian" name="human_Educated_Years" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							学历专业
+						</td>
+						<td class="TD_STYLE2">
+							<input id="zhuanye" name="human_Educated_Major" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							薪酬标准
+						</td>
+						<td class="TD_STYLE2">
+							<select name="salary_Standard_Id" class="SELECT_STYLE1">
+								<option>薪酬标准1</option>
+								<option>薪酬标准2</option>
+							</select>
+						</td>
+						<td class="TD_STYLE1">
+							开户行
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" id="human_Bank" name="human_Bank" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							帐号
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" id="human_Account" name="human_Account" class="INPUT_STYLE2">
+						</td>
+						<td class="TD_STYLE1">
+							变更人
+						</td>
+						<td class="TD_STYLE2">
+							<input type="text" id="changer" name="changer" value="马飞飞" readonly="readonly" class="INPUT_STYLE2">
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							变更时间
+						</td>
+						<td class="TD_STYLE2">
+							<!--<input type="text" name="" id="create_time" readonly="readonly" class="INPUT_STYLE2">-->
+							<input value="00/" id="change_Time" class="easyui-datetimebox" name="change_Time" data-options="" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							特长
+						</td>
+						<td class="TD_STYLE2">
+
+							<input id="techang" name="human_Speciality" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							爱好
+						</td>
+						<td class="TD_STYLE2">
+
+							<input id="aihao" name="human_Hobby" data-options="" class="easyui-combobox" style="width:300px">
+
+						</td>
+						<td class="TD_STYLE1">
+							&nbsp;
+						</td>
+						<td class="TD_STYLE2">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							个人履历
+						</td>
+						<td colspan="7" class="TD_STYLE2">
+							<textarea id="human_Histroy_Records" name="human_Histroy_Records" rows="4" class="TEXTAREA_STYLE1"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							家庭关系信息
+						</td>
+						<td colspan="7" class="TD_STYLE2">
+							<textarea id="human_Family_Membership" name="human_Family_Membership" rows="4" class="TEXTAREA_STYLE1"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="TD_STYLE1">
+							备注
+						</td>
+						<td colspan="7" class="TD_STYLE2">
+							<textarea id="remark" name="remark" rows="4" class="TEXTAREA_STYLE1"></textarea>
+						</td>
+					</tr>
+				</table>
+			</form>
+
+		</div>
+
 	</body>
+	<script>
+	</script>
+
 </html>

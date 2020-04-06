@@ -62,4 +62,28 @@ public class InterviewController {
 		return map;
 	}
 
+	@RequestMapping("/queryInterviewByStatus4") // Interview/queryInterviewByStatus4
+	public @ResponseBody HashMap<String, Object> queryInterviewByStatus4(pagination page) {
+		List<EngageInterview> queryInterviewByStatus4 = interviewService.queryInterviewByStatus4(page);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("rows", queryInterviewByStatus4);
+		map.put("total", interviewService.queryInterviewByStatus4Count());
+		return map;
+	}
+
+	@RequestMapping("/queryInterviewByStatus5") // Interview/queryInterviewByStatus5
+	public @ResponseBody HashMap<String, Object> queryInterviewByStatus5(pagination page) {
+		List<EngageInterview> queryInterviewByStatus5 = interviewService.queryInterviewByStatus5(page);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("rows", queryInterviewByStatus5);
+		map.put("total", interviewService.queryInterviewByStatus5Count());
+		return map;
+	}
+//	@RequestMapping("/updateInterViewApply") // Interview/updateInterViewApply
+//	public Boolean updateInterViewApply(String comment, Integer checkStatus, Integer einId, Integer resid) {
+//		System.out.println(comment + checkStatus);
+//		
+//		return false;
+//	}
+
 }

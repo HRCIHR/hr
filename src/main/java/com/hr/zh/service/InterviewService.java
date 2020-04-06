@@ -21,4 +21,12 @@ public interface InterviewService {
 	List<EngageInterview> queryInterviewByStatusOne(pagination page);
 
 	Integer queryInterviewByStatusOneCount();
+	
+	List<EngageInterview> queryInterviewByStatus4(pagination page);
+
+	Integer queryInterviewByStatus4Count();
+	
+	List<EngageInterview> queryInterviewByStatus5(pagination page);
+
+	Integer queryInterviewByStatus5Count();
 }

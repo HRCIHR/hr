@@ -141,5 +141,16 @@
 		where res_Id=#{_parameter}
 	</select>
 
+	<!--Integer updateResumeApply(EngageResume resume); -->
+	<update id="updateResumeApply">
+		update engage_resume set
+		pass_check_status=#{pass_CheckStatus} ,
+		pass_checkComment=#{pass_Checkcomment} where res_id=#{res_Id}
+	</update>
+	<update id="updateResumeApplytwo">
+		update engage_resume set
+		pass_check_status=#{pass_CheckStatus} ,
+		pass_passComment=#{pass_Passcomment} where res_id=#{res_Id}
+	</update>
 
 </mapper>

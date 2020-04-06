@@ -75,30 +75,57 @@
 	<!-- //com.hr.zh.mapper.ResumeMapper.queryResumeByID -->
 	<select id="queryInterview" resultMap="joinMap">
 		<include refid="sqlqueryAll"></include>
-		where check_Status>1
+		where check_Status=3
 		LIMIT #{page},#{rows}
 	</select>
 	<select id="queryInterviewCount" resultType="java.lang.Integer">
 		select count(ein_id)
 		FROM
-		engage_interview where check_Status>1
+		engage_interview where check_Status=3
 	</select>
 
 
 
 
-<select id="queryInterviewByStatusOne" resultMap="joinMap">
+	<select id="queryInterviewByStatusOne" resultMap="joinMap">
 		<include refid="sqlqueryAll"></include>
 		where check_Status=1
 		LIMIT #{page},#{rows}
 	</select>
-	<select id="queryInterviewByStatusOneCount" resultType="java.lang.Integer">
+	<select id="queryInterviewByStatusOneCount"
+		resultType="java.lang.Integer">
 		select count(ein_id)
 		FROM
-		engage_interview where check_Status=1
+		engage_interview where
+		check_Status=1
+	</select>
+	<!--Interview/queryInterviewByStatus4 -->
+	<select id="queryInterviewByStatus4" resultMap="joinMap">
+		<include refid="sqlqueryAll"></include>
+		where check_Status=4
+		LIMIT #{page},#{rows}
+	</select>
+	<select id="queryInterviewByStatus4Count"
+		resultType="java.lang.Integer">
+		select count(ein_id)
+		FROM
+		engage_interview where
+		check_Status=4
 	</select>
 
-
+	<!--Interview/queryInterviewByStatus5 -->
+	<select id="queryInterviewByStatus5" resultMap="joinMap">
+		<include refid="sqlqueryAll"></include>
+		where check_Status=5
+		LIMIT #{page},#{rows}
+	</select>
+	<select id="queryInterviewByStatus5Count"
+		resultType="java.lang.Integer">
+		select count(ein_id)
+		FROM
+		engage_interview where
+		check_Status=5
+	</select>
 
 
 
@@ -111,7 +138,13 @@
 		where
 		ein_id=#{einId}
 	</update>
-
+	<!--Integer updateInterViewStatuszero(); -->
+	<update id="updateInterViewStatuszero">
+		update engage_interview set
+		check_Status=#{checkStatus}
+		where
+		ein_id=#{einId}
+	</update>
 
 </mapper>
 	

@@ -8,10 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hr.entity.EngageInterview;
 import com.hr.entity.EngageResume;
 import com.hr.util.ResumeCase;
 import com.hr.util.pagination;
 import com.hr.zh.service.ResumeService;
+
+import jdk.nashorn.internal.ir.annotations.Reference;
 
 @Controller
 @RequestMapping("Resume")
@@ -47,5 +50,21 @@ public class ResumeController {
 		map.put("total", count);
 
 		return map;
+	}
+
+	@RequestMapping("/updateResumeApply") // Resume/updateResumeApply 为0 表示申请审核
+	public @ResponseBody Boolean updateResumeApply(EngageResume resume, EngageInterview interview) {
+		System.out.println(resume + "" + interview);
+		Boolean updateResumeApply = resumeService.updateResumeApply(resume, interview);
+
+		return updateResumeApply;
+	}
+
+	@RequestMapping("/updateResumetwo") // Resume/updateResumetwo
+	public @ResponseBody Boolean updateResumetwo(EngageResume resume, EngageInterview interview) {
+
+		System.out.println(resume + "" + interview);
+		Boolean updateResumeApply = resumeService.updateResumeApplytwo(resume, interview);
+		return updateResumeApply;
 	}
 }

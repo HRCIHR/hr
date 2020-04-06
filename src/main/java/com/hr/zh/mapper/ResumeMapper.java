@@ -23,5 +23,10 @@ public interface ResumeMapper {
 	Integer queryResumeByCaseCount(@Param("resumeCase") ResumeCase resumeCase);
 
 	EngageResume queryResumeByID(Integer id);
+	
+	
+		Integer updateResumeApply(EngageResume resume);
+		
+		Integer updateResumeApplytwo(EngageResume resume);
 
 }

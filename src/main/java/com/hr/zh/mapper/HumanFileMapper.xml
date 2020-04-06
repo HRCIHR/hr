@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.zh.mapper.HumanFileMapper">
+
+	<sql id="queryAllsql">
+		SELECT
+		human_file.human_id,
+		human_file.first_kind_id,
+		human_file.second_kind_id,
+		human_file.third_kind_id,
+		human_file.human_name,
+		human_file.human_address,
+		human_file.human_postcode,
+		human_file.human_pro_designation,
+		human_file.human_major_id,
+		human_file.human_telephone,
+		human_file.human_mobilephone,
+		human_file.human_bank,
+		human_file.human_account,
+		human_file.human_qq,
+		human_file.human_email,
+		human_file.human_hobby,
+		human_file.human_speciality,
+		human_file.human_sex,
+		human_file.human_religion,
+		human_file.human_party,
+		human_file.human_nationality,
+		human_file.human_race,
+		human_file.human_birthday,
+		human_file.human_birthplace,
+		human_file.human_age,
+		human_file.human_educated_degree,
+		human_file.human_educated_years,
+		human_file.human_educated_major,
+		human_file.human_society_security_id,
+		human_file.human_id_card,
+		human_file.remark,
+		human_file.salary_standard_id,
+		human_file.salary_sum,
+		human_file.demand_salaray_sum,
+		human_file.paid_salary_sum,
+		human_file.major_change_amount,
+		human_file.bonus_amount,
+		human_file.training_amount,
+		human_file.file_chang_amount,
+		human_file.human_histroy_records,
+		human_file.human_family_membership,
+		human_file.human_picture,
+		human_file.attachment_name,
+		human_file.check_status,
+		human_file.register,
+		human_file.checker,
+		human_file.changer,
+		human_file.regist_time,
+		human_file.check_time,
+		human_file.change_time,
+		human_file.lastly_change_time,
+		human_file.delete_time,
+		human_file.recovery_time,
+		human_file.human_file_status
+		FROM
+		human_file
+
+	</sql>
+	<!-- thirdKind publicChar -->
+	<resultMap type="com.hr.entity.HumanFile" id="humanFileMap">
+		<association property="thirdKind" column="third_kind_id"
+			select="com.hr.zh.mapper.ThirdKindMapper.queryThirdKindById">
+
+		</association>
+		<association property="Major" column="human_major_id"
+			select="com.hr.zh.mapper.MajorMapper.queryMajorByid">
+
+		</association>
+	</resultMap>
+
+
+
+	<!--Integer saveHumanFile(@Param("sql") String value, @Param("humanFile") 
+		HumanFile humanFile); -->
+	<insert id="saveHumanFile">
+		${sql}
+	</insert>
+	<!--Integer updateHumanFile(@Param("sql") String value, @Param("humanFile") 
+		HumanFile humanFile); -->
+	<update id="updateHumanFile">
+		${sql}
+	</update>
+
+	<!-- List<HumanFile> queryHumanFileByCheckStatus(Integer satus); -->
+
+	<select id="queryHumanFileByCheckStatus"
+		resultMap="humanFileMap">
+		<include refid="queryAllsql"></include>
+		<where>
+			human_file_status=#{status}
+		</where>
+		LIMIT #{pa.page},#{pa.rows}
+	</select>
+	<!-- Integer queryHumanFileByCheckStatusCount(Integer satus); -->
+
+	<select id="queryHumanFileByCheckStatusCount"
+		resultType="java.lang.Integer">
+		SELECT count(human_id) from human_file
+		<where>
+			human_file_status=#{status}
+		</where>
+	</select>
+
+	<!-- List<HumanFile> queryHumanFileByCase(@Param("humanFileCase") HumanFileCase 
+humanFileCase, @Param("pa") pagination page); -->
+	<select id="queryHumanFileByCase" resultMap="humanFileMap">
+		<include refid="queryAllsql"></include>
+		INNER JOIN config_major on
+		human_file.human_major_id=config_major.major_id
+		<where>
+			<if
+				test="humanFileCase.begin!=null and humanFileCase.finish!=null">
+				and regist_time BETWEEN #{humanFileCase.begin} and
+				#{humanFileCase.finish}
+			</if>
+			<if test="humanFileCase.majorKindId!=null">
+				and major_kind_id=#{humanFileCase.majorKindId}
+			</if>
+			<if test="humanFileCase.majorId!=null">
+				and human_major_id=#{humanFileCase.majorId}
+			</if>
+			<if test="humanFileCase.first_Kind_Id!=null">
+				and first_kind_id=#{humanFileCase.majorId}
+			</if>
+			<if test="humanFileCase.second_Kind_Id!=null">
+				and second_kind_id=#{humanFileCase.majorId}
+			</if>
+			<if test="humanFileCase.third_Kind_Id!=null">
+				and third_kind_id=#{humanFileCase.majorId}
+			</if>
+			and human_file_status=#{humanFileCase.status}
+		</where>
+		LIMIT #{pa.page},#{pa.rows}
+	</select>
+
+
+	<!--List<HumanFile> queryHumanFileByCaseCount(HumanFileCase humanFileCase); -->
+
+	<select id="queryHumanFileByCaseCount"
+		resultType="java.lang.Integer">
+		SELECT count(human_id) from human_file INNER JOIN config_major on
+		human_file.human_major_id=config_major.major_id
+		<where>
+			<if
+				test="begin!=null and finish!=null">
+				and regist_time BETWEEN #{begin} and
+				#{finish}
+		</if>
+			<if test="majorKindId!=null">
+				and major_kind_id=#{majorKindId}
+			</if>
+			<if test="majorId!=null">
+				and human_major_id=#{majorId}
+			</if>
+			<if test="first_Kind_Id!=null">
+				and first_kind_id=#{majorId}
+			</if>
+			<if test="second_Kind_Id!=null">
+				and second_kind_id=#{majorId}
+			</if>
+			<if test="third_Kind_Id!=null">
+				and third_kind_id=#{majorId}
+			</if>
+			and human_file_status=#{status}
+		</where>
+	</select>
+
+<!-- 	HumanFile queryHumanFileByhuman_Id(String humanID); -->
+
+	<select id="queryHumanFileByhuman_Id" resultType="com.hr.entity.HumanFile">
+	<include refid="queryAllsql"></include> where human_id=#{_parameter}
+	</select>
+
+<!--integer DelHumanFileByHumanID(String humanID);  -->
+<delete id="DelHumanFileByHumanID">
+
+delete from human_file where human_id=#{_parameter}
+</delete>
+
+</mapper>

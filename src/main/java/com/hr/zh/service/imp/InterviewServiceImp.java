@@ -79,4 +79,29 @@ public class InterviewServiceImp implements InterviewService {
 		return queryInterviewByStatusOneCount;
 	}
 
+	@Override
+	public List<EngageInterview> queryInterviewByStatus4(pagination page) {
+		// TODO Auto-generated method stub
+		pagination.pageformat(page);
+		return interviewMapper.queryInterviewByStatus4(page);
+	}
+
+	@Override
+	public Integer queryInterviewByStatus4Count() {
+		// TODO Auto-generated method stub
+		return interviewMapper.queryInterviewByStatus4Count();
+	}
+
+	@Override
+	public List<EngageInterview> queryInterviewByStatus5(pagination page) {
+		// TODO Auto-generated method stub
+		pagination.pageformat(page);
+		return interviewMapper.queryInterviewByStatus5(page);
+	}
+
+	@Override
+	public Integer queryInterviewByStatus5Count() {
+		// TODO Auto-generated method stub
+		return interviewMapper.queryInterviewByStatus5Count();
+	}
 }

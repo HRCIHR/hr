@@ -44,7 +44,7 @@
 				$("#human_Address").textbox("setValue", datas.engageResume.human_Address);
 				$("#human_Postcode").textbox("setValue", datas.engageResume.human_Postcode);
 				$("#human_Birthplace").textbox("setValue", datas.engageResume.human_Birthplace);
-				$("#resid").val(datas.res_Id);
+				$("#resid").val(datas.engageResume.res_Id);
 				$("#human_Idcard").textbox("setValue", datas.engageResume.human_Idcard);
 				//human_Age  human_College human_History_Records remark
 				$("#human_Age").textbox("setValue", datas.engageResume.human_Age);
@@ -75,6 +75,12 @@
 				$("#mspj").textbox("setValue", datas.interviewComment);
 
 				$("#einId").val(datas.einId);
+				//sxr sxsj sxpj
+				//				checker checkTime  checkComment
+				$('#sxsj').datetimebox('setValue', datas.checkTime);
+				$("#sxr").textbox("setValue", datas.checker);
+				$("#sxpj").textbox("setValue", datas.checkComment);
+
 			}, 100);
 
 			$('#Resumedialog').dialog("open");
@@ -82,8 +88,8 @@
 		$(function() {
 
 			$("#updatebut").on("click", function() {
-				$("#resultform").form('submit', {
-					url: "http://127.0.0.1:8080/HR/Interview/updateInterview",
+				$("#shenpiform").form('submit', {
+					url: "http://127.0.0.1:8080/HR/Resume/updateResumeApply",
 					success: function(data) {
 						if(data) {
 							$.messager.alert('提示信息', '修改成功!', 'info', function() {
@@ -283,12 +289,12 @@
 						obj.human_Sex = data.rows[a].engageResume.human_Sex;
 						obj.majorKindName = data.rows[a].engageResume.ConfigMajor.configMajorKind.majorKindName;
 						obj.majorName = data.rows[a].engageResume.ConfigMajor.majorName;
-						
+
 						obj.human_Age = data.rows[a].engageResume.human_Age;
 						obj.human_College = data.rows[a].engageResume.human_College;
 						obj.human_Educated_Degree = data.rows[a].engageResume.human_Educated_Degree;
-//						obj.registeTime = data.rows[a].registeTime;
-//						obj.multiQualityDegree = data.rows[a].multiQualityDegree;
+						//						obj.registeTime = data.rows[a].registeTime;
+						//						obj.multiQualityDegree = data.rows[a].multiQualityDegree;
 						//
 						//						var interviewstatus = data.rows[a].ConfigMajor.interview_Status;
 						//						if(interviewstatus * 1 > 0) {
@@ -318,7 +324,7 @@
 				},
 
 				columns: [
-					[ {
+					[{
 							field: 'human_Name',
 							title: '姓名',
 							width: 187,
@@ -381,8 +387,8 @@
 		<table id="resumetable"></table>
 
 		<div id="Resumedialog">
-			<form id="resultform" method="post">
-				<input type="hidden" name="" id="resid" />
+			<form id="shenpiform" method="post">
+				<input type="hidden" name="res_Id" id="resid" />
 				<table>
 					<tr>
 						<td>
@@ -577,23 +583,40 @@
 					</tr>
 
 					<tr>
+						<tr>
+							<td colspan="3">
+								<hr/>
+							</td>
+						</tr>
 						<td>
-							<input id="sxr" name="checker" class="easyui-textbox" data-options="label:'筛选人'" style="width:300px" />
+							<input id="sxr" name="" class="easyui-textbox" data-options="label:'筛选人'" style="width:300px" />
 
 						</td>
 						<td>
-							<input id="sxsj" name="checkTime" class="easyui-datetimebox" data-options="required:true,showSeconds:false,label:'筛选时间'" value="33" style="width:300px">
+							<input id="sxsj" name="" class="easyui-datetimebox" data-options="required:true,showSeconds:false,label:'筛选时间'" value="33" style="width:300px">
 
 						</td>
 						<td>
-							<input id="sxpj" name="checkComment" class="easyui-textbox" data-options="label:'筛选评价',multiline:true" style="width:250px;height: 130px;">
+							<input id="sxpj" name="" class="easyui-textbox" data-options="label:'筛选评价',multiline:true" style="width:250px;height: 130px;">
 						</td>
 
+					</tr>
+
+					<tr>
+						//申请审核意见
+						<td>
+
+							<input id="sxpj" name="pass_Checkcomment" class="easyui-textbox" data-options="label:'申请审核意见',multiline:true" style="width:250px;height: 130px;">
+
+						</td>
 					</tr>
 					<tr>
 
 						<td>
-							建议录用：<input checked="checked" type="radio" name="checkStatus" value="1" /> &nbsp;&nbsp;&nbsp;&nbsp;不录用： <input type="radio" name="checkStatus" value="0" />
+							申请录用：<input checked="checked" type="radio" name="pass_CheckStatus" value="1" /> &nbsp;&nbsp;&nbsp;&nbsp;释放简历： <input type="radio" name="pass_CheckStatus" value="0" />
+
+							<!--<input id="resid" type="hidden" value="" name="res_Id" />-->
+
 							<input id="einId" type="hidden" value="" name="einId" />
 						</td>
 						<td>
@@ -601,9 +624,9 @@
 						</td>
 
 					</tr>
-			</form>
-			</table>
 
+				</table>
+			</form>
 			<!--</div>-->
 		</div>
 

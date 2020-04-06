@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.ty.mapper.salary_standard_detailsMapper">
+  <resultMap id="BaseResultMap" type="com.hr.entity.SalaryStandardDetails">
+    <id column="item_id" jdbcType="SMALLINT" property="itemId" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="salary" jdbcType="DECIMAL" property="salary" />
+    <result column="standard_id" jdbcType="VARCHAR" property="standardId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    item_id, item_name, salary, standard_id
+  </sql>
+  <insert id="insert">
+    insert into salary_standard_details (item_name, salary,standard_id)
+    values (#{itemName}, #{salary}, #{standardId})
+  </insert>
+</mapper>

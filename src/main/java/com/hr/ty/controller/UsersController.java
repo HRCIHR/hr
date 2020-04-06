@@ -31,6 +31,14 @@ public class UsersController {
 
 	@Autowired
 	private PageCountService ps;
+	
+	@RequestMapping("/Chuang")
+	@ResponseBody
+	public users Chuang(HttpSession session) {
+		users user = (users) session.getAttribute("user");//??
+		System.out.println("得到当前用户信息。"+user);
+		return  user;
+	}
 
 	@RequestMapping("/querUserByNameAndPwd")
 	@ResponseBody
@@ -44,7 +52,6 @@ public class UsersController {
 			return false;
 		}
 		return true;
-
 	}
 
 	@RequestMapping("/querUserAndRole")
@@ -89,5 +96,4 @@ public class UsersController {
 		
 	}
 	
-
 }

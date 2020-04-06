@@ -42,4 +42,11 @@ public class SalaryStandardDetails {
     public void setStandardId(String standardId) {
         this.standardId = standardId == null ? null : standardId.trim();
     }
+
+	@Override
+	public String toString() {
+		return "SalaryStandardDetails [itemId=" + itemId + ", itemName=" + itemName + ", salary=" + salary
+				+ ", standardId=" + standardId + "]";
+	}
+    
 }

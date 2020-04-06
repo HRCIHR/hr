@@ -68,8 +68,39 @@
 </script>
 <script type="text/javascript">
 	//点击复核。
-	function Recheck() {
+	function Recheck(s) {
+		//获取当前系统时间
+		formatterDate = function(date) {
+			var day = date.getDate() > 9 ? date.getDate() : "0"
+					+ date.getDate();
+			var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"
+					+ (date.getMonth() + 1);
+			var hor = date.getHours();
+			var min = date.getMinutes();
+			var sec = date.getSeconds();
+			return date.getFullYear() + '-' + month + '-' + day + " " + hor
+					+ ":" + min + ":" + sec;
+		};
+		console.log(s);
+		$('#standardId').textbox('readonly',true);
+		$('#standardId').textbox('setValue', s.standardId);
+		$('#standardName').textbox('readonly',true);
+		$('#standardName').textbox('setValue', s.standardName);
+		$('#salarySum').textbox('readonly',true);
+		$('#salarySum').textbox('setValue', s.salarySum);
+		$('#designer').textbox('readonly',true);
+		$('#designer').textbox('setValue', s.designer);
+		$('#checker').textbox('readonly',true);
+		$('#checker').textbox('setValue', s.checker);
+		$('#checkTime').datetimebox('readonly',true);
+		$('#checkTime').datetimebox('setValue', formatterDate(new Date()));
 		$('#recheck').window('open');
+		//获取数据
+		$.get("http://127.0.0.1:8080/HR/SalaryStandardDetails/queryByid", 
+		{ standardId: s.standardId},
+          function(data){
+          alert(data);
+      });
 	}
 </script>
 <title>薪酬标准登记复核</title>
@@ -86,41 +117,35 @@
 	buttons:[{text:'复核不通过',handler:function(){}},{text:'复核通过',handler:function(){}}]">
 		<form style="margin-top: 10px;" id="" class="easyui-form"
 			method="post">
-
+            <center>
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-textbox" name="" id="standardId" style="width: 300px"
 					data-options="label:'酬薪编号:',required:true">
 			</div>
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-textbox" name="" id="standardName" style="width: 300px"
 					data-options="label:'薪酬标准名称 :',required:true">
 			</div>
 
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-textbox" name="" id="salarySum" style="width: 300px"
 					data-options="label:'薪酬总额 :',required:true">
 			</div>
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-textbox" name="" id="designer" style="width: 300px"
 					data-options="label:'制定人 :',required:true">
 			</div>
 
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-textbox" name="" id="checker" style="width: 300px"
 					data-options="label:'复核人 :',required:true">
 			</div>
 			
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-datetimebox" name="" id="checkTime" style="width: 300px"
 					data-options="label:'复核时间 :',required:true">
 			</div>
-
-			<div style="margin-bottom: 20px;>
-					<input class="
-				easyui-textbox" name="" style="width: 300px"
-				data-options="label:'复核人 :',required:true"></div>
-				
-		<div>
+</center>
           <div style="margin-bottom: 20px; margin-left: 30px; float: left;">
 				<input class="easyui-textbox" name="" style="width: 100px"
 					data-options="label:'序号 :',required:true">

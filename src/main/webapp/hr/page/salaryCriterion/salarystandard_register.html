@@ -1,80 +1,138 @@
-<!doctype html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-trasitional.dtd">
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<script type="application/javascript"
-	src="../../../easyui/jquery.min.js"></script>
-<script type="application/javascript"
-	src="../../../easyui/jquery.easyui.min.js"></script>
-<script type="application/javascript"
-	src="../../../easyui/easyui-lang-zh_CN.js"></script>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="application/javascript" src="../../../easyui/jquery.min.js"></script>
+<script type="application/javascript" src="../../../easyui/jquery.easyui.min.js"></script>
+<script type="application/javascript" src="../../../easyui/easyui-lang-zh_CN.js"></script>
 <link rel="stylesheet" href="../../../easyui/themes/icon.css" />
 <link rel="stylesheet" href="../../../easyui/themes/default/easyui.css" />
-		<title>薪酬标准登记 </title>
-		<script type="text/javascript">
-		   $(function (){
-			   $('#dengJi').window('open');
-		   })
-		</script>
-</head>
-	<body>
-		 <div id="dengJi" class="easyui-dialog" title="登记"
-		style="width: 600px; height: 550px;"
-		data-options="iconCls:'icon-save',resizable:true,modal:true,resizable:false,draggable:false,closed:true,
-	buttons:[{text:'提交',handler:function(){}},{text:'返回',handler:function(){}}]">
-		<form style="margin-top: 10px;" id="" class="easyui-form"
-			method="post">
+<title>薪酬标准登记</title>
+<script type="text/javascript">
+	$(function() {
+		$.get("http://127.0.0.1:8080/HR/users/Chuang",
+		function(data) {
+			console.log(data);
+			var d = JSON.parse(data);
+			$('#uName').textbox('setValue', d.uName);
+		});
+		$('#dengJi').window('open');
+		//随机生成八位数做编号
+		var Id = 'cx' + Math.floor(Math.random() * 100000000);
+		//编号文本框赋值
+		$('#c').textbox('setValue', Id);
+		$('#bh').textbox('setValue', Id);
+		//获取当前系统时间
+		formatterDate = function(date) {
+			var day = date.getDate() > 9 ? date.getDate() : "0"
+					+ date.getDate();
+			var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"
+					+ (date.getMonth() + 1);
+			var hor = date.getHours();
+			var min = date.getMinutes();
+			var sec = date.getSeconds();
+			return date.getFullYear() + '-' + month + '-' + day + " " + hor
+					+ ":" + min + ":" + sec;
+		};
+		//登记时间文本框赋值
+		$('#startTime').datetimebox('setValue', formatterDate(new Date()));
+	  })
+</script>
+<!--登记信息-->
+<script type="text/javascript">
+	function insert() {
+		$('#insertForm').form('submit', {
+			url : 'http://127.0.0.1:8080/HR/Salarystandard/Registration',
+			success : function(data) {
+				//alert(data)
+				if (data > 0) {
+					$('#dengJi').window('close');
+					$('#dengXM').window('open');
+				}
+			}
+		});
+	}
+</script>
+<!--登记薪酬项目-->
+<script type="text/javascript">
+	function detailsinsert() {
+		$('#detailsForm').form('submit',{
+		url : 'http://127.0.0.1:8080/HR/SalaryStandardDetails/Registration',
+		success : function(data) {
+			if (data > 0) {
+		$.messager.alert('提示','登记完成，如需继续登记可继续操作。或进行其他操作。');
+			}
 
+		}
+	});
+	}
+	function cl() {
+		$('#dengXM').window('close');
+	}
+
+	function ck() {
+		$('#dengJi').window('close');
+	}
+</script>
+</head>
+
+<body>
+	<div id="dengJi" class="easyui-dialog" title="登记" style="width: 400px; height: 400px;"
+	data-options="iconCls:'icon-save',resizable:true,modal:true,resizable:false,draggable:false,closed:true,
+	buttons:[{text:'登记',handler:function(){insert()}},{text:'取消',handler:function(){ck()}}]">
+	<form style="margin-top: 10px;" id="insertForm" class="easyui-form" method="post">
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+			<input id="c" class="easyui-textbox" readonly="true" name="standardId" style="width: 300px"
 					data-options="label:'酬薪编号:',required:true">
 			</div>
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
-					data-options="label:'薪酬标准名称 :',required:true">
+				<input class="easyui-textbox" name="standardName"
+				style="width: 300px" data-options="label:'薪酬标准名称 :',required:true">
 			</div>
 
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-textbox" name="salarySum" style="width: 300px"
 					data-options="label:'薪酬总额 :',required:true">
 			</div>
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
+				<input class="easyui-textbox" name="designer" style="width: 300px"
 					data-options="label:'制定人 :',required:true">
 			</div>
 
 			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
-					data-options="label:'复核人 :',required:true">
-			</div>
-			
-			<div style="margin-bottom: 20px; margin-left: 30px;">
-				<input class="easyui-textbox" name="" style="width: 300px"
-					data-options="label:'复核时间 :',required:true">
+				<input class="easyui-textbox" readonly="true" id="uName"
+					name="register" value="admin" style="width: 300px"
+					data-options="label:'登记人 :',required:true">
 			</div>
 
-			<div style="margin-bottom: 20px;>
-					<input class="
-				easyui-textbox" name="" style="width: 300px"
-				data-options="label:'复核人 :',required:true"></div>
-				
-		<div>
-          <div style="margin-bottom: 20px; margin-left: 30px; float: left;">
-				<input class="easyui-textbox" name="" style="width: 100px"
-					data-options="label:'序号 :',required:true">
+			<div style="margin-bottom: 20px; margin-left: 30px;">
+				<input id="startTime" class="easyui-datetimebox" readonly="true"
+					name="registTime" style="width: 300px"
+					data-options="label:'登记时间 :',required:true">
 			</div>
-		      <div style="margin-bottom: 20px; margin-left: 30px;float: left;">
-				<input class="easyui-textbox" name="" style="width: 200px"
-					data-options="label:'薪酬项目名称 :',required:true">
-			</div>
-			  <div style="margin-bottom: 20px; margin-left: 30px;float: left;">
-				<input class="easyui-textbox" name="" style="width: 150px"
-					data-options="label:'金额 :',required:true">
-			</div>
-            </div>
 		</form>
 	</div>
-		
-	</body>
-</html>
 
+	<div id="dengXM" class="easyui-dialog" title="薪酬项目名称" style="width: 600px; height: 200px;"
+	data-options="iconCls:'icon-save',resizable:true,modal:true,resizable:false,draggable:false,closed:true,
+	buttons:[{text:'添加',handler:function(){detailsinsert()}},{text:'完成',handler:function(){cl()}}]">
+		<form style="margin-top: 10px;" id="detailsForm" class="easyui-form" method="post">
+			<div>
+				<div style="margin-bottom: 20px; margin-left: 30px; float: left;">
+					<input class="easyui-textbox" readonly="true" id="bh"
+						name="standardId" style="width: 200px"
+						data-options="label:'序号 :',required:true">
+				</div>
+				<div style="margin-bottom: 20px; margin-left: 30px; float: left;">
+					<input class="easyui-textbox" name="itemName" style="width: 200px"
+						data-options="label:'薪酬项目名称 :',required:true">
+				</div>
+				<div style="margin-bottom: 20px; margin-left: 30px; float: left;">
+					<input class="easyui-textbox" name="salary" style="width: 150px"
+						data-options="label:'金额 :',required:true">
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

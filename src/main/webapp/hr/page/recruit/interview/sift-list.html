@@ -82,6 +82,7 @@
 		$(function() {
 
 			$("#updatebut").on("click", function() {
+				//$.messager.alert('提示信息', '修改成功!');
 				$("#resultform").form('submit', {
 					url: "http://127.0.0.1:8080/HR/Interview/updateInterview",
 					success: function(data) {

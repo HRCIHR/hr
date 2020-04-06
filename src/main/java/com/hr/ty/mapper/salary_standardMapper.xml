@@ -35,11 +35,28 @@
 	    select count(${tabId}) from ${tabName} where check_status=0
 	  </select>
 	  
+	  <select id="getTableCountByStandard" resultType="int">
+	    select count(${tabId}) from ${tabName} 
+	  </select>
+	  
 	<select id="selectBycheckStatus" resultMap="BaseResultMap">
 	<bind name="page" value="(page-1)*rows"/>
 		select
 		<include refid="Base_Column_List" />
 		from salary_standard
 		where check_status = 0 limit #{page},#{rows}
+	</select>
+	
+	<insert id="insertSalaryStandard">
+	   insert into salary_standard (standard_id, standard_name, designer, register,salary_sum,regist_time,check_status)
+	    values (#{standardId},#{standardName},#{designer},#{register},#{salarySum},#{registTime},0);
+	</insert>
+	
+	<select id="selectSalaryStandard" resultMap="BaseResultMap">
+	<bind name="page" value="(page-1)*rows"/>
+	   select
+		<include refid="Base_Column_List" />
+		from salary_standard 
+		 limit #{page},#{rows}
 	</select>
 </mapper>

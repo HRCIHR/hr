@@ -43,7 +43,7 @@
 	<insert id="insertUser" >
     insert into users (u_name, u_true_name, 
       u_password, u_roleid)
-    values (#{uName,}, #{uTrueName}, 
+    values (#{uName}, #{uTrueName}, 
       #{uPassword}, #{role.roleId})
   </insert>
   

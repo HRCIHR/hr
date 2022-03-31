@@ -9,7 +9,7 @@
 	<name>hr Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<mvc.version>4.3.18.RELEASE</mvc.version>
+		<mvc.version>5.3.18</mvc.version>
 	</properties>
 	<dependencies>
 		<dependency>
